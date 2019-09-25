@@ -1,0 +1,53 @@
+﻿using MetroFramework.Forms;
+using RentCar.Core.Entities;
+using RentCar.Core.Interfaces;
+using RentCar.UI.Maintenances;
+using System;
+using System.Windows.Forms;
+
+namespace RentCar.UI
+{
+    public partial class MasterPage : Form
+    {
+        public MasterPage()
+        {
+            InitializeComponent();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        private void SetActualForm<TForm>() where TForm : Form
+        {
+     
+             var  form = Program.Container.GetInstance<TForm>();
+            form.MdiParent = this;
+            ShowActualForm(form);
+
+        }
+
+        private void ShowActualForm(Form form)
+        {
+            form.Show();
+        }
+
+        private void carBrandsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetActualForm<FrmCarBrand>();
+        }
+
+        private void carCategoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetActualForm<FrmCarCategory>();
+        }
+
+
+        private void carToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+    }
+}
