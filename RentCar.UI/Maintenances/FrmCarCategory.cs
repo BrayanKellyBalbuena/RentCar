@@ -6,13 +6,7 @@ using RentCar.UI.Utils;
 using RentCar.UI.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RentCar.UI.Maintenances
@@ -23,8 +17,6 @@ namespace RentCar.UI.Maintenances
         private bool isNew;
         private bool isEdit;
         private string ENTER_NAME_MESSAGE = "Enter a name of Card Category";
-        private const string DELETE_COLUMN = "Delete";
-        private const string ID_COLUMN = "Id";
 
         public FrmCarCategory(IEntityService<CarCategory> carCategoryService)
         {
@@ -88,8 +80,8 @@ namespace RentCar.UI.Maintenances
 
         private void HideColumns()
         {
-            dgvCarCategory.Columns[DELETE_COLUMN].Visible = false;
-            dgvCarCategory.Columns[ID_COLUMN].Visible = false;
+            dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
+            dgvCarCategory.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }
 
 
@@ -196,9 +188,9 @@ namespace RentCar.UI.Maintenances
 
         private void dgvCarCategory_DoubleClick(object sender, EventArgs e)
         {
-            txtIdCarBrand.Text = dgvCarCategory.CurrentRow.Cells["Id"].Value.ToString();
-            txtName.Text = dgvCarCategory.CurrentRow.Cells["Name"].Value.ToString();
-            txtDescription.Text = dgvCarCategory.CurrentRow.Cells["Description"].Value.ToString();
+            txtIdCarBrand.Text = dgvCarCategory.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
+            txtName.Text = dgvCarCategory.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
+            txtDescription.Text = dgvCarCategory.CurrentRow.Cells[DataGridColumnNames.DESCRIPCION_COLUMN].Value.ToString();
             this.tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
@@ -232,19 +224,19 @@ namespace RentCar.UI.Maintenances
         {
             if (chkDelete.Checked)
             {
-                dgvCarCategory.Columns[DELETE_COLUMN].Visible = true;
+                dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = true;
             }
             else
             {
-                dgvCarCategory.Columns[DELETE_COLUMN].Visible = false;
+                dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             }
         }
 
         private void dgvCarCategory_CellContentClick(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgvCarCategory.Columns[DELETE_COLUMN].Index)
+            if (e.ColumnIndex == dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Index)
             {
-                DataGridViewCheckBoxCell chkDelete = dgvCarCategory.Rows[e.RowIndex].Cells[DELETE_COLUMN] as DataGridViewCheckBoxCell;
+                DataGridViewCheckBoxCell chkDelete = dgvCarCategory.Rows[e.RowIndex].Cells[DataGridColumnNames.DELETE_COLUMN] as DataGridViewCheckBoxCell;
                 chkDelete.Value = !Convert.ToBoolean(chkDelete.Value);
             }
         }
@@ -253,8 +245,15 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
+                if (!chkDelete.Checked)
+                {
+                    MessageBoxUtil.MessageError(this, AlertMessages.NOT_RECORD_SELECTED_FOR_DELETE);
+                    return;
+                }
+
                 DialogResult Opcion;
-                Opcion = MessageBox.Show("Realmente Desea Eliminar los Registros", "Sistema de Ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                Opcion = MessageBox.Show(AlertMessages.CONFIRM_DELETION, Constanst.SYSTEM_NAME,
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                 if (Opcion == DialogResult.OK)
                 {

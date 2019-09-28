@@ -1,55 +1,41 @@
-﻿
-using AutoMapper;
-using MetroFramework;
-using MetroFramework.Forms;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
+﻿using RentCar.Core.Entities;
 using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
-using RentCar.UI.Reports;
 using RentCar.UI.Utils;
 using RentCar.UI.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RentCar.UI.Maintenances
 {
-    public partial class FrmCarBrand : Form
+    public partial class FrmFluelCategory : Form
     {
-        private IEntityService<CarBrand> carBrandService;
+        private IEntityService<FluelCategory> fluelCategoryService;
         private bool isNew;
         private bool isEdit;
 
-        public FrmCarBrand(IEntityService<CarBrand> carBrandService) 
+        public FrmFluelCategory(IEntityService<FluelCategory> fluelCategoryService)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
-            this.carBrandService = carBrandService;
+            this.fluelCategoryService = fluelCategoryService;
         }
 
-        //public static FrmCarBrand GetInstance()
-        //{
-        //    if (instance == null)
-        //    {
-        //        instance = new FrmCarBrand();
-        //    }
-        //    if (instance.IsDisposed) {
-        //        instance = new FrmCarBrand();
-               
-        //    }
-        //    return instance;
 
-        //}
-
-        private void FrmCarBrands_Load(object sender, EventArgs e)
+        private void FrmFluelCategory_Load(object sender, EventArgs e)
         {
-      
+
             EnableTextBox(false);
             EnableBottons();
-            LoadCarBrands();
+            LoadFluelCategories();
             Show();
 
         }
@@ -58,7 +44,7 @@ namespace RentCar.UI.Maintenances
         {
             txtName.ReadOnly = !valor;
             txtDescription.ReadOnly = !valor;
-            txtIdCarBrand.Enabled = false;
+            txtIdFluelCategory.Enabled = false;
         }
 
         private void EnableBottons()
@@ -74,7 +60,7 @@ namespace RentCar.UI.Maintenances
             }
             else
             {
-                this.EnableTextBox(false);
+                EnableTextBox(false);
                 btnNew.Enabled = true;
                 btnSave.Enabled = false;
                 btnEdit.Enabled = false;
@@ -82,25 +68,25 @@ namespace RentCar.UI.Maintenances
             }
         }
 
-        private async void LoadCarBrands()
+        private async void LoadFluelCategories()
         {
-            try {
-                dgvCarBrands.DataSource =   Program.mapper.Map<IEnumerable<CarBrandViewModel>>( await carBrandService.GetAll().ToListAsync());
-                lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarBrands.Rows.Count;
+            try
+            {
+                dgvFluelCategories.DataSource = Program.mapper.Map<IEnumerable<FluelCategoryViewModel>>(await fluelCategoryService.GetAll().ToListAsync());
+                lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvFluelCategories.Rows.Count;
             }
             catch (Exception ex)
             {
-
+                MessageBoxUtil.MessageError(this, ex.Message);
             }
-
 
             HideColumns();
         }
 
         private void HideColumns()
         {
-            dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
-            dgvCarBrands.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
+            dgvFluelCategories.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
+            dgvFluelCategories.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }
 
 
@@ -118,15 +104,15 @@ namespace RentCar.UI.Maintenances
         {
             txtName.Text = string.Empty;
             txtDescription.Text = string.Empty;
-            txtIdCarBrand.Text = string.Empty;
+            txtIdFluelCategory.Text = string.Empty;
         }
 
         private async void Search()
         {
-            dgvCarBrands.DataSource = Program.mapper.Map<IEnumerable<CarBrandViewModel>>(
-               await carBrandService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
+            dgvFluelCategories.DataSource = Program.mapper.Map<IEnumerable<FluelCategoryViewModel>>(
+               await fluelCategoryService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
-            lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarBrands.Rows.Count;
+            lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvFluelCategories.Rows.Count;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -159,8 +145,8 @@ namespace RentCar.UI.Maintenances
                     if (isNew)
                     {
 
-                        await carBrandService.AddAsync(
-                            new CarBrand
+                        await fluelCategoryService.AddAsync(
+                            new FluelCategory
                             {
                                 Name = txtName.Text,
                                 Description = txtDescription.Text,
@@ -173,11 +159,11 @@ namespace RentCar.UI.Maintenances
                     }
                     else
                     {
-                        var entity = await carBrandService.GetByIdAsync(int.Parse(txtIdCarBrand.Text));
+                        var entity = await fluelCategoryService.GetByIdAsync(int.Parse(txtIdFluelCategory.Text));
 
-                        var brand = new CarBrandViewModel
+                        var brand = new FluelCategoryViewModel
                         {
-                            Id = int.Parse(txtIdCarBrand.Text),
+                            Id = int.Parse(txtIdFluelCategory.Text),
                             Name = txtName.Text,
                             Description = txtDescription.Text,
                             CreatedDate = entity.CreatedDate,
@@ -185,8 +171,7 @@ namespace RentCar.UI.Maintenances
                         };
                         entity = Program.mapper.Map(brand, entity);
 
-                   
-                        await carBrandService.UpdateAsync(entity);
+                        await fluelCategoryService.UpdateAsync(entity);
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.UPDATED_SUCCESSFULLY);
                     }
@@ -195,7 +180,7 @@ namespace RentCar.UI.Maintenances
 
                     this.EnableBottons();
                     this.ClearTextBox();
-                    this.LoadCarBrands();
+                    this.LoadFluelCategories();
 
                 }
             }
@@ -205,11 +190,20 @@ namespace RentCar.UI.Maintenances
             }
         }
 
-        private void dgvCarBrands_DoubleClick(object sender, EventArgs e)
+        private void dgvFluelCategories_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtIdCarBrand.Text = dgvCarBrands.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
-            txtName.Text = dgvCarBrands.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
-            txtDescription.Text = dgvCarBrands.CurrentRow.Cells[DataGridColumnNames.DESCRIPCION_COLUMN].Value.ToString();
+            if (e.ColumnIndex == dgvFluelCategories.Columns[DataGridColumnNames.DELETE_COLUMN].Index)
+            {
+                DataGridViewCheckBoxCell chkDelete = dgvFluelCategories.Rows[e.RowIndex].Cells[DataGridColumnNames.DELETE_COLUMN] as DataGridViewCheckBoxCell;
+                chkDelete.Value = !Convert.ToBoolean(chkDelete.Value);
+            }
+        }
+
+        private void dgvFluelCategories_DoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtIdFluelCategory.Text = dgvFluelCategories.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
+            txtName.Text = dgvFluelCategories.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
+            txtDescription.Text = dgvFluelCategories.CurrentRow.Cells[DataGridColumnNames.DESCRIPCION_COLUMN].Value.ToString();
             this.tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
@@ -218,12 +212,13 @@ namespace RentCar.UI.Maintenances
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(txtIdCarBrand.Text != string.Empty)
+            if (txtIdFluelCategory.Text != string.Empty)
             {
                 isEdit = true;
                 EnableBottons();
                 EnableTextBox(true);
-            } else
+            }
+            else
             {
                 MessageBoxUtil.MessageError(this, AlertMessages.NOT_RECORD_SELECTED_FOR_MODIFIY);
             }
@@ -242,20 +237,11 @@ namespace RentCar.UI.Maintenances
         {
             if (chkDelete.Checked)
             {
-                dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = true;
+                dgvFluelCategories.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = true;
             }
             else
             {
-                dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
-            }
-        }
-
-        private void dgvCarBrands_CellContentClick(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Index)
-            {
-                DataGridViewCheckBoxCell chkDelete =  dgvCarBrands.Rows[e.RowIndex].Cells[DataGridColumnNames.DELETE_COLUMN] as DataGridViewCheckBoxCell;
-                chkDelete.Value = !Convert.ToBoolean(chkDelete.Value);
+                dgvFluelCategories.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             }
         }
 
@@ -263,6 +249,7 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
+
                 if (!chkDelete.Checked)
                 {
                     MessageBoxUtil.MessageError(this, AlertMessages.NOT_RECORD_SELECTED_FOR_DELETE);
@@ -275,20 +262,20 @@ namespace RentCar.UI.Maintenances
 
                 if (Opcion == DialogResult.OK)
                 {
-                    foreach (DataGridViewRow row in dgvCarBrands.Rows)
+                    foreach (DataGridViewRow row in dgvFluelCategories.Rows)
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        if (Convert.ToBoolean(row.Cells[DataGridColumnNames.DELETE_COLUMN].Value))
                         {
-                           int id = Convert.ToInt32(row.Cells[1].Value);
+                            int id = Convert.ToInt32(row.Cells[DataGridColumnNames.ID_COLUMN].Value);
 
-                            await carBrandService.DeleteAsync(id);
-                                MessageBoxUtil.MessageOk(this, AlertMessages.DELETED_SUCCESSFULLY);
-                            }
-
+                            await fluelCategoryService.DeleteAsync(id);
+                            MessageBoxUtil.MessageOk(this, AlertMessages.DELETED_SUCCESSFULLY);
                         }
+
                     }
-                    LoadCarBrands();
-                
+                }
+                LoadFluelCategories();
+
             }
             catch (Exception ex)
             {
@@ -298,9 +285,9 @@ namespace RentCar.UI.Maintenances
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            var frm = new FrmReportCarBrands();
-            frm.SeachText = txtSearch.Text;
-            frm.ShowDialog();
+            ////var frm = new FrmReportCarBrands();
+            //frm.SeachText = txtSearch.Text;
+            //frm.ShowDialog();
         }
     }
 }

@@ -43,6 +43,7 @@
     <Compile Include="Abstractions\Entity.cs" />
     <Compile Include="Entities\CarBrand.cs" />
     <Compile Include="Entities\CarCategory.cs" />
+    <Compile Include="Entities\FluelCategory.cs" />
     <Compile Include="Interfaces\Domain\IEntityService.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
   </ItemGroup>

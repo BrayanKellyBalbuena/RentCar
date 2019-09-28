@@ -116,6 +116,7 @@
             this.fluelCategoriesToolStripMenuItem.Name = "fluelCategoriesToolStripMenuItem";
             this.fluelCategoriesToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.fluelCategoriesToolStripMenuItem.Text = "Fluel Categories";
+            this.fluelCategoriesToolStripMenuItem.Click += new System.EventHandler(this.fluelCategoriesToolStripMenuItem_Click);
             // 
             // carCategoriesToolStripMenuItem
             // 

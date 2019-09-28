@@ -86,7 +86,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constans\AlertMessages.cs" />
     <Compile Include="Constans\Constanst.cs" />
+    <Compile Include="Constans\DataGridColumnNames.cs" />
+    <Compile Include="Maintenances\FrmFluelCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenances\FrmFluelCategory.Designer.cs">
+      <DependentUpon>FrmFluelCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintenances\FrmCarBrand.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +109,7 @@
     </Compile>
     <Compile Include="MappingsProfiles\CarBrandProfile.cs" />
     <Compile Include="MappingsProfiles\CarCategoryProfile.cs" />
+    <Compile Include="MappingsProfiles\FluelCategoryProfile.cs" />
     <Compile Include="MasterPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,7 +134,12 @@
     <Compile Include="Utils\UserControlValidator.cs" />
     <Compile Include="ViewModels\CarBrandViewModel.cs" />
     <Compile Include="ViewModels\CarCategoryViewModel.cs" />
+    <Compile Include="ViewModels\CatalogViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
+    <Compile Include="ViewModels\FluelCategoryViewModel.cs" />
+    <EmbeddedResource Include="Maintenances\FrmFluelCategory.resx">
+      <DependentUpon>FrmFluelCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmCarBrand.resx">
       <DependentUpon>FrmCarBrand.cs</DependentUpon>
     </EmbeddedResource>

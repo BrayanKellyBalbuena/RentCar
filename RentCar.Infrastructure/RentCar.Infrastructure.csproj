@@ -59,15 +59,17 @@
     <Compile Include="DbContexts\RentCarContext.cs" />
     <Compile Include="EntitiesConfigutations\CarBrandEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\CarCategoryEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\FluelCategoryEntityTypeConfiguration.cs" />
     <Compile Include="Exceptions\EntityException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CarBrandRepository.cs" />
     <Compile Include="Repositories\CarCategoryRepository.cs" />
-    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\FluelCategoryRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\CarBrandService.cs" />
     <Compile Include="Services\CarCategoryService.cs" />
     <Compile Include="Services\EntityService.cs" />
+    <Compile Include="Services\FuelCategoryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
