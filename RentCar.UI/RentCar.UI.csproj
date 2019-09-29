@@ -89,6 +89,12 @@
     <Compile Include="Constans\AlertMessages.cs" />
     <Compile Include="Constans\Constanst.cs" />
     <Compile Include="Constans\DataGridColumnNames.cs" />
+    <Compile Include="Maintenances\FrmCarModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenances\FrmCarModel.Designer.cs">
+      <DependentUpon>FrmCarModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintenances\FrmFluelCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,7 @@
     </Compile>
     <Compile Include="MappingsProfiles\CarBrandProfile.cs" />
     <Compile Include="MappingsProfiles\CarCategoryProfile.cs" />
+    <Compile Include="MappingsProfiles\CarModelProfile.cs" />
     <Compile Include="MappingsProfiles\FluelCategoryProfile.cs" />
     <Compile Include="MasterPage.cs">
       <SubType>Form</SubType>
@@ -130,13 +137,23 @@
     <Compile Include="Reports\FrmReportCarCategory.Designer.cs">
       <DependentUpon>FrmReportCarCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\FrmReportCarModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\FrmReportCarModel.Designer.cs">
+      <DependentUpon>FrmReportCarModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\MessageBoxUtil.cs" />
     <Compile Include="Utils\UserControlValidator.cs" />
     <Compile Include="ViewModels\CarBrandViewModel.cs" />
     <Compile Include="ViewModels\CarCategoryViewModel.cs" />
+    <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\FluelCategoryViewModel.cs" />
+    <EmbeddedResource Include="Maintenances\FrmCarModel.resx">
+      <DependentUpon>FrmCarModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmFluelCategory.resx">
       <DependentUpon>FrmFluelCategory.cs</DependentUpon>
     </EmbeddedResource>
@@ -163,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\FrmReportCarCategory.resx">
       <DependentUpon>FrmReportCarCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FrmReportCarModel.resx">
+      <DependentUpon>FrmReportCarModel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

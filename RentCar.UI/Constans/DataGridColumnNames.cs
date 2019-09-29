@@ -12,5 +12,6 @@ namespace RentCar.UI.Constans
         public const string DELETE_COLUMN = "Delete";
         public const string NAME_COLUMN = "Name";
         public const string DESCRIPCION_COLUMN = "Description";
+        public const string CAR_BRAND_ID = "CarBrandId";
     }
 }

@@ -3,7 +3,8 @@ using RentCar.Infrastructure.Abstractions;
 
 namespace RentCar.Infrastructure.EntitiesConfigutations
 {
-    internal class CarCategoryEntityTypeConfiguration : EntityConfiguration<CarCategory>
+    internal class CarModelEntityTypeConfiguration : EntityConfiguration<CarModel>
     {
+
     }
 }

@@ -52,5 +52,10 @@ namespace RentCar.UI
         {
             SetActualForm<FrmFluelCategory>();
         }
+
+        private void carModelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetActualForm<FrmCarModel>();
+        }
     }
 }
