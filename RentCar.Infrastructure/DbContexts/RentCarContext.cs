@@ -16,6 +16,8 @@ namespace RentCar.Infrastructure.DbContexts
         public DbSet<CarCategory> CarCategories { get; set; }
         public DbSet<FluelCategory> FluelCategoyries { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
+        public DbSet<PersonType> PersonTypes { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

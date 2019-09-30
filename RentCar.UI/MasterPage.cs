@@ -57,5 +57,15 @@ namespace RentCar.UI
         {
             SetActualForm<FrmCarModel>();
         }
+
+        private void personTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetActualForm<FrmPersonType>();
+        }
+
+        private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetActualForm<FrmEmployee>();
+        }
     }
 }

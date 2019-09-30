@@ -9,5 +9,10 @@ namespace RentCar.UI.Utils
 
             return string.IsNullOrEmpty(textBox.Text) && string.IsNullOrWhiteSpace(textBox.Text);
         }
+
+        public static bool IsValidIdentificationCard(this TextBox textBox)
+        {
+            return textBox.IsNotNullOrEmpty() || textBox.Text.Length == 11 ? true : false;
+        }
     }
 }

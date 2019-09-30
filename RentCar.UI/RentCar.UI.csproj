@@ -95,6 +95,12 @@
     <Compile Include="Maintenances\FrmCarModel.Designer.cs">
       <DependentUpon>FrmCarModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintenances\FrmEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenances\FrmEmployee.Designer.cs">
+      <DependentUpon>FrmEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintenances\FrmFluelCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,10 +119,18 @@
     <Compile Include="Maintenances\FrmCarCategory.Designer.cs">
       <DependentUpon>FrmCarCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintenances\FrmPersonType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenances\FrmPersonType.Designer.cs">
+      <DependentUpon>FrmPersonType.cs</DependentUpon>
+    </Compile>
     <Compile Include="MappingsProfiles\CarBrandProfile.cs" />
     <Compile Include="MappingsProfiles\CarCategoryProfile.cs" />
     <Compile Include="MappingsProfiles\CarModelProfile.cs" />
+    <Compile Include="MappingsProfiles\EmployeeProfile.cs" />
     <Compile Include="MappingsProfiles\FluelCategoryProfile.cs" />
+    <Compile Include="MappingsProfiles\PersonTypeProfile.cs" />
     <Compile Include="MasterPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,10 +163,15 @@
     <Compile Include="ViewModels\CarCategoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\FluelCategoryViewModel.cs" />
+    <Compile Include="ViewModels\PersonTypeViewModel.cs" />
     <EmbeddedResource Include="Maintenances\FrmCarModel.resx">
       <DependentUpon>FrmCarModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenances\FrmEmployee.resx">
+      <DependentUpon>FrmEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmFluelCategory.resx">
       <DependentUpon>FrmFluelCategory.cs</DependentUpon>
@@ -162,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmCarCategory.resx">
       <DependentUpon>FrmCarCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenances\FrmPersonType.resx">
+      <DependentUpon>FrmPersonType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MasterPage.resx">
       <DependentUpon>MasterPage.cs</DependentUpon>

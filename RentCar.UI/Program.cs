@@ -49,6 +49,8 @@ namespace RentCar.UI
             Container.Register<IRepository<CarCategory>, CarCategoryRepository<RentCarContext>>(Lifestyle.Singleton);
             Container.Register<IRepository<FluelCategory>, FluelCategoryRepository<RentCarContext>>(Lifestyle.Singleton);
             Container.Register<IRepository<CarModel>, CarModelRepository<RentCarContext>>(Lifestyle.Singleton);
+            Container.Register<IRepository<PersonType>, PersonTypeRepository<RentCarContext>>(Lifestyle.Singleton);
+            Container.Register<IRepository<Employee>, EmployeeRepository<RentCarContext>>(Lifestyle.Singleton);
             
         }
 
@@ -58,6 +60,8 @@ namespace RentCar.UI
             Container.Register<IEntityService<CarCategory>, CarCategoryService>(Lifestyle.Singleton);
             Container.Register<IEntityService<FluelCategory>, FuelCategoryService>(Lifestyle.Singleton);
             Container.Register<IEntityService<CarModel>, CarModelService>(Lifestyle.Singleton);
+            Container.Register<IEntityService<PersonType>, PersonTypeService>(Lifestyle.Singleton);
+            Container.Register<IEntityService<Employee>, EmployeeService>(Lifestyle.Singleton);
         }
 
         private static void RegisterForms()
@@ -67,6 +71,8 @@ namespace RentCar.UI
             Container.Register<FrmCarCategory>(Lifestyle.Singleton);
             Container.Register<FrmFluelCategory>(Lifestyle.Singleton);
             Container.Register<FrmCarModel>(Lifestyle.Singleton);
+            Container.Register<FrmPersonType>(Lifestyle.Singleton);
+            Container.Register<FrmEmployee>(Lifestyle.Singleton);
         }
 
         private static void ConfigureMaps()

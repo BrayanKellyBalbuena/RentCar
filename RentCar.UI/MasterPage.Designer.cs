@@ -131,6 +131,7 @@
             this.personTypesToolStripMenuItem.Name = "personTypesToolStripMenuItem";
             this.personTypesToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.personTypesToolStripMenuItem.Text = "Person Types";
+            this.personTypesToolStripMenuItem.Click += new System.EventHandler(this.personTypesToolStripMenuItem_Click);
             // 
             // clientsToolStripMenuItem
             // 
@@ -143,6 +144,7 @@
             this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
             this.employeesToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.employeesToolStripMenuItem.Text = "Employees";
+            this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
             // 
             // carInspectionToolStripMenuItem
             // 
