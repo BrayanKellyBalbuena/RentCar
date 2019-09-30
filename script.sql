@@ -1,27 +1,27 @@
 ---Base de datos Proyecto Exoneración Propieraria 1
+DROP DATABASE IF EXISTS RentCar
+GO
 
 CREATE DATABASE RentCar
 GO 
 USE RentCar
 GO
 
-DROP TABLE DevolutionAndRent;
-DROP TABLE CarsInspections;
-DROP TABLE Car;
-DROP TABLE CarModels;
-DROP TABLE CarBrands;
-DROP TABLE FluelCategories;
-DROP TABLE CarCategories;
-DROP TABLE Clients;
-DROP TABLE PersonType;
-DROP TABLE Employees;
+DROP TABLE IF EXISTS dbo.DevolutionAndRent;
+DROP TABLE IF EXISTS dbo.CarsInspections;
+DROP TABLE IF EXISTS dbo.Car;
+DROP TABLE IF EXISTS dbo.CarModels;
+DROP TABLE IF EXISTS dbo.CarBrands;
+DROP TABLE IF EXISTS dbo.FluelCategories;
+DROP TABLE IF EXISTS dbo.Clients;
+DROP TABLE IF EXISTS dbo.PersonType;
+DROP TABLE IF EXISTS dbo.Employees;
 
-
-DROP TABLE Access;
-DROP TABLE UserRoles;
-DROP TABLE Roles;
-DROP TABLE Menues;
-DROP TABLE Users;
+DROP TABLE IF EXISTS dbo.Access;
+DROP TABLE IF EXISTS dbo.UserRoles;
+DROP TABLE IF EXISTS dbo.Roles;
+DROP TABLE IF EXISTS dbo.Menues;
+DROP TABLE IF EXISTS dbo.Users;
 
 
 CREATE TABLE Users
