@@ -95,6 +95,12 @@
     <Compile Include="Maintenances\FrmCarModel.Designer.cs">
       <DependentUpon>FrmCarModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintenances\FrmClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenances\FrmClient.Designer.cs">
+      <DependentUpon>FrmClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintenances\FrmEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,12 +169,16 @@
     <Compile Include="ViewModels\CarCategoryViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\FluelCategoryViewModel.cs" />
     <Compile Include="ViewModels\PersonTypeViewModel.cs" />
     <EmbeddedResource Include="Maintenances\FrmCarModel.resx">
       <DependentUpon>FrmCarModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintenances\FrmClient.resx">
+      <DependentUpon>FrmClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmEmployee.resx">
       <DependentUpon>FrmEmployee.cs</DependentUpon>
