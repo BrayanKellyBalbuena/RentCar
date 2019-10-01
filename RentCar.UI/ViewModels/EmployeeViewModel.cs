@@ -10,8 +10,5 @@ namespace RentCar.UI.ViewModels
     {
         public string Name { get; set; }
         public string IdentificationCard { get; set; }
-        public decimal CreditLimit { get; set; }
-        public int PersonTypeId { get; set; }
-        public string PersonType { get; set; }
     }
 }

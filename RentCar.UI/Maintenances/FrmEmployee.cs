@@ -145,8 +145,6 @@ namespace RentCar.UI.Maintenances
                 }
                 else
                 {
-                    ClearErrorProvider();
-
                     if (isNew)
                     {
 
@@ -187,6 +185,7 @@ namespace RentCar.UI.Maintenances
                     EnableBottons();
                     ClearTextBox();
                     LoadEmployees();
+                    ClearErrorProvider();
 
                 }
             }
@@ -194,6 +193,12 @@ namespace RentCar.UI.Maintenances
             {
                 MessageBoxUtil.MessageError(this, ex.Message);
             }
+        }
+
+        private void ClearErrorProvider()
+        {
+            errorIcon.SetError(txtName, string.Empty);
+            errorIcon.SetError(txtIdentificationCard, string.Empty);
         }
 
         private void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -210,7 +215,7 @@ namespace RentCar.UI.Maintenances
             txtIdEmployee.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
             txtName.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
             txtIdentificationCard.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.IDENTIFICATION_CARD].Value.ToString();
-            this.tabControl1.SelectedTab = tbpMantenance;
+            tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
             EnableTextBox(false);
@@ -298,11 +303,7 @@ namespace RentCar.UI.Maintenances
 
         private void txtIdentificationCard_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtIdentificationCard.Text, "[^0-9]"))
-            {
-                MessageBox.Show(AlertMessages.ENTER_ONLY_NUMBERS);
-                txtIdentificationCard.Text = txtIdentificationCard.Text.Remove(txtIdentificationCard.Text.Length - 1);
-            }
+            (sender as TextBox).IsValidIdentificationCard();
         }
 
         private bool ValidateTextBox()
@@ -322,12 +323,6 @@ namespace RentCar.UI.Maintenances
             }
 
             return error;
-        }
-
-        private void ClearErrorProvider()
-        {
-            errorIcon.SetError(txtName, string.Empty);
-            errorIcon.SetError(txtIdentificationCard, string.Empty);
         }
     }
 }

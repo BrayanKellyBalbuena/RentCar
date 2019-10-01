@@ -15,7 +15,8 @@ namespace RentCar.UI.Constans
         public const string NOT_RECORD_SELECTED_FOR_MODIFIY = "You must first select the record to modify";
         public const string NOT_RECORD_SELECTED_FOR_DELETE = "You must first select the record to delete";
         public const string ENTER_A_NAME = "Enter a Name";
-        public const string ENTER_A_VALID_IDENTIFICATION_CARD = "ENTER A VALID INDETIFICATION CARD WITH LENTH 11 NUMBERS";
+        public const string ENTER_A_VALID_IDENTIFICATION_CARD = "Enter a valid indetification card with lenth 11 numbers";
+        public const string ENTER_A_VALID_CREDIT_CARD = "Enter a valid credit card with lenth 16 numbers";
         public const string ENTER_ONLY_NUMBERS = "Please enter only numbers.";
 
         public const string MISSING_DATA = "You need to enter some data, they will be highlighted";

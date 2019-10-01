@@ -75,6 +75,7 @@ namespace RentCar.UI
             Container.Register<FrmCarModel>(Lifestyle.Singleton);
             Container.Register<FrmPersonType>(Lifestyle.Singleton);
             Container.Register<FrmEmployee>(Lifestyle.Singleton);
+            Container.Register<FrmClient>(Lifestyle.Singleton);
         }
 
         private static void ConfigureMaps()

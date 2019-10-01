@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace RentCar.UI.Maintenances
@@ -34,7 +35,7 @@ namespace RentCar.UI.Maintenances
 
             EnableTextBox(false);
             EnableBottons();
-            LoadCarModels();
+            LoadClients();
             SetupComboBoxes();
             Show();
 
@@ -71,11 +72,11 @@ namespace RentCar.UI.Maintenances
             }
         }
 
-        private async void LoadCarModels()
+        private  void LoadClients()
         {
             try
             {
-                var data = await clientService.GetAll().ToListAsync();
+                var data =  clientService.GetAll().ToList();
                 dgvClients.DataSource = Program.mapper.Map<IEnumerable<ClientViewModel>>(data);
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvClients.Rows.Count;
 
@@ -88,7 +89,7 @@ namespace RentCar.UI.Maintenances
                
         }
 
-        private async void SetupComboBoxes()
+        private  void SetupComboBoxes()
         {
             cbPersonType.ValueMember = DataGridColumnNames.ID_COLUMN;
             cbPersonType.DisplayMember = DataGridColumnNames.NAME_COLUMN;
@@ -96,9 +97,9 @@ namespace RentCar.UI.Maintenances
             cbPersonTypeSearch.ValueMember = DataGridColumnNames.ID_COLUMN;
             cbPersonTypeSearch.DisplayMember = DataGridColumnNames.NAME_COLUMN;
 
-            cbPersonType.DataSource = await (from brand in personTypeService.GetAll()
+            cbPersonType.DataSource =  (from brand in personTypeService.GetAll()
                                            select new { Id = brand.Id, Name = brand.Name }
-                                    ).ToListAsync();
+                                    ).ToList();
 
             cbPersonTypeSearch.DataSource = cbPersonType.DataSource;
         }
@@ -157,10 +158,9 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                if (txtName.IsNotNullOrEmpty())
+                if (!ValidateTextBox())
                 {
-                    MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
-                    errorIcon.SetError(txtName, AlertMessages.ENTER_A_NAME);
+                    return;
                 }
                 else
                 {
@@ -208,16 +208,24 @@ namespace RentCar.UI.Maintenances
                     this.isNew = false;
                     this.isEdit = false;
 
-                    this.EnableBottons();
-                    this.ClearTextBox();
-                    this.LoadCarModels();
-
+                    EnableBottons();
+                    ClearTextBox();
+                    LoadClients();
+                    ClearErrorProvider();
                 }
             }
             catch (Exception ex)
             {
                 MessageBoxUtil.MessageError(this, ex.Message);
             }
+        }
+
+        private void ClearErrorProvider()
+        {
+            errorIcon.SetError(txtName, string.Empty);
+            errorIcon.SetError(txtIdentificationCard, string.Empty);
+            errorIcon.SetError(txtCreditCardNumber, string.Empty);
+            errorIcon.SetError(numericDownCreditLimit, string.Empty);
         }
 
         private void dgvClients_DoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -308,7 +316,7 @@ namespace RentCar.UI.Maintenances
 
                     }
                 }
-                LoadCarModels();
+                LoadClients();
 
             }
             catch (Exception ex)
@@ -322,6 +330,44 @@ namespace RentCar.UI.Maintenances
             //var frm = new FrmReportCarModel();
             ////frm.SeachText = txtSearch.Text;
             //frm.ShowDialog();
+        }
+
+        private void txtIdentificationCard_TextChanged(object sender, EventArgs e)
+        {
+            (sender as TextBox).IsValidIdentificationCard();
+        }
+
+        private void txtCreditCard_TextChanged(object sender, EventArgs e)
+        {
+            (sender as TextBox).IsValidCreditCard();
+        }
+
+        private bool ValidateTextBox()
+        {
+            bool error = true;
+
+            if (txtName.IsNotNullOrEmpty())
+            {
+                MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
+                errorIcon.SetError(txtName, AlertMessages.ENTER_A_NAME);
+                error = false;
+            }
+            
+            if (!txtIdentificationCard.IsValidIdentificationCard())
+            {
+                MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
+                errorIcon.SetError(txtIdentificationCard, AlertMessages.ENTER_A_VALID_IDENTIFICATION_CARD);
+                error = false;
+            }
+
+            if(!txtCreditCardNumber.IsValidCreditCard())
+            {
+                MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
+                errorIcon.SetError(txtCreditCardNumber, AlertMessages.ENTER_A_VALID_CREDIT_CARD);
+                error = false;
+            }
+
+            return error;
         }
     }
 }

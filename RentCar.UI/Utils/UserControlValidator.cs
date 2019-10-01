@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using RentCar.Infrastructure.Constants;
+using RentCar.UI.Constans;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace RentCar.UI.Utils
 {
@@ -12,7 +15,58 @@ namespace RentCar.UI.Utils
 
         public static bool IsValidIdentificationCard(this TextBox textBox)
         {
-            return textBox.IsNotNullOrEmpty() || textBox.Text.Length == 11 ? true : false;
+            bool result = true;
+
+            if (textBox.IsNotNullOrEmpty())
+            {
+                result = false;
+            }
+
+            if(textBox.Text.Length != IdentificationDocumentsLengthNumber.DOMINICAN_REPUBLIC_IDENTIFICACION_CARD_LENGTH)
+            {
+                result = false;
+            }
+
+            if (!TextHasOnlyNumbers(textBox.Text))
+            {
+                MessageBox.Show(AlertMessages.ENTER_ONLY_NUMBERS);
+                textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
+
+                result = false;
+            }
+
+            return result;
+        }
+
+        public static bool IsValidCreditCard(this TextBox textBox)
+        {
+            bool result = true;
+
+            if (!textBox.IsNotNullOrEmpty() & textBox.Text.Length != IdentificationDocumentsLengthNumber.CREDIT_CARD_LENTH)
+            {
+                result = false;
+            }
+
+            if (!TextHasOnlyNumbers(textBox.Text))
+            {
+                MessageBox.Show(AlertMessages.ENTER_ONLY_NUMBERS);
+                textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
+
+                result = false;
+            }
+
+            return result;
+        }
+
+        private static bool TextHasOnlyNumbers(string text)
+        {
+         
+            if (Regex.IsMatch(text, "[^0-9]"))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
