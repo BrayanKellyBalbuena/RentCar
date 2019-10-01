@@ -184,8 +184,8 @@ CREATE TABLE PersonTypes(
 CREATE TABLE Clients(
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(128) NOT NULL,
-    IdentificationCard TINYINT NOT NULL,
-    CreditCardNumber TINYINT NOT NULL,
+    IdentificationCard CHAR(11) NOT NULL,
+    CreditCardNumber CHAR(16) NOT NULL,
     CreditLimit DECIMAL(12,2),
     PersonTypeId INT NOT NULL,
     [State] BIT NOT NULL,
@@ -193,15 +193,11 @@ CREATE TABLE Clients(
     CreatedDate DATETIME2 NOT NULL,
     ModifiedBy NVARCHAR(60),
     ModifiedDate DATETIME2,
+	CONSTRAINT Chk_Clients_IdentificationCard CHECK(CreditCardNumber LIKE '%[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]%'),
+	CONSTRAINT Chk_Clients_CreditCardNumber CHECK(CreditCardNumber LIKE '%[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]%'),
     CONSTRAINT PK_Clients_Id PRIMARY KEY(Id),
     CONSTRAINT FK_Clients_PersonTypes_Id FOREIGN KEY (PersonTypeId) REFERENCES PersonTypes(Id)
 )
-
-ALTER TABLE Clients
-ALTER COLUMN IdentificationCard NVARCHAR(11) NOT NULL
-
-ALTER TABLE Clients
-ALTER COLUMN CreditCardNumber NVARCHAR(16) NOT NULL
 
 CREATE TABLE Employees(
     Id INT NOT NULL IDENTITY,
