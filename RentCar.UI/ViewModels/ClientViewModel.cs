@@ -8,6 +8,11 @@ namespace RentCar.UI.ViewModels
 {
    public class ClientViewModel : EntityViewModel
     {
-        public int MyProperty { get; set; }
+        public string Name { get; set; }
+        public string IdentificationCard { get; set; }
+        public string CreditCardNumber { get; set; }
+        public decimal CreditLimit { get; set; }
+        public int PersonTypeId { get; set; }
+        public string PersonTypeName { get; set; }
     }
 }

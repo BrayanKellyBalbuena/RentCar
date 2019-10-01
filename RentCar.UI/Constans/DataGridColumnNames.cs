@@ -14,5 +14,8 @@ namespace RentCar.UI.Constans
         public const string DESCRIPCION_COLUMN = "Description";
         public const string CAR_BRAND_ID = "CarBrandId";
         public const string IDENTIFICATION_CARD = "IdentificationCard";
+        public const string PERSON_TYPE_ID = "PersonTypeId";
+        public const string CREDIT_LIMIT = "CreditLimit";
+        public const string CREDIT_CARD_NUMBER = "CreditCardNumber";
     }
 }

@@ -11,6 +11,7 @@ namespace RentCar.Core.Entities
     {
         public string Name { get; set; }
         public string IdentificationCard { get; set; }
+        public string CreditCardNumber { get; set; }
         public decimal CreditLimit { get; set; }
         public int PersonTypeId { get; set; }
         public virtual PersonType PersonType{ get; set; }

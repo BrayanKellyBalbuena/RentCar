@@ -43,8 +43,10 @@ namespace RentCar.UI.Maintenances
         private void EnableTextBox(bool valor)
         {
             txtName.ReadOnly = !valor;
-            txtDescription.ReadOnly = !valor;
-            txtIdCarModel.Enabled = false;
+            txtIdentificationCard.ReadOnly = !valor;
+            txtCreditCardNumber.ReadOnly = !valor;
+            numericDownCreditLimit.Enabled = valor;
+            txtIdClient.Enabled = false;
             cbPersonType.Enabled = valor;
         }
 
@@ -74,16 +76,16 @@ namespace RentCar.UI.Maintenances
             try
             {
                 var data = await clientService.GetAll().ToListAsync();
-                dgvClients.DataSource = Program.mapper.Map<IEnumerable<ClientViewModel>>(await clientService.GetAll().ToListAsync());
+                dgvClients.DataSource = Program.mapper.Map<IEnumerable<ClientViewModel>>(data);
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvClients.Rows.Count;
+
+                HideColumns();
             }
             catch (Exception ex)
             {
                 MessageBoxUtil.MessageError(this, ex.Message);
             }
-
-
-            HideColumns();
+               
         }
 
         private async void SetupComboBoxes()
@@ -105,6 +107,7 @@ namespace RentCar.UI.Maintenances
         {
             dgvClients.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             dgvClients.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
+            dgvClients.Columns[DataGridColumnNames.PERSON_TYPE_ID].Visible = false;
         }
 
         private void MessageOk(string message)
@@ -120,13 +123,15 @@ namespace RentCar.UI.Maintenances
         private void ClearTextBox()
         {
             txtName.Text = string.Empty;
-            txtDescription.Text = string.Empty;
-            txtIdCarModel.Text = string.Empty;
+            txtIdentificationCard.Text = string.Empty;
+            txtIdClient.Text = string.Empty;
+            txtCreditCardNumber.Text = string.Empty;
+            numericDownCreditLimit.Value = byte.MinValue;
         }
 
         private async void Search()
         {
-            dgvClients.DataSource = Program.mapper.Map<IEnumerable<CarModelViewModel>>(
+            dgvClients.DataSource = Program.mapper.Map<IEnumerable<ClientViewModel>>(
                await clientService.GetAll(x => x.Name.Contains(txtSearch.Text) && x.PersonTypeId == (int)cbPersonTypeSearch.SelectedValue).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvClients.Rows.Count;
@@ -165,10 +170,13 @@ namespace RentCar.UI.Maintenances
                         await clientService.AddAsync(
                             new Client
                             {
-                                Name = txtName.Text,
-                                Description = txtDescription.Text,
+
+                                Name = txtName.Text.ToString(),
+                                IdentificationCard = txtIdentificationCard.Text.ToString(),
+                                CreditCardNumber = txtCreditCardNumber.Text.ToString(),
+                                CreditLimit = numericDownCreditLimit.Value,
                                 CreatedDate = DateTime.Now,
-                                CarBrandId = (int)cbPersonType.SelectedValue
+                                PersonTypeId = (int) cbPersonType.SelectedValue
 
                             });
 
@@ -177,14 +185,16 @@ namespace RentCar.UI.Maintenances
                     }
                     else
                     {
-                        var entity = await clientService.GetByIdAsync(int.Parse(txtIdCarModel.Text));
+                        var entity = await clientService.GetByIdAsync(int.Parse(txtIdClient.Text));
 
                         var model = new ClientViewModel
                         {
-                            Id = int.Parse(txtIdCarModel.Text),
-                            Name = txtName.Text,
-                            Description = txtDescription.Text,
-                            CarBrandId = entity.CarBrandId,
+                            Id = int.Parse(txtIdClient.Text),
+                            Name = txtName.Text.ToString(),
+                            PersonTypeId = (int) cbPersonType.SelectedValue,
+                            IdentificationCard = txtIdentificationCard.Text.ToString(),
+                            CreditCardNumber = txtCreditCardNumber.Text.ToString(),
+                            CreditLimit = numericDownCreditLimit.Value,
                             CreatedDate = entity.CreatedDate,
                             ModifiedDate = DateTime.Now
                         };
@@ -212,10 +222,12 @@ namespace RentCar.UI.Maintenances
 
         private void dgvClients_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtIdCarModel.Text = dgvClients.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
-            cbPersonType.SelectedValue = dgvClients.CurrentRow.Cells[DataGridColumnNames.CAR_BRAND_ID].Value;
+            txtIdClient.Text = dgvClients.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
+            cbPersonType.SelectedValue = dgvClients.CurrentRow.Cells[DataGridColumnNames.PERSON_TYPE_ID].Value;
             txtName.Text = dgvClients.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
-            txtDescription.Text = dgvClients.CurrentRow.Cells[DataGridColumnNames.DESCRIPCION_COLUMN].Value.ToString();
+            txtIdentificationCard.Text = dgvClients.CurrentRow.Cells[DataGridColumnNames.IDENTIFICATION_CARD].Value.ToString();
+            txtCreditCardNumber.Text = dgvClients.CurrentRow.Cells[DataGridColumnNames.CREDIT_CARD_NUMBER].Value.ToString();
+            numericDownCreditLimit.Value = (decimal) dgvClients.CurrentRow.Cells[DataGridColumnNames.CREDIT_LIMIT].Value;
             tabControl1.SelectedTab = tbpMantenance;
 
             btnEdit.Enabled = true;
@@ -226,7 +238,7 @@ namespace RentCar.UI.Maintenances
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (txtIdCarModel.Text != string.Empty)
+            if (txtIdClient.Text != string.Empty)
             {
                 isEdit = true;
                 EnableBottons();
@@ -307,9 +319,9 @@ namespace RentCar.UI.Maintenances
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            var frm = new FrmReportCarModel();
-            //frm.SeachText = txtSearch.Text;
-            frm.ShowDialog();
+            //var frm = new FrmReportCarModel();
+            ////frm.SeachText = txtSearch.Text;
+            //frm.ShowDialog();
         }
     }
 }

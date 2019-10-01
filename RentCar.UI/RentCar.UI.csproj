@@ -134,6 +134,7 @@
     <Compile Include="MappingsProfiles\CarBrandProfile.cs" />
     <Compile Include="MappingsProfiles\CarCategoryProfile.cs" />
     <Compile Include="MappingsProfiles\CarModelProfile.cs" />
+    <Compile Include="MappingsProfiles\ClientProfile.cs" />
     <Compile Include="MappingsProfiles\EmployeeProfile.cs" />
     <Compile Include="MappingsProfiles\FluelCategoryProfile.cs" />
     <Compile Include="MappingsProfiles\PersonTypeProfile.cs" />
