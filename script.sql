@@ -23,70 +23,6 @@ DROP TABLE IF EXISTS dbo.Roles;
 DROP TABLE IF EXISTS dbo.Menues;
 DROP TABLE IF EXISTS dbo.Users;
 
-
-CREATE TABLE Users
-(
-    Id INT NOT NULL IDENTITY,
-    EmployeeId INT NOT NULL,
-    UserName NVARCHAR(60) NOT NULL UNIQUE,
-    UserPassword NVARCHAR(64) NOT NULL,
-    [State] BIT NOT NULL,
-    CreatedBy NVARCHAR(60),
-    CreatedDate DATETIME2 NOT NULL,
-    ModifiedBy NVARCHAR(60),
-    ModifiedDate DATETIME2,
-    CONSTRAINT PK_Users_Id PRIMARY KEY(Id),
-    CONSTRAINT FK_Users_Employees_Id FOREIGN KEY (EmployeeId) REFERENCES Employees(Id)
-)
-GO
-
-CREATE TABLE Roles(
-    Id INT NOT NULL IDENTITY,
-    [Name] NVARCHAR(256),
-    [State] BIT NOT NULL,
-    CreatedBy NVARCHAR(60),
-    CreatedDate DATETIME2 NOT NULL,
-    ModifiedBy  NVARCHAR(60),
-    ModifiedDate DATETIME2
-    CONSTRAINT PK_Roles_Id PRIMARY KEY(Id)
-)
-GO
-
-CREATE TABLE UserRoles(
-    Id INT NOT NULL IDENTITY,
-    UserId INT NOT NULL,
-    RoleId INT NOT NULL,
-    [State] BIT NOT NULL,
-    CreatedBy NVARCHAR(2),
-    CreatedDate DATETIME2 NOT NULL,
-    ModifiedBy NVARCHAR(60),
-    ModifiedDate DATETIME2,
-    CONSTRAINT PK_UserRoles_Id PRIMARY KEY(Id),
-    CONSTRAINT FK_UserRoles_Roles_RoleId FOREIGN KEY (RoleId) REFERENCES Roles(Id),
-    CONSTRAINT FK_UserRoles_User_UserId FOREIGN KEY (UserId) REFERENCES Users(Id)
-)
-
-CREATE TABLE Menues(
-    Id INT NOT NULL IDENTITY,
-    [Name] NVARCHAR(256) NOT NULL,
-    [State] BIT NOT NULL,
-    CONSTRAINT PK_Menues_Id PRIMARY KEY(Id)
-)
-
-CREATE TABLE Access (
-    Id INT NOT NULL IDENTITY,
-    MenuId INT NOT NULL,
-    RoleId INT NOT NULL,
-    [State] BIT NOT NULL,
-    CreatedBy NVARCHAR(60),
-    CreatedDate DATETIME2 NOT NULL,
-    ModifiedBy NVARCHAR(60),
-    ModifiedDate DATETIME2,
-    CONSTRAINT PK_Access_Id PRIMARY KEY(Id),
-    CONSTRAINT FK_Access_Menues_MenuId FOREIGN KEY (MenuId) REFERENCES Menues(Id),
-    CONSTRAINT FK_Access_Roles_RoleId FOREIGN KEY (RoleId) REFERENCES Roles(Id)
-)
-GO
 CREATE TABLE CarBrands(
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(256) NOT NULL,
@@ -105,7 +41,7 @@ GO
 --------------
 CREATE TABLE CarModels(
     Id INT NOT NULL IDENTITY,
-    BrandId INT NOT NULL,
+    CarBrandId INT NOT NULL,
     [Name] NVARCHAR(256) NOT NULL,
     [Description] NVARCHAR (512),
     [State] BIT NOT NULL,
@@ -148,7 +84,7 @@ CREATE TABLE CarCategories (
     ModifiedDate DATETIME2,
     CONSTRAINT Pk_CarTypes_Id PRIMARY KEY(Id)
 )
-
+GO
 CREATE TABLE Car (
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(200) NOT NULL,
@@ -168,7 +104,7 @@ CREATE TABLE Car (
     CONSTRAINT FK_Cars_CarCategories_Id FOREIGN KEY(CarCategoryId)
         REFERENCES CarCategories(Id)
 )
-
+GO
 CREATE TABLE PersonTypes(
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(20),
@@ -181,6 +117,7 @@ CREATE TABLE PersonTypes(
     CONSTRAINT PK_PersonTypes_Id PRIMARY KEY(Id)
 )
 
+GO
 CREATE TABLE Clients(
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(128) NOT NULL,
@@ -198,7 +135,7 @@ CREATE TABLE Clients(
     CONSTRAINT PK_Clients_Id PRIMARY KEY(Id),
     CONSTRAINT FK_Clients_PersonTypes_Id FOREIGN KEY (PersonTypeId) REFERENCES PersonTypes(Id)
 )
-
+GO
 CREATE TABLE Employees(
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(128) NOT NULL,
@@ -268,15 +205,68 @@ CREATE UNIQUE INDEX IXU_Clients_IdentificationCard ON Clients(IdentificationCard
 CREATE NONCLUSTERED INDEX IX_Clients_CreditCarNumber ON Clients(CreditCardNumber)
 CREATE NONCLUSTERED INDEX IX_Employees_Name ON Clients([name])
 
+CREATE TABLE Users
+(
+    Id INT NOT NULL IDENTITY,
+    EmployeeId INT NOT NULL,
+    UserName NVARCHAR(60) NOT NULL UNIQUE,
+    UserPassword NVARCHAR(64) NOT NULL,
+    [State] BIT NOT NULL,
+    CreatedBy NVARCHAR(60),
+    CreatedDate DATETIME2 NOT NULL,
+    ModifiedBy NVARCHAR(60),
+    ModifiedDate DATETIME2,
+    CONSTRAINT PK_Users_Id PRIMARY KEY(Id),
+    CONSTRAINT FK_Users_Employees_Id FOREIGN KEY (EmployeeId) REFERENCES Employees(Id)
+)
 GO
-/*No. Renta
-Empleado
-Vehículo
-Cliente
-Fecha Renta
-Fecha Devolución
-Monto x Día
-Cantidad de días
-Comentario
-Estado
-*/
+
+CREATE TABLE Roles(
+    Id INT NOT NULL IDENTITY,
+    [Name] NVARCHAR(256),
+    [State] BIT NOT NULL,
+    CreatedBy NVARCHAR(60),
+    CreatedDate DATETIME2 NOT NULL,
+    ModifiedBy  NVARCHAR(60),
+    ModifiedDate DATETIME2
+    CONSTRAINT PK_Roles_Id PRIMARY KEY(Id)
+)
+GO
+
+CREATE TABLE UserRoles(
+    Id INT NOT NULL IDENTITY,
+    UserId INT NOT NULL,
+    RoleId INT NOT NULL,
+    [State] BIT NOT NULL,
+    CreatedBy NVARCHAR(2),
+    CreatedDate DATETIME2 NOT NULL,
+    ModifiedBy NVARCHAR(60),
+    ModifiedDate DATETIME2,
+    CONSTRAINT PK_UserRoles_Id PRIMARY KEY(Id),
+    CONSTRAINT FK_UserRoles_Roles_RoleId FOREIGN KEY (RoleId) REFERENCES Roles(Id),
+    CONSTRAINT FK_UserRoles_User_UserId FOREIGN KEY (UserId) REFERENCES Users(Id)
+)
+
+GO
+CREATE TABLE Menues(
+    Id INT NOT NULL IDENTITY,
+    [Name] NVARCHAR(256) NOT NULL,
+    [State] BIT NOT NULL,
+    CONSTRAINT PK_Menues_Id PRIMARY KEY(Id)
+)
+GO
+
+CREATE TABLE Access (
+    Id INT NOT NULL IDENTITY,
+    MenuId INT NOT NULL,
+    RoleId INT NOT NULL,
+    [State] BIT NOT NULL,
+    CreatedBy NVARCHAR(60),
+    CreatedDate DATETIME2 NOT NULL,
+    ModifiedBy NVARCHAR(60),
+    ModifiedDate DATETIME2,
+    CONSTRAINT PK_Access_Id PRIMARY KEY(Id),
+    CONSTRAINT FK_Access_Menues_MenuId FOREIGN KEY (MenuId) REFERENCES Menues(Id),
+    CONSTRAINT FK_Access_Roles_RoleId FOREIGN KEY (RoleId) REFERENCES Roles(Id)
+)
+GO
