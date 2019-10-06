@@ -153,6 +153,7 @@ GO
 ---INDEX Employees
 CREATE UNIQUE INDEX IXU_Employee_IdentificationCard ON Employees(IdentificationCard)
 
+GO
 
 CREATE TABLE CarsInspections
 (
@@ -162,7 +163,7 @@ CREATE TABLE CarsInspections
     HasScratch INT NOT NULL,
     HasTires BIT NOT NULL,
     FluelQuantity FLOAT,
-    HastHydraulicJack BIT NOT NULL,
+    HasHydraulicJack BIT NOT NULL,
     HasReplacementTires BIT NOT NULL,
     HasBrokenCrystal BIT NOT NULL,
     FrontRightTireState BIT NOT NULL,

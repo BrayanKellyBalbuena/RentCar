@@ -89,6 +89,12 @@
     <Compile Include="Constans\AlertMessages.cs" />
     <Compile Include="Constans\Constanst.cs" />
     <Compile Include="Constans\DataGridColumnNames.cs" />
+    <Compile Include="Maintenances\FrmCarInspection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintenances\FrmCarInspection.Designer.cs">
+      <DependentUpon>FrmCarInspection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintenances\FrmCarModel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,7 @@
     </Compile>
     <Compile Include="MappingsProfiles\CarBrandProfile.cs" />
     <Compile Include="MappingsProfiles\CarCategoryProfile.cs" />
+    <Compile Include="MappingsProfiles\CarInspectionProfile.cs" />
     <Compile Include="MappingsProfiles\CarModelProfile.cs" />
     <Compile Include="MappingsProfiles\ClientProfile.cs" />
     <Compile Include="MappingsProfiles\EmployeeProfile.cs" />
@@ -168,6 +175,7 @@
     <Compile Include="Utils\UserControlValidator.cs" />
     <Compile Include="ViewModels\CarBrandViewModel.cs" />
     <Compile Include="ViewModels\CarCategoryViewModel.cs" />
+    <Compile Include="ViewModels\CarInspectionViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
@@ -175,6 +183,9 @@
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\FluelCategoryViewModel.cs" />
     <Compile Include="ViewModels\PersonTypeViewModel.cs" />
+    <EmbeddedResource Include="Maintenances\FrmCarInspection.resx">
+      <DependentUpon>FrmCarInspection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmCarModel.resx">
       <DependentUpon>FrmCarModel.cs</DependentUpon>
     </EmbeddedResource>
