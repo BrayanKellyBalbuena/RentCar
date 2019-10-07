@@ -110,7 +110,6 @@ namespace RentCar.UI.Maintenances
         private void ClearTextBox()
         {
             txtName.Text = string.Empty;
-            txtIdentificationCard.Text = string.Empty;
             txtIdEmployee.Text = string.Empty;
         }
 
@@ -123,12 +122,12 @@ namespace RentCar.UI.Maintenances
                     await carService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             }
-            else
-            {
-                dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<CarCategoryViewModel>>(
-                    await carService.GetAll(x => x.IdentificationCard.Contains(txtSearch.Text)).ToListAsync()
-               );
-            }
+            //else
+            //{
+            //    //dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<CarCategoryViewModel>>(
+            //    //    await carService.GetAll(x => x.IdentificationCard.Contains(txtSearch.Text)).ToListAsync()
+            //   );
+            //}
 
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvEmployees.Rows.Count;
 
@@ -164,33 +163,33 @@ namespace RentCar.UI.Maintenances
                     if (isNew)
                     {
 
-                        await carService.AddAsync(
-                            new Employee
-                            {
-                                Name = txtName.Text,
-                                IdentificationCard = txtIdentificationCard.Text,
-                                CreatedDate = DateTime.Now
+                        //await carService.AddAsync(
+                        //    new Employee
+                        //    {
+                        //        Name = txtName.Text,
+                          
+                        //        CreatedDate = DateTime.Now
 
-                            });
+                        //    });
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.INSERTED_SUCCESSFULLY);
 
                     }
                     else
                     {
-                        var entity = await carService.GetByIdAsync(int.Parse(txtIdEmployee.Text));
+                        //var entity = await carService.GetByIdAsync(int.Parse(txtIdEmployee.Text));
 
-                        var employeeVm = new EmployeeViewModel
-                        {
-                            Id = int.Parse(txtIdEmployee.Text),
-                            Name = txtName.Text,
-                            IdentificationCard = txtIdentificationCard.Text,
-                            CreatedDate = entity.CreatedDate,
-                            ModifiedDate = DateTime.Now
-                        };
-                        entity = Program.mapper.Map(employeeVm, entity);
+                        //var employeeVm = new EmployeeViewModel
+                        //{
+                        //    Id = int.Parse(txtIdEmployee.Text),
+                        //    Name = txtName.Text,
+                
+                        //    CreatedDate = entity.CreatedDate,
+                        //    ModifiedDate = DateTime.Now
+                        //};
+                        //entity = Program.mapper.Map(employeeVm, entity);
 
-                        await carService.UpdateAsync(entity);
+                        //await carService.UpdateAsync(entity);
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.UPDATED_SUCCESSFULLY);
                     }
@@ -214,7 +213,7 @@ namespace RentCar.UI.Maintenances
         private void ClearErrorProvider()
         {
             errorIcon.SetError(txtName, string.Empty);
-            errorIcon.SetError(txtIdentificationCard, string.Empty);
+            //errorIcon.SetError(txtIdentificationCard, string.Empty);
         }
 
         private void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -230,7 +229,7 @@ namespace RentCar.UI.Maintenances
         {
             txtIdEmployee.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
             txtName.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
-            txtIdentificationCard.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.IDENTIFICATION_CARD].Value.ToString();
+           
             tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
@@ -335,12 +334,12 @@ namespace RentCar.UI.Maintenances
                 errorIcon.SetError(txtName, AlertMessages.ENTER_A_NAME);
                 error = false;
             }
-            if (!txtIdentificationCard.IsValidIdentificationCard())
-            {
-                MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
-                errorIcon.SetError(txtIdentificationCard, AlertMessages.ENTER_A_VALID_IDENTIFICATION_CARD);
-                error = false;
-            }
+            //if (!txtIdentificationCard.IsValidIdentificationCard())
+            //{
+            //    MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
+            //    errorIcon.SetError(txtIdentificationCard, AlertMessages.ENTER_A_VALID_IDENTIFICATION_CARD);
+            //    error = false;
+            //}
 
             return error;
         }

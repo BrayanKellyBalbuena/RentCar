@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="Maintenances\FrmCar.Designer.cs">
       <DependentUpon>FrmCar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintenances\FrmCarInspection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +193,7 @@
     <Compile Include="ViewModels\PersonTypeViewModel.cs" />
     <EmbeddedResource Include="Maintenances\FrmCar.resx">
       <DependentUpon>FrmCar.cs</DependentUpon>
+     </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmCarInspection.resx">
       <DependentUpon>FrmCarInspection.cs</DependentUpon>
     </EmbeddedResource>
