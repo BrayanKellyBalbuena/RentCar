@@ -72,5 +72,10 @@ namespace RentCar.UI
         {
             SetActualForm<FrmClient>();
         }
+
+        private void carInspectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetActualForm<FrmCarInspection>();
+        }
     }
 }

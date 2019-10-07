@@ -61,6 +61,7 @@
     <Compile Include="EntitiesConfigutations\CarBrandEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\CarCategoryEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\CarEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\CarInspectionEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\CarModelEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\ClientEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\EmployeeEntityTypeConfiguration.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CarBrandRepository.cs" />
     <Compile Include="Repositories\CarCategoryRepository.cs" />
+    <Compile Include="Repositories\CarInspectionRepository.cs" />
     <Compile Include="Repositories\CarModelRepository.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\CarBrandService.cs" />
     <Compile Include="Services\CarCategoryService.cs" />
+    <Compile Include="Services\CarInspectionService.cs" />
     <Compile Include="Services\CarModelService.cs" />
     <Compile Include="Services\CarService.cs" />
     <Compile Include="Services\ClientService.cs" />

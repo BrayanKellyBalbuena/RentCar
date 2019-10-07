@@ -45,6 +45,8 @@
     <Compile Include="Entities\CarBrand.cs" />
     <Compile Include="Entities\CarCategory.cs" />
     <Compile Include="Entities\CarModel.cs" />
+    <Compile Include="Entities\Car.cs" />
+    <Compile Include="Entities\CarInspection.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\FluelCategory.cs" />
