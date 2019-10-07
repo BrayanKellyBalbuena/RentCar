@@ -88,21 +88,26 @@ GO
 CREATE TABLE Car (
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(200) NOT NULL,
-    ChasisNumber INT NOT NULL,
-    EngineNumber INT NOT NULL,
+    ChassisNumber NCHAR(17) NOT NULL,
+    EngineNumber NVARCHAR(15) NOT NULL,
     PlacaNumber INT NOT NULL,
     CarCategoryId INT NOT NULL,
-    BrandId INT NOT NULL,
-    ModelId INT NOT NULL,
-    FluelTypeId INT NOT NULL,
+    CarBrandId INT NOT NULL,
+    CarModelId INT NOT NULL,
+    FluelCategoryId INT NOT NULL,
     [State] BIT NOT NULL,
     CreatedBy NVARCHAR(60),
     CreatedDate DATETIME2 NOT NULL,
     ModifiedBy NVARCHAR(60),
     ModifiedDate DATETIME2,
     CONSTRAINT PK_Cars_Id PRIMARY KEY(Id),
-    CONSTRAINT FK_Cars_CarCategories_Id FOREIGN KEY(CarCategoryId)
-        REFERENCES CarCategories(Id)
+    CONSTRAINT FK_Cars_CarCategories_Id FOREIGN KEY(CarCategoryId) REFERENCES CarCategories(Id),
+	CONSTRAINT FK_Cars_Brands_Id FOREIGN KEY(CarBrandId) REFERENCES CarBrands(Id),
+	CONSTRAINT FK_Cars_Models_Id FOREIGN KEY(CarModelId) REFERENCES CarModels(Id),
+	CONSTRAINT FK_Cars_FluelTypes_Id FOREIGN KEY(FluelCategoryId) REFERENCES FluelCategories(Id),
+	CONSTRAINT UQ_Cars_ChasisNumber UNIQUE(ChassisNumber),
+	CONSTRAINT UQ_Cars_EngineNumber UNIQUE(EngineNumber),
+	CONSTRAINT UQ_Cars_PlacaNumber UNIQUE(PlacaNumber),
 )
 GO
 CREATE TABLE PersonTypes(
