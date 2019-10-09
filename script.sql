@@ -90,7 +90,7 @@ CREATE TABLE Cars (
     [Name] NVARCHAR(200) NOT NULL,
     ChassisNumber NCHAR(17) NOT NULL,
     EngineNumber NVARCHAR(15) NOT NULL,
-    PlacaNumber INT NOT NULL,
+    PlacaNumber NVARCHAR(7) NOT NULL,
     CarCategoryId INT NOT NULL,
     CarBrandId INT NOT NULL,
     CarModelId INT NOT NULL,
