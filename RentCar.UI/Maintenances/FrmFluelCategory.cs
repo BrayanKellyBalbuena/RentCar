@@ -2,7 +2,7 @@
 using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
 using RentCar.UI.Utils;
-using RentCar.UI.ViewModels;
+using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

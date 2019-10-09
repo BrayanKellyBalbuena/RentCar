@@ -36,14 +36,14 @@
             this.tbpList = new System.Windows.Forms.TabPage();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cbFluelCategoryFilter = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbCarModelFilter = new System.Windows.Forms.ComboBox();
+            this.cbCategoryFilter = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbSearchType = new System.Windows.Forms.ComboBox();
+            this.cbBrandFilter = new System.Windows.Forms.ComboBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.lblTotalRows = new System.Windows.Forms.Label();
             this.chkDelete = new System.Windows.Forms.CheckBox();
@@ -119,14 +119,14 @@
             // 
             this.tbpList.Controls.Add(this.comboBox7);
             this.tbpList.Controls.Add(this.label8);
-            this.tbpList.Controls.Add(this.comboBox3);
+            this.tbpList.Controls.Add(this.cbFluelCategoryFilter);
             this.tbpList.Controls.Add(this.label7);
             this.tbpList.Controls.Add(this.label6);
             this.tbpList.Controls.Add(this.label5);
-            this.tbpList.Controls.Add(this.comboBox2);
-            this.tbpList.Controls.Add(this.comboBox1);
+            this.tbpList.Controls.Add(this.cbCarModelFilter);
+            this.tbpList.Controls.Add(this.cbCategoryFilter);
             this.tbpList.Controls.Add(this.label2);
-            this.tbpList.Controls.Add(this.cbSearchType);
+            this.tbpList.Controls.Add(this.cbBrandFilter);
             this.tbpList.Controls.Add(this.btnPrint);
             this.tbpList.Controls.Add(this.lblTotalRows);
             this.tbpList.Controls.Add(this.chkDelete);
@@ -146,9 +146,6 @@
             // comboBox7
             // 
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Items.AddRange(new object[] {
-            "Name",
-            "IdentificationCard"});
             this.comboBox7.Location = new System.Drawing.Point(59, 80);
             this.comboBox7.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox7.Name = "comboBox7";
@@ -164,17 +161,14 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Filter:";
             // 
-            // comboBox3
+            // cbFluelCategoryFilter
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "Name",
-            "IdentificationCard"});
-            this.comboBox3.Location = new System.Drawing.Point(315, 43);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(130, 21);
-            this.comboBox3.TabIndex = 15;
+            this.cbFluelCategoryFilter.FormattingEnabled = true;
+            this.cbFluelCategoryFilter.Location = new System.Drawing.Point(315, 43);
+            this.cbFluelCategoryFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.cbFluelCategoryFilter.Name = "cbFluelCategoryFilter";
+            this.cbFluelCategoryFilter.Size = new System.Drawing.Size(130, 21);
+            this.cbFluelCategoryFilter.TabIndex = 15;
             // 
             // label7
             // 
@@ -203,29 +197,23 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Category:";
             // 
-            // comboBox2
+            // cbCarModelFilter
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Name",
-            "IdentificationCard"});
-            this.comboBox2.Location = new System.Drawing.Point(315, 15);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(130, 21);
-            this.comboBox2.TabIndex = 11;
+            this.cbCarModelFilter.FormattingEnabled = true;
+            this.cbCarModelFilter.Location = new System.Drawing.Point(315, 15);
+            this.cbCarModelFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.cbCarModelFilter.Name = "cbCarModelFilter";
+            this.cbCarModelFilter.Size = new System.Drawing.Size(130, 21);
+            this.cbCarModelFilter.TabIndex = 11;
             // 
-            // comboBox1
+            // cbCategoryFilter
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Name",
-            "IdentificationCard"});
-            this.comboBox1.Location = new System.Drawing.Point(59, 46);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(117, 21);
-            this.comboBox1.TabIndex = 10;
+            this.cbCategoryFilter.FormattingEnabled = true;
+            this.cbCategoryFilter.Location = new System.Drawing.Point(59, 46);
+            this.cbCategoryFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.cbCategoryFilter.Name = "cbCategoryFilter";
+            this.cbCategoryFilter.Size = new System.Drawing.Size(117, 21);
+            this.cbCategoryFilter.TabIndex = 10;
             // 
             // label2
             // 
@@ -236,17 +224,14 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Brand:";
             // 
-            // cbSearchType
+            // cbBrandFilter
             // 
-            this.cbSearchType.FormattingEnabled = true;
-            this.cbSearchType.Items.AddRange(new object[] {
-            "Name",
-            "IdentificationCard"});
-            this.cbSearchType.Location = new System.Drawing.Point(59, 15);
-            this.cbSearchType.Margin = new System.Windows.Forms.Padding(2);
-            this.cbSearchType.Name = "cbSearchType";
-            this.cbSearchType.Size = new System.Drawing.Size(117, 21);
-            this.cbSearchType.TabIndex = 8;
+            this.cbBrandFilter.FormattingEnabled = true;
+            this.cbBrandFilter.Location = new System.Drawing.Point(59, 15);
+            this.cbBrandFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.cbBrandFilter.Name = "cbBrandFilter";
+            this.cbBrandFilter.Size = new System.Drawing.Size(117, 21);
+            this.cbBrandFilter.TabIndex = 8;
             // 
             // btnPrint
             // 
@@ -256,6 +241,7 @@
             this.btnPrint.Size = new System.Drawing.Size(62, 26);
             this.btnPrint.TabIndex = 7;
             this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // lblTotalRows
             // 
@@ -276,6 +262,7 @@
             this.chkDelete.Size = new System.Drawing.Size(57, 17);
             this.chkDelete.TabIndex = 5;
             this.chkDelete.Text = "Delete";
+            this.chkDelete.CheckedChanged += new System.EventHandler(this.chkDelete_CheckedChanged);
             // 
             // dgvEmployees
             // 
@@ -295,6 +282,8 @@
             this.dgvEmployees.RowTemplate.Height = 24;
             this.dgvEmployees.Size = new System.Drawing.Size(536, 177);
             this.dgvEmployees.TabIndex = 4;
+            this.dgvEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
+            this.dgvEmployees.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_DoubleClick);
             // 
             // Delete
             // 
@@ -314,6 +303,7 @@
             this.btnDelete.Size = new System.Drawing.Size(62, 26);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Eliminar";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSearch
             // 
@@ -323,6 +313,7 @@
             this.btnSearch.Size = new System.Drawing.Size(64, 26);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -626,7 +617,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tbpList;
-        private System.Windows.Forms.ComboBox cbSearchType;
+        private System.Windows.Forms.ComboBox cbBrandFilter;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Label lblTotalRows;
         private System.Windows.Forms.CheckBox chkDelete;
@@ -651,11 +642,11 @@
         private System.Windows.Forms.ToolTip ttMessage;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbCarModelFilter;
+        private System.Windows.Forms.ComboBox cbCategoryFilter;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cbFluelCategoryFilter;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;

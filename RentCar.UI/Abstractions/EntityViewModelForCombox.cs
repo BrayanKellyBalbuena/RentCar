@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RentCar.UI.Abstractions
 {
-    public abstract class CatalogViewModel : EntityViewModel
-    {
+   public abstract class EntityViewModelForCombox
+   {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-    }
+   }
 }

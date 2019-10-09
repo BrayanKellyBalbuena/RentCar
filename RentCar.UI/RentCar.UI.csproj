@@ -86,9 +86,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\EntityViewModelForCombox.cs" />
     <Compile Include="Constans\AlertMessages.cs" />
     <Compile Include="Constans\Constanst.cs" />
     <Compile Include="Constans\DataGridColumnNames.cs" />
+    <Compile Include="Extensions\ComboxExtension.cs" />
     <Compile Include="Maintenances\FrmCar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +151,8 @@
     <Compile Include="MappingsProfiles\CarModelProfile.cs" />
     <Compile Include="MappingsProfiles\CarProfile.cs" />
     <Compile Include="MappingsProfiles\ClientProfile.cs" />
+    <Compile Include="MappingsProfiles\EntityProfile.cs" />
+    <Compile Include="ViewModels\ClientViewModelForCombox.cs" />
     <Compile Include="MappingsProfiles\EmployeeProfile.cs" />
     <Compile Include="MappingsProfiles\FluelCategoryProfile.cs" />
     <Compile Include="MappingsProfiles\PersonTypeProfile.cs" />
@@ -181,19 +185,24 @@
     <Compile Include="Utils\MessageBoxUtil.cs" />
     <Compile Include="Utils\UserControlValidator.cs" />
     <Compile Include="ViewModels\CarBrandViewModel.cs" />
+    <Compile Include="ViewModels\CarBrandViewModelForComboBox.cs" />
     <Compile Include="ViewModels\CarCategoryViewModel.cs" />
+    <Compile Include="ViewModels\CarCategoryViewModelForComboBox.cs" />
     <Compile Include="ViewModels\CarInspectionViewModel.cs" />
     <Compile Include="ViewModels\CarModelViewModel.cs" />
+    <Compile Include="ViewModels\CarModelViewModelForComboBox.cs" />
     <Compile Include="ViewModels\CarViewModel.cs" />
+    <Compile Include="ViewModels\CarViewModelForComboBox.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
-    <Compile Include="ViewModels\EntityViewModel.cs" />
+    <Compile Include="Abstractions\EntityViewModel.cs" />
     <Compile Include="ViewModels\FluelCategoryViewModel.cs" />
+    <Compile Include="ViewModels\FluelCategoryViewModelForComboBox.cs" />
     <Compile Include="ViewModels\PersonTypeViewModel.cs" />
     <EmbeddedResource Include="Maintenances\FrmCar.resx">
       <DependentUpon>FrmCar.cs</DependentUpon>
-     </EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmCarInspection.resx">
       <DependentUpon>FrmCarInspection.cs</DependentUpon>
     </EmbeddedResource>

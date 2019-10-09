@@ -45,7 +45,7 @@ namespace RentCar.UI
 
         private void carToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            SetActualForm<FrmCar>();
         }
 
         private void fluelCategoriesToolStripMenuItem_Click(object sender, EventArgs e)

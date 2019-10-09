@@ -1,4 +1,4 @@
-﻿namespace RentCar.UI.ViewModels
+﻿namespace RentCar.UI.Abstractions
 {
     public class PersonTypeViewModel : CatalogViewModel
     {

@@ -1,27 +1,44 @@
-﻿using RentCar.Core.Entities;
+﻿using AutoMapper;
+using RentCar.Core.Entities;
 using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
 using RentCar.UI.Utils;
-using RentCar.UI.ViewModels;
+using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
+using AutoMapper.QueryableExtensions;
+using RentCar.UI.ViewModels;
+using RentCar.UI.Extensions;
 
 namespace RentCar.UI.Maintenances
 {
     public partial class FrmCar : Form
     {
         private IEntityService<Car> carService;
+        private IEntityService<CarBrand> carBrandService;
+        private IEntityService<CarCategory> carCategoryService;
+        private IEntityService<CarModel> carModelService;
+        private IEntityService<FluelCategory> fluelCategorService;
+        private IMapper mapper;
         private bool isNew;
         private bool isEdit;
 
-        public FrmCar(IEntityService<Car> carService)
+        public FrmCar(IEntityService<Car> carService, IEntityService<CarBrand> carBrandService,
+            IEntityService<CarCategory> carCategoryService, IEntityService<CarModel> carModelService,
+            IEntityService<FluelCategory> fluelCategorService, IMapper mapper)
         {
             InitializeComponent();
+
             ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
             this.carService = carService;
+            this.carBrandService = carBrandService;
+            this.carCategoryService = carCategoryService;
+            this.carModelService = carModelService;
+            this.fluelCategorService = fluelCategorService;
+            this.mapper = mapper;
         }
 
 
@@ -30,7 +47,9 @@ namespace RentCar.UI.Maintenances
             EnableTextBox(false);
             EnableComboBox(false);
             EnableBottons();
+            SetupCombox();
             LoadEmployees();
+            LoadComboBox();
             Show();
         }
 
@@ -75,11 +94,11 @@ namespace RentCar.UI.Maintenances
             }
         }
 
-        private  void LoadEmployees()
+        private void LoadEmployees()
         {
             try
             {
-                dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<CarViewModel>>(carService.GetAll().ToList());
+                dgvEmployees.DataSource = mapper.Map<IEnumerable<CarViewModel>>(carService.GetAll().ToList());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvEmployees.Rows.Count;
             }
             catch (Exception ex)
@@ -90,21 +109,43 @@ namespace RentCar.UI.Maintenances
             HideColumns();
         }
 
+        private void LoadComboBox()
+        {
+            cbBrand.DataSource = carBrandService.GetAll()
+                .ProjectTo<CarBrandViewModelForComboBox>(mapper.ConfigurationProvider).ToList();
+            cbCarModel.DataSource = carModelService.GetAll()
+                .ProjectTo<CarModelViewModelForComboBox>(mapper.ConfigurationProvider).ToList();
+            cbCarCategory.DataSource = carCategoryService.GetAll()
+                .ProjectTo<CarCategoryViewModelForComboBox>(mapper.ConfigurationProvider).ToList();
+            cbFluelCategory.DataSource = fluelCategorService.GetAll()
+                .ProjectTo<FluelCategoryViewModelForComboBox>(mapper.ConfigurationProvider).ToList();
+
+            cbBrandFilter.DataSource = cbBrand.DataSource;
+            cbCategoryFilter.DataSource = cbCarCategory.DataSource;
+            cbCarModelFilter.DataSource = cbCarModel.DataSource;
+            cbFluelCategoryFilter.DataSource = cbFluelCategory.DataSource;
+        }
+
+        private void SetupCombox()
+        {
+            cbBrand.SetupMembers();
+            cbCarCategory.SetupMembers();
+            cbCarModel.SetupMembers();
+            cbFluelCategory.SetupMembers();
+            cbBrandFilter.SetupMembers();
+            cbCategoryFilter.SetupMembers();
+            cbCarModelFilter.SetupMembers();
+            cbFluelCategoryFilter.SetupMembers();
+        }
+
         private void HideColumns()
         {
             dgvEmployees.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             dgvEmployees.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
-        }
-
-
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
+            dgvEmployees.Columns[DataGridColumnNames.CAR_BRAND_ID].Visible = false;
+            dgvEmployees.Columns[DataGridColumnNames.CAR_MODEL_ID].Visible = false;
+            dgvEmployees.Columns[DataGridColumnNames.FLUEL_CATEGORY_ID].Visible = false;
+            dgvEmployees.Columns[DataGridColumnNames.CAR_CATEGORY_ID].Visible = false;
         }
 
         private void ClearTextBox()
@@ -116,18 +157,17 @@ namespace RentCar.UI.Maintenances
         private async void Search()
         {
 
-            if (cbSearchType.SelectedIndex == 0)
+            if (cbBrandFilter.SelectedIndex == 0)
             {
-                dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<CarViewModel>>(
+                dgvEmployees.DataSource = mapper.Map<IEnumerable<CarViewModel>>(
                     await carService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             }
-            //else
-            //{
-            //    //dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<CarCategoryViewModel>>(
-            //    //    await carService.GetAll(x => x.IdentificationCard.Contains(txtSearch.Text)).ToListAsync()
-            //   );
-            //}
+            else
+            {
+
+
+            }
 
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvEmployees.Rows.Count;
 
@@ -163,33 +203,36 @@ namespace RentCar.UI.Maintenances
                     if (isNew)
                     {
 
-                        //await carService.AddAsync(
-                        //    new Employee
-                        //    {
-                        //        Name = txtName.Text,
-                          
-                        //        CreatedDate = DateTime.Now
-
-                        //    });
+                        await carService.AddAsync(
+                            new Car
+                            {
+                                Name = txtName.Text,
+                                ChassisNumber = txtChassisNumber.Text,
+                                EngineNumber = txtEngineNumber.Text,
+                                PlacaNumber = txtPlacaNumber.Text,
+                                CarBrandId = (int)cbBrand.SelectedValue,
+                                CarCategoryId = (int)cbCarCategory.SelectedValue,
+                                CarModelId = (int)cbCarModel.SelectedValue,
+                                FluelCategoryId = (int) cbFluelCategory.SelectedValue
+                            }); ; 
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.INSERTED_SUCCESSFULLY);
 
                     }
                     else
                     {
-                        //var entity = await carService.GetByIdAsync(int.Parse(txtIdEmployee.Text));
+                        var entity = await carService.GetByIdAsync(int.Parse(txtIdEmployee.Text));
 
-                        //var employeeVm = new EmployeeViewModel
-                        //{
-                        //    Id = int.Parse(txtIdEmployee.Text),
-                        //    Name = txtName.Text,
-                
-                        //    CreatedDate = entity.CreatedDate,
-                        //    ModifiedDate = DateTime.Now
-                        //};
-                        //entity = Program.mapper.Map(employeeVm, entity);
+                        entity.Name = txtName.Text;
+                        entity.ChassisNumber = txtChassisNumber.Text;
+                        entity.EngineNumber = txtEngineNumber.Text;
+                        entity.PlacaNumber = txtPlacaNumber.Text;
+                        entity.CarBrandId = (int)cbBrand.SelectedValue;
+                        entity.CarCategoryId = (int)cbCarCategory.SelectedValue;
+                        entity.CarModelId = (int)cbCarModel.SelectedValue;
+                        entity.FluelCategoryId = (int)cbFluelCategory.SelectedValue;
 
-                        //await carService.UpdateAsync(entity);
+                        await carService.UpdateAsync(entity);
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.UPDATED_SUCCESSFULLY);
                     }
@@ -229,7 +272,14 @@ namespace RentCar.UI.Maintenances
         {
             txtIdEmployee.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
             txtName.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
-           
+            txtChassisNumber.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CHASISS_NUMBER].Value.ToString();
+            txtPlacaNumber.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.PLACA_NUMBER].Value.ToString();
+            txtEngineNumber.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.ENGINE_NUMBER].Value.ToString();
+            cbBrand.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CAR_BRAND_ID].Value;
+            cbCarCategory.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CAR_CATEGORY_ID].Value;
+            cbCarModel.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CAR_MODEL_ID].Value;
+            cbFluelCategory.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.FLUEL_CATEGORY_ID].Value;
+
             tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
@@ -253,6 +303,8 @@ namespace RentCar.UI.Maintenances
             }
         }
 
+
+       
         private void btnCancel_Click(object sender, EventArgs e)
         {
             isNew = false;

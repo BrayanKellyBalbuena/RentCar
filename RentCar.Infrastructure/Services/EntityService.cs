@@ -30,6 +30,7 @@ namespace RentCar.Infrastructure.Services
             }
            
             entity.State = true;
+            entity.CreatedDate = DateTime.Now;
 
             await Repository.AddAsync(entity);
             await Repository.SaveChangesAsync();
@@ -67,7 +68,9 @@ namespace RentCar.Infrastructure.Services
         public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
             if (entity == null)  throw new ArgumentNullException(nameof(TEntity));
-            
+
+            entity.ModifiedDate = DateTime.Now;
+
             await Repository.UpdateAsync(entity);
 
             return entity;

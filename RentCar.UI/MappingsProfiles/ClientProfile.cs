@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RentCar.Core.Entities;
+using RentCar.UI.Abstractions;
 using RentCar.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace RentCar.UI.MappingsProfiles
 
             CreateMap<ClientViewModel, Client>()
                 .ForSourceMember(source => source.PersonTypeName, opt => opt.DoNotValidate());
+
+            CreateMap<Client, ClientViewModelForCombox>();
         }
     }
 }

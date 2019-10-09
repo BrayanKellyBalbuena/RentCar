@@ -9,12 +9,11 @@ using SimpleInjector;
 using System;
 using System.Windows.Forms;
 using AutoMapper;
-using RentCar.UI.ViewModels;
 using RentCar.UI.MappingsProfiles;
 
 namespace RentCar.UI
 {
-    
+
     static class Program
     {
         public static Container Container { get; private set; }
@@ -91,6 +90,7 @@ namespace RentCar.UI
             });
 
             mapper = config.CreateMapper();
+            Container.Register(() => mapper, Lifestyle.Singleton);        
         }
     }
 }

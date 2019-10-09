@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RentCar.UI.ViewModels
+namespace RentCar.UI.Abstractions
 {
     public class CarModelViewModel : CatalogViewModel
     {

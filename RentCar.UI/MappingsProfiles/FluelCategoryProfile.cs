@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RentCar.Core.Entities;
+using RentCar.UI.Abstractions;
 using RentCar.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace RentCar.UI.MappingsProfiles
         public FluelCategoryProfile()
         {
             CreateMap<FluelCategoryViewModel, FluelCategory>().ReverseMap();
+
+            CreateMap<FluelCategory, FluelCategoryViewModelForComboBox>();
         }
     }
 }

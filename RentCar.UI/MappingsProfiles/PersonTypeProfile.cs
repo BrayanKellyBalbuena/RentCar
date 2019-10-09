@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using RentCar.Core.Entities;
-using RentCar.UI.ViewModels;
+using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

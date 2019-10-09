@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using RentCar.Core.Entities;
-using RentCar.UI.ViewModels;
+using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ namespace RentCar.UI.MappingsProfiles
         public CarBrandProfile()
         {
             CreateMap<CarBrandViewModel, CarBrand>().ReverseMap();
+            CreateMap<CarBrand, CarBrandViewModelForComboBox>();
         }
     }
 }
