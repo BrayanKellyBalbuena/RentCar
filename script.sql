@@ -85,7 +85,7 @@ CREATE TABLE CarCategories (
     CONSTRAINT Pk_CarTypes_Id PRIMARY KEY(Id)
 )
 GO
-CREATE TABLE Car (
+CREATE TABLE Cars (
     Id INT NOT NULL IDENTITY,
     [Name] NVARCHAR(200) NOT NULL,
     ChassisNumber NCHAR(17) NOT NULL,
