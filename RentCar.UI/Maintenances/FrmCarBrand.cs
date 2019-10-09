@@ -8,7 +8,7 @@ using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
 using RentCar.UI.Reports;
 using RentCar.UI.Utils;
-using RentCar.UI.ViewModels;
+using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -277,9 +277,9 @@ namespace RentCar.UI.Maintenances
                 {
                     foreach (DataGridViewRow row in dgvCarBrands.Rows)
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        if (Convert.ToBoolean(row.Cells[DataGridColumnNames.DELETE_COLUMN].Value))
                         {
-                           int id = Convert.ToInt32(row.Cells[1].Value);
+                           int id = Convert.ToInt32(row.Cells[DataGridColumnNames.ID_COLUMN].Value);
 
                             await carBrandService.DeleteAsync(id);
                                 MessageBoxUtil.MessageOk(this, AlertMessages.DELETED_SUCCESSFULLY);
