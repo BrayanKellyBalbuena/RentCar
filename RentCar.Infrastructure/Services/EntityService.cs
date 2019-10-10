@@ -7,9 +7,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace RentCar.Infrastructure.Services
+namespace RentCar.Infrastructure.Abstractions
 {
-    public class EntityService<TEntity> : IEntityService<TEntity> where TEntity : Entity
+    public abstract class EntityService<TEntity> : IEntityService<TEntity> where TEntity : Entity
     {
         public EntityService(IRepository<TEntity> repository)
         {
@@ -28,7 +28,7 @@ namespace RentCar.Infrastructure.Services
             {
                 throw new ArgumentNullException();
             }
-           
+
             entity.State = true;
             entity.CreatedDate = DateTime.Now;
 
@@ -67,7 +67,7 @@ namespace RentCar.Infrastructure.Services
 
         public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            if (entity == null)  throw new ArgumentNullException(nameof(TEntity));
+            if (entity == null) throw new ArgumentNullException(nameof(TEntity));
 
             entity.ModifiedDate = DateTime.Now;
 
@@ -91,13 +91,13 @@ namespace RentCar.Infrastructure.Services
         public async Task<TEntity> GetByIdAsync(int id)
         {
             var entity = await Repository.GetByIdAsync(id);
- 
+
             return entity;
         }
 
         public virtual IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-           
+
             if (filter != null)
             {
                 return Repository.GetAll(filter).Take(200);
@@ -113,7 +113,7 @@ namespace RentCar.Infrastructure.Services
         }
     }
 
-    internal static class ExpressionTransformer<TFrom, TTo> 
+    internal static class ExpressionTransformer<TFrom, TTo>
     {
         public class Visitor : ExpressionVisitor
         {

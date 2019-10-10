@@ -1,19 +1,13 @@
-﻿using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
-using RentCar.Core.Interfaces.Domain;
-using RentCar.Infrastructure.DbContexts;
+﻿using RentCar.Infrastructure.DbContexts;
 using RentCar.Infrastructure.Repositories;
-using RentCar.Infrastructure.Services;
 using RentCar.UI.Maintenances;
 using SimpleInjector;
 using System;
 using System.Windows.Forms;
 using AutoMapper;
 using RentCar.UI.MappingsProfiles;
-using System.Reflection;
-using RentCar.Core.Abstractions;
 using System.Linq;
-using RentCar.Infrastructure.Abstractions;
+using RentCar.Infrastructure.Services;
 
 namespace RentCar.UI
 {
@@ -67,15 +61,28 @@ namespace RentCar.UI
 
         private static void RegisterServices()
         {
-            Container.Register<IEntityService<CarBrand>, CarBrandService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<CarCategory>, CarCategoryService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<FluelCategory>, FuelCategoryService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<CarModel>, CarModelService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<PersonType>, PersonTypeService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<Employee>, EmployeeService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<Client>, ClientService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<Car>, CarService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<CarInspection>, CarInspectionService>(Lifestyle.Singleton);
+            var serviceRegistrations =
+                from type in typeof(CarService).Assembly.GetExportedTypes()
+                where type.Namespace.StartsWith("RentCar.Infrastructure.Services")
+                select new { Interfaces = type.GetInterfaces().Where(i => i.Name.Contains("Service")), Implementation = type };
+
+            foreach (var registration in serviceRegistrations)
+            {
+                foreach (var @interface in registration.Interfaces)
+                {
+                    Container.Register(@interface, registration.Implementation, Lifestyle.Singleton);
+                }
+            }
+
+            //Container.Register<IEntityService<CarBrand>, CarBrandService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<CarCategory>, CarCategoryService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<FluelCategory>, FuelCategoryService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<CarModel>, CarModelService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<PersonType>, PersonTypeService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<Employee>, EmployeeService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<Client>, ClientService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<Car>, CarService>(Lifestyle.Singleton);
+            //Container.Register<IEntityService<CarInspection>, CarInspectionService>(Lifestyle.Singleton);
         }
 
         private static void RegisterForms()
