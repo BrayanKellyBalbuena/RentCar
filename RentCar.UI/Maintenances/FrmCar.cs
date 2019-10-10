@@ -98,8 +98,8 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                dgvEmployees.DataSource = mapper.Map<IEnumerable<CarViewModel>>(carService.GetAll().ToList());
-                lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvEmployees.Rows.Count;
+                dgvCars.DataSource = mapper.Map<IEnumerable<CarViewModel>>(carService.GetAll().ToList());
+                lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCars.Rows.Count;
             }
             catch (Exception ex)
             {
@@ -140,12 +140,12 @@ namespace RentCar.UI.Maintenances
 
         private void HideColumns()
         {
-            dgvEmployees.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
-            dgvEmployees.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
-            dgvEmployees.Columns[DataGridColumnNames.CAR_BRAND_ID].Visible = false;
-            dgvEmployees.Columns[DataGridColumnNames.CAR_MODEL_ID].Visible = false;
-            dgvEmployees.Columns[DataGridColumnNames.FLUEL_CATEGORY_ID].Visible = false;
-            dgvEmployees.Columns[DataGridColumnNames.CAR_CATEGORY_ID].Visible = false;
+            dgvCars.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
+            dgvCars.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
+            dgvCars.Columns[DataGridColumnNames.CAR_BRAND_ID].Visible = false;
+            dgvCars.Columns[DataGridColumnNames.CAR_MODEL_ID].Visible = false;
+            dgvCars.Columns[DataGridColumnNames.FLUEL_CATEGORY_ID].Visible = false;
+            dgvCars.Columns[DataGridColumnNames.CAR_CATEGORY_ID].Visible = false;
         }
 
         private void ClearTextBox()
@@ -159,7 +159,7 @@ namespace RentCar.UI.Maintenances
 
             if (cbBrandFilter.SelectedIndex == 0)
             {
-                dgvEmployees.DataSource = mapper.Map<IEnumerable<CarViewModel>>(
+                dgvCars.DataSource = mapper.Map<IEnumerable<CarViewModel>>(
                     await carService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             }
@@ -169,7 +169,7 @@ namespace RentCar.UI.Maintenances
 
             }
 
-            lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvEmployees.Rows.Count;
+            lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCars.Rows.Count;
 
         }
 
@@ -259,26 +259,26 @@ namespace RentCar.UI.Maintenances
             //errorIcon.SetError(txtIdentificationCard, string.Empty);
         }
 
-        private void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCars_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgvEmployees.Columns[DataGridColumnNames.DELETE_COLUMN].Index)
+            if (e.ColumnIndex == dgvCars.Columns[DataGridColumnNames.DELETE_COLUMN].Index)
             {
-                DataGridViewCheckBoxCell chkDelete = dgvEmployees.Rows[e.RowIndex].Cells[DataGridColumnNames.DELETE_COLUMN] as DataGridViewCheckBoxCell;
+                DataGridViewCheckBoxCell chkDelete = dgvCars.Rows[e.RowIndex].Cells[DataGridColumnNames.DELETE_COLUMN] as DataGridViewCheckBoxCell;
                 chkDelete.Value = !Convert.ToBoolean(chkDelete.Value);
             }
         }
 
-        private void dgvEmployees_DoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCars_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtIdEmployee.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
-            txtName.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
-            txtChassisNumber.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CHASISS_NUMBER].Value.ToString();
-            txtPlacaNumber.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.PLACA_NUMBER].Value.ToString();
-            txtEngineNumber.Text = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.ENGINE_NUMBER].Value.ToString();
-            cbBrand.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CAR_BRAND_ID].Value;
-            cbCarCategory.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CAR_CATEGORY_ID].Value;
-            cbCarModel.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.CAR_MODEL_ID].Value;
-            cbFluelCategory.SelectedValue = dgvEmployees.CurrentRow.Cells[DataGridColumnNames.FLUEL_CATEGORY_ID].Value;
+            txtIdEmployee.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
+            txtName.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
+            txtChassisNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.CHASISS_NUMBER].Value.ToString();
+            txtPlacaNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.PLACA_NUMBER].Value.ToString();
+            txtEngineNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.ENGINE_NUMBER].Value.ToString();
+            cbBrand.SelectedValue = dgvCars.CurrentRow.Cells[DataGridColumnNames.CAR_BRAND_ID].Value;
+            cbCarCategory.SelectedValue = dgvCars.CurrentRow.Cells[DataGridColumnNames.CAR_CATEGORY_ID].Value;
+            cbCarModel.SelectedValue = dgvCars.CurrentRow.Cells[DataGridColumnNames.CAR_MODEL_ID].Value;
+            cbFluelCategory.SelectedValue = dgvCars.CurrentRow.Cells[DataGridColumnNames.FLUEL_CATEGORY_ID].Value;
 
             tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
@@ -318,11 +318,11 @@ namespace RentCar.UI.Maintenances
         {
             if (chkDelete.Checked)
             {
-                dgvEmployees.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = true;
+                dgvCars.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = true;
             }
             else
             {
-                dgvEmployees.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
+                dgvCars.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             }
         }
 
@@ -343,7 +343,7 @@ namespace RentCar.UI.Maintenances
 
                 if (Opcion == DialogResult.OK)
                 {
-                    foreach (DataGridViewRow row in dgvEmployees.Rows)
+                    foreach (DataGridViewRow row in dgvCars.Rows)
                     {
                         if (Convert.ToBoolean(row.Cells[DataGridColumnNames.DELETE_COLUMN].Value))
                         {

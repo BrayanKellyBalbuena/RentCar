@@ -47,7 +47,7 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.lblTotalRows = new System.Windows.Forms.Label();
             this.chkDelete = new System.Windows.Forms.CheckBox();
-            this.dgvEmployees = new System.Windows.Forms.DataGridView();
+            this.dgvCars = new System.Windows.Forms.DataGridView();
             this.Delete = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -82,7 +82,7 @@
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tbpList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCars)).BeginInit();
             this.tbpMantenance.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorIcon)).BeginInit();
@@ -130,7 +130,7 @@
             this.tbpList.Controls.Add(this.btnPrint);
             this.tbpList.Controls.Add(this.lblTotalRows);
             this.tbpList.Controls.Add(this.chkDelete);
-            this.tbpList.Controls.Add(this.dgvEmployees);
+            this.tbpList.Controls.Add(this.dgvCars);
             this.tbpList.Controls.Add(this.btnDelete);
             this.tbpList.Controls.Add(this.btnSearch);
             this.tbpList.Controls.Add(this.txtSearch);
@@ -264,26 +264,26 @@
             this.chkDelete.Text = "Delete";
             this.chkDelete.CheckedChanged += new System.EventHandler(this.chkDelete_CheckedChanged);
             // 
-            // dgvEmployees
+            // dgvCars
             // 
-            this.dgvEmployees.AllowUserToAddRows = false;
-            this.dgvEmployees.AllowUserToDeleteRows = false;
-            this.dgvEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvCars.AllowUserToAddRows = false;
+            this.dgvCars.AllowUserToDeleteRows = false;
+            this.dgvCars.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvEmployees.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvCars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCars.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Delete});
-            this.dgvEmployees.Location = new System.Drawing.Point(5, 167);
-            this.dgvEmployees.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvEmployees.Name = "dgvEmployees";
-            this.dgvEmployees.ReadOnly = true;
-            this.dgvEmployees.RowTemplate.Height = 24;
-            this.dgvEmployees.Size = new System.Drawing.Size(536, 177);
-            this.dgvEmployees.TabIndex = 4;
-            this.dgvEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
-            this.dgvEmployees.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_DoubleClick);
+            this.dgvCars.Location = new System.Drawing.Point(5, 167);
+            this.dgvCars.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvCars.Name = "dgvCars";
+            this.dgvCars.ReadOnly = true;
+            this.dgvCars.RowTemplate.Height = 24;
+            this.dgvCars.Size = new System.Drawing.Size(536, 177);
+            this.dgvCars.TabIndex = 4;
+            this.dgvCars.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCars_CellContentClick);
+            this.dgvCars.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCars_DoubleClick);
             // 
             // Delete
             // 
@@ -603,7 +603,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tbpList.ResumeLayout(false);
             this.tbpList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCars)).EndInit();
             this.tbpMantenance.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -621,7 +621,7 @@
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Label lblTotalRows;
         private System.Windows.Forms.CheckBox chkDelete;
-        private System.Windows.Forms.DataGridView dgvEmployees;
+        private System.Windows.Forms.DataGridView dgvCars;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Delete;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSearch;
