@@ -73,16 +73,6 @@ namespace RentCar.UI
                     Container.Register(@interface, registration.Implementation, Lifestyle.Singleton);
                 }
             }
-
-            //Container.Register<IEntityService<CarBrand>, CarBrandService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<CarCategory>, CarCategoryService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<FluelCategory>, FuelCategoryService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<CarModel>, CarModelService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<PersonType>, PersonTypeService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<Employee>, EmployeeService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<Client>, ClientService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<Car>, CarService>(Lifestyle.Singleton);
-            //Container.Register<IEntityService<CarInspection>, CarInspectionService>(Lifestyle.Singleton);
         }
 
         private static void RegisterForms()
