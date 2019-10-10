@@ -78,7 +78,7 @@
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\FluelCategoryRepository.cs" />
     <Compile Include="Repositories\PersonTypeRepository.cs" />
-    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Abstractions\Repository.cs" />
     <Compile Include="Services\CarBrandService.cs" />
     <Compile Include="Services\CarCategoryService.cs" />
     <Compile Include="Services\CarInspectionService.cs" />

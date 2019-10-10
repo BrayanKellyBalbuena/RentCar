@@ -1,4 +1,5 @@
 ﻿using RentCar.Core.Entities;
+using RentCar.Infrastructure.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

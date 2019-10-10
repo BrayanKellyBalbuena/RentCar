@@ -10,6 +10,10 @@ using System;
 using System.Windows.Forms;
 using AutoMapper;
 using RentCar.UI.MappingsProfiles;
+using System.Reflection;
+using RentCar.Core.Abstractions;
+using System.Linq;
+using RentCar.Infrastructure.Abstractions;
 
 namespace RentCar.UI
 {
@@ -44,16 +48,21 @@ namespace RentCar.UI
         private static void RegisterRepositories()
         {
 
-            Container.Register<IRepository<CarBrand>, CarBrandRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<CarCategory>, CarCategoryRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<FluelCategory>, FluelCategoryRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<CarModel>, CarModelRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<PersonType>, PersonTypeRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<Employee>, EmployeeRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<Client>, ClientRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<Car>, CarRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<CarInspection>, CarInspectionRepository<RentCarContext>>(Lifestyle.Singleton);
-            
+            var repositoryRegistrations =
+                from type in typeof(CarRepository<>).Assembly.GetExportedTypes()
+                where type.Namespace.StartsWith("RentCar.Infrastructure.Repositories")
+                select new { Interfaces = type.GetInterfaces().Where(x => x.Name.Contains("Repository")), Implementacion = type}
+                ;
+
+            foreach (var registration in repositoryRegistrations)
+            {
+                foreach (var @interface in registration.Interfaces)
+                {
+                    Type concreteRepository = registration.Implementacion.MakeGenericType(typeof(RentCarContext));
+
+                    Container.Register(@interface, concreteRepository, Lifestyle.Singleton);
+                }
+            }
         }
 
         private static void RegisterServices()

@@ -8,9 +8,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace RentCar.Infrastructure.Repositories
+namespace RentCar.Infrastructure.Abstractions
 {
-    public class Repository<TContext, TEntity> : IDisposable, IRepository<TEntity> where TEntity : Entity where TContext : DbContext
+    public abstract class Repository<TContext, TEntity> : IDisposable, IRepository<TEntity> where TEntity : Entity where TContext : DbContext
     {
         private bool _save = true;
         private readonly TContext _context;
