@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using AutoMapper;
 
 namespace RentCar.UI.Maintenances
 {
@@ -17,6 +18,7 @@ namespace RentCar.UI.Maintenances
     {
         private readonly IEntityService<Client> clientService;
         private readonly IEntityService<PersonType> personTypeService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
 
@@ -77,7 +79,7 @@ namespace RentCar.UI.Maintenances
             try
             {
                 var data =  clientService.GetAll().ToList();
-                dgvClients.DataSource = Program.mapper.Map<IEnumerable<ClientViewModel>>(data);
+                dgvClients.DataSource = mapper.Map<IEnumerable<ClientViewModel>>(data);
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvClients.Rows.Count;
 
                 HideColumns();
@@ -132,7 +134,7 @@ namespace RentCar.UI.Maintenances
 
         private async void Search()
         {
-            dgvClients.DataSource = Program.mapper.Map<IEnumerable<ClientViewModel>>(
+            dgvClients.DataSource = mapper.Map<IEnumerable<ClientViewModel>>(
                await clientService.GetAll(x => x.Name.Contains(txtSearch.Text) && x.PersonTypeId == (int)cbPersonTypeSearch.SelectedValue).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvClients.Rows.Count;
@@ -198,7 +200,7 @@ namespace RentCar.UI.Maintenances
                             CreatedDate = entity.CreatedDate,
                             ModifiedDate = DateTime.Now
                         };
-                        entity = Program.mapper.Map(model, entity);
+                        entity = mapper.Map(model, entity);
 
 
                         await clientService.UpdateAsync(entity);

@@ -15,7 +15,6 @@ namespace RentCar.UI
     static class Program
     {
         public static Container Container { get; private set; }
-        public static IMapper mapper;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -95,7 +94,7 @@ namespace RentCar.UI
                 cfg.AddMaps(typeof(CarBrandProfile).Assembly);
             });
 
-            mapper = config.CreateMapper();
+           var mapper = config.CreateMapper();
             Container.Register(() => mapper, Lifestyle.Singleton);        
         }
     }

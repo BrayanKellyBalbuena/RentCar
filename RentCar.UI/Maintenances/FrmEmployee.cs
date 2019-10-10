@@ -7,20 +7,23 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Windows.Forms;
+using AutoMapper;
 
 namespace RentCar.UI.Maintenances
 {
     public partial class FrmEmployee : Form
     {
-        private IEntityService<Employee> employeeService;
+        private readonly IEntityService<Employee> employeeService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
 
-        public FrmEmployee(IEntityService<Employee> employeeService)
+        public FrmEmployee(IEntityService<Employee> employeeService, IMapper mapper)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
             this.employeeService = employeeService;
+            this.mapper = mapper;
         }
 
 
@@ -64,7 +67,7 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<EmployeeViewModel>>(await employeeService.GetAll().ToListAsync());
+                dgvEmployees.DataSource = mapper.Map<IEnumerable<EmployeeViewModel>>(await employeeService.GetAll().ToListAsync());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvEmployees.Rows.Count;
             }
             catch (Exception ex)
@@ -104,13 +107,13 @@ namespace RentCar.UI.Maintenances
 
             if (cbSearchType.SelectedIndex == 0)
             {
-                dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<EmployeeViewModel>>(
+                dgvEmployees.DataSource = mapper.Map<IEnumerable<EmployeeViewModel>>(
                     await employeeService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             }
             else
             {
-                dgvEmployees.DataSource = Program.mapper.Map<IEnumerable<EmployeeViewModel>>(
+                dgvEmployees.DataSource = mapper.Map<IEnumerable<EmployeeViewModel>>(
                     await employeeService.GetAll(x => x.IdentificationCard.Contains(txtSearch.Text)).ToListAsync()
                );
             }
@@ -172,7 +175,7 @@ namespace RentCar.UI.Maintenances
                             CreatedDate = entity.CreatedDate,
                             ModifiedDate = DateTime.Now
                         };
-                        entity = Program.mapper.Map(employeeVm, entity);
+                        entity = mapper.Map(employeeVm, entity);
 
                         await employeeService.UpdateAsync(entity);
 

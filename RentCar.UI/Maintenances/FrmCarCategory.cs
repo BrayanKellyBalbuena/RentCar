@@ -3,27 +3,29 @@ using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
 using RentCar.UI.Reports;
 using RentCar.UI.Utils;
-using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Windows.Forms;
 using RentCar.UI.ViewModels;
+using AutoMapper;
 
 namespace RentCar.UI.Maintenances
 {
     public partial class FrmCarCategory : Form
     {
-        private IEntityService<CarCategory> carCategoryService;
+        private readonly IEntityService<CarCategory> carCategoryService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
         private string ENTER_NAME_MESSAGE = "Enter a name of Card Category";
 
-        public FrmCarCategory(IEntityService<CarCategory> carCategoryService)
+        public FrmCarCategory(IEntityService<CarCategory> carCategoryService, IMapper mapper)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, ENTER_NAME_MESSAGE);
             this.carCategoryService = carCategoryService;
+            this.mapper = mapper;
         }
 
 
@@ -67,7 +69,7 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                dgvCarCategory.DataSource = Program.mapper.Map<IEnumerable<CarCategoryViewModel>>(await carCategoryService.GetAll().ToListAsync());
+                dgvCarCategory.DataSource = mapper.Map<IEnumerable<CarCategoryViewModel>>(await carCategoryService.GetAll().ToListAsync());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarCategory.Rows.Count;
             }
             catch (Exception ex)
@@ -105,7 +107,7 @@ namespace RentCar.UI.Maintenances
 
         private async void Search()
         {
-            dgvCarCategory.DataSource = Program.mapper.Map<IEnumerable<CarCategoryViewModel>>(
+            dgvCarCategory.DataSource = mapper.Map<IEnumerable<CarCategoryViewModel>>(
                await carCategoryService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarCategory.Rows.Count;
@@ -165,7 +167,7 @@ namespace RentCar.UI.Maintenances
                             CreatedDate = entity.CreatedDate,
                             ModifiedDate = DateTime.Now
                         };
-                        entity = Program.mapper.Map(brand, entity);
+                        entity = mapper.Map(brand, entity);
 
 
                         await carCategoryService.UpdateAsync(entity);

@@ -6,14 +6,11 @@ using RentCar.UI.Utils;
 using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoMapper;
 
 namespace RentCar.UI.Maintenances
 {
@@ -21,16 +18,17 @@ namespace RentCar.UI.Maintenances
     {
         private readonly IEntityService<CarModel> carModelService;
         private readonly IEntityService<CarBrand> carBrandService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
 
-        public FrmCarModel(IEntityService<CarModel> carModelService, IEntityService<CarBrand> carBrandService)
+        public FrmCarModel(IEntityService<CarModel> carModelService, IEntityService<CarBrand> carBrandService, IMapper mapper)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
-
             this.carModelService = carModelService;
             this.carBrandService = carBrandService;
+            this.mapper = mapper;
         }
 
         private void FrmCarModels_Load(object sender, EventArgs e)
@@ -78,7 +76,7 @@ namespace RentCar.UI.Maintenances
             try
             {
                 var data = await carModelService.GetAll().ToListAsync();
-                dgvCarModels.DataSource = Program.mapper.Map<IEnumerable<CarModelViewModel>>(await carModelService.GetAll().ToListAsync());
+                dgvCarModels.DataSource = mapper.Map<IEnumerable<CarModelViewModel>>(await carModelService.GetAll().ToListAsync());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarModels.Rows.Count;
             }
             catch (Exception ex)
@@ -130,7 +128,7 @@ namespace RentCar.UI.Maintenances
 
         private async void Search()
         {
-            dgvCarModels.DataSource = Program.mapper.Map<IEnumerable<CarModelViewModel>>(
+            dgvCarModels.DataSource = mapper.Map<IEnumerable<CarModelViewModel>>(
                await carModelService.GetAll(x => x.Name.Contains(txtSearch.Text) && x.CarBrandId == (int) cbBrandSearch.SelectedValue).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarModels.Rows.Count;
@@ -192,7 +190,7 @@ namespace RentCar.UI.Maintenances
                             CreatedDate = entity.CreatedDate,
                             ModifiedDate = DateTime.Now
                         };
-                        entity = Program.mapper.Map(Model, entity);
+                        entity = mapper.Map(Model, entity);
 
 
                         await carModelService.UpdateAsync(entity);

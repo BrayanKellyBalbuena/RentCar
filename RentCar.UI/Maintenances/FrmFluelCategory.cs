@@ -5,28 +5,25 @@ using RentCar.UI.Utils;
 using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoMapper;
 
 namespace RentCar.UI.Maintenances
 {
     public partial class FrmFluelCategory : Form
     {
-        private IEntityService<FluelCategory> fluelCategoryService;
+        private readonly IEntityService<FluelCategory> fluelCategoryService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
 
-        public FrmFluelCategory(IEntityService<FluelCategory> fluelCategoryService)
+        public FrmFluelCategory(IEntityService<FluelCategory> fluelCategoryService, IMapper mapper)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
             this.fluelCategoryService = fluelCategoryService;
+            this.mapper = mapper;
         }
 
 
@@ -72,7 +69,7 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                dgvFluelCategories.DataSource = Program.mapper.Map<IEnumerable<FluelCategoryViewModel>>(await fluelCategoryService.GetAll().ToListAsync());
+                dgvFluelCategories.DataSource = mapper.Map<IEnumerable<FluelCategoryViewModel>>(await fluelCategoryService.GetAll().ToListAsync());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvFluelCategories.Rows.Count;
             }
             catch (Exception ex)
@@ -109,7 +106,7 @@ namespace RentCar.UI.Maintenances
 
         private async void Search()
         {
-            dgvFluelCategories.DataSource = Program.mapper.Map<IEnumerable<FluelCategoryViewModel>>(
+            dgvFluelCategories.DataSource = mapper.Map<IEnumerable<FluelCategoryViewModel>>(
                await fluelCategoryService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvFluelCategories.Rows.Count;
@@ -169,7 +166,7 @@ namespace RentCar.UI.Maintenances
                             CreatedDate = entity.CreatedDate,
                             ModifiedDate = DateTime.Now
                         };
-                        entity = Program.mapper.Map(brand, entity);
+                        entity = mapper.Map(brand, entity);
 
                         await fluelCategoryService.UpdateAsync(entity);
 

@@ -7,12 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Windows.Forms;
+using AutoMapper;
 
 namespace RentCar.UI.Maintenances
 {
     public partial class FrmPersonType : Form
     {
-        private IEntityService<PersonType> personTypeService;
+        private readonly IEntityService<PersonType> personTypeService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
 
@@ -64,7 +66,7 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                dgvPersonTypes.DataSource = Program.mapper.Map<IEnumerable<PersonTypeViewModel>>(await personTypeService.GetAll().ToListAsync());
+                dgvPersonTypes.DataSource = mapper.Map<IEnumerable<PersonTypeViewModel>>(await personTypeService.GetAll().ToListAsync());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvPersonTypes.Rows.Count;
             }
             catch (Exception ex)
@@ -101,7 +103,7 @@ namespace RentCar.UI.Maintenances
 
         private async void Search()
         {
-            dgvPersonTypes.DataSource = Program.mapper.Map<IEnumerable<PersonTypeViewModel>>(
+            dgvPersonTypes.DataSource = mapper.Map<IEnumerable<PersonTypeViewModel>>(
                await personTypeService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvPersonTypes.Rows.Count;
@@ -161,7 +163,7 @@ namespace RentCar.UI.Maintenances
                             CreatedDate = entity.CreatedDate,
                             ModifiedDate = DateTime.Now
                         };
-                        entity = Program.mapper.Map(Model, entity);
+                        entity = mapper.Map(Model, entity);
 
 
                         await personTypeService.UpdateAsync(entity);
