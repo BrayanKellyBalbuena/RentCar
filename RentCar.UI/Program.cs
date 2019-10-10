@@ -76,16 +76,17 @@ namespace RentCar.UI
 
         private static void RegisterForms()
         {
-            Container.Register<MasterPage>(Lifestyle.Singleton);
-            Container.Register<FrmCarBrand>(Lifestyle.Singleton);
-            Container.Register<FrmCarCategory>(Lifestyle.Singleton);
-            Container.Register<FrmFluelCategory>(Lifestyle.Singleton);
-            Container.Register<FrmCarModel>(Lifestyle.Singleton);
-            Container.Register<FrmPersonType>(Lifestyle.Singleton);
-            Container.Register<FrmEmployee>(Lifestyle.Singleton);
-            Container.Register<FrmClient>(Lifestyle.Singleton);
-            Container.Register<FrmCar>(Lifestyle.Singleton);
-            Container.Register<FrmCarInspection>(Lifestyle.Singleton);
+
+            var formRegistration =
+               from formType in typeof(Program).Assembly.GetExportedTypes()
+               where typeof(Form).IsAssignableFrom(formType)
+               select formType;
+
+            foreach (var formType in formRegistration)
+            {
+                Container.Register(formType);
+
+            }
         }
 
         private static void ConfigureMaps()
