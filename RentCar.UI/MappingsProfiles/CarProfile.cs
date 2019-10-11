@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RentCar.Core.Entities;
 using RentCar.UI.Abstractions;
+using RentCar.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace RentCar.UI.MappingsProfiles
                 .ForSourceMember(source => source.FluelCategory, opt => opt.DoNotValidate());
 
             CreateMap<Car, CarBrandViewModelForComboBox>();
+
+            CreateMap<CarViewModel, CarViewModelForComboBox>();
         }
     }
 }
