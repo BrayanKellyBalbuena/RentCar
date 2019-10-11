@@ -5,14 +5,7 @@ using RentCar.UI.Constans;
 using RentCar.UI.Extensions;
 using RentCar.UI.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RentCar.UI.FrmQueries
@@ -23,8 +16,6 @@ namespace RentCar.UI.FrmQueries
         private readonly IEntityService<CarBrand> carBrandService;
         private readonly IEntityService<CarModel> carModelService;
         private readonly IMapper mapper;
-        public IObservable<CarViewModelForComboBox> CarSelected { get; private set; } = Observable.Return(
-                new CarViewModelForComboBox());
 
         public FrmCarQuery(IEntityService<Car> carService, IEntityService<CarBrand> carBrandService,
             IEntityService<CarModel> carModelService, IMapper mapper)
@@ -73,17 +64,11 @@ namespace RentCar.UI.FrmQueries
             dgvCars.Columns[DataGridColumnNames.CAR_CATEGORY_ID].Visible = false;
         }
 
-        private async void dgvCars_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCars_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var currenRow = dgvCars.CurrentRow;
             var parentForm = Parent;
-            CarSelected =  Observable.Return(
-                new CarViewModelForComboBox
-                {
-                    Id = (int)currenRow.Cells[DataGridColumnNames.ID_COLUMN].Value,
-                    Name = currenRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString()
-                });
-
+          
             Hide();
         }
     }

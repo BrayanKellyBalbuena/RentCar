@@ -1,7 +1,4 @@
-﻿using MetroFramework.Forms;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
-using RentCar.UI.Maintenances;
+﻿using RentCar.UI.Maintenances;
 using System;
 using System.Windows.Forms;
 

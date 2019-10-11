@@ -25,11 +25,7 @@ namespace RentCar.UI.Maintenances
         {
             var frmSeachCar = Program.Container.GetInstance<FrmCarQuery>();
 
-            frmSeachCar.CarSelected.Subscribe( 
-                c =>  Debug.WriteLine(c.Name),
-                err => { },
-                () => { });
-            frmSeachCar.Show();
+            frmSeachCar.ShowDialog();
         }
     }
 }

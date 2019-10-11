@@ -1,5 +1,4 @@
-﻿using MetroFramework;
-using RentCar.UI.Constans;
+﻿using RentCar.UI.Constans;
 using System.Windows.Forms;
 
 namespace RentCar.UI.Utils
