@@ -78,7 +78,7 @@ namespace RentCar.UI.Utils
                 result = false;
             }
 
-            if (textBox.Text.HasSpecialCharacters())
+            if (textBox.Text.HasSpecialCharacters() && textBox.Text.Length != 0)
             {
                 MessageBox.Show(AlertMessages.NO_SPECIAL_CHARACTERS);
                 textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
@@ -101,6 +101,7 @@ namespace RentCar.UI.Utils
 
             if (textBox.Text.HasSpecialCharacters())
             {
+                if (textBox.Text.Length == 0) return false;
                 MessageBox.Show(AlertMessages.NO_SPECIAL_CHARACTERS);
                 textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
 

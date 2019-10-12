@@ -232,7 +232,7 @@ namespace RentCar.UI.Maintenances
             isNew = false;
             isEdit = false;
             EnableBottons();
-            EnableTextBox(true);
+            EnableTextBox(false);
             this.ClearTextBox();
         }
 

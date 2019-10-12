@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace RentCar.UI.Maintenances
 {
@@ -75,8 +76,10 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                var data = await carModelService.GetAll().ToListAsync();
-                dgvCarModels.DataSource = mapper.Map<IEnumerable<CarModelViewModel>>(await carModelService.GetAll().ToListAsync());
+                dgvCarModels.DataSource = await carModelService.GetAll()
+                    .ProjectTo<CarModelViewModel>(mapper.ConfigurationProvider)
+                    .ToListAsync();
+
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarModels.Rows.Count;
             }
             catch (Exception ex)
@@ -96,11 +99,15 @@ namespace RentCar.UI.Maintenances
             cbBrandSearch.ValueMember = DataGridColumnNames.ID_COLUMN;
             cbBrandSearch.DisplayMember = DataGridColumnNames.NAME_COLUMN;
 
-            cbCarBrand.DataSource = await (from brand in carBrandService.GetAll()
-                                           select new { Id = brand.Id, Name = brand.Name }
-                                    ).ToListAsync();
 
-            cbBrandSearch.DataSource = cbCarBrand.DataSource;
+            var brands = await (from brand in carBrandService.GetAll()
+                                           select new { brand.Id, brand.Name }
+                                    ).ToListAsync();
+            cbCarBrand.DataSource = brands;
+
+            brands.Insert(0, new { Id = 0, Name = "All" });
+
+            cbBrandSearch.DataSource = brands;
         }
 
         private void HideColumns()
@@ -126,11 +133,17 @@ namespace RentCar.UI.Maintenances
             txtIdCarModel.Text = string.Empty;
         }
 
-        private async void Search()
+        private  void Search()
         {
-            dgvCarModels.DataSource = mapper.Map<IEnumerable<CarModelViewModel>>(
-               await carModelService.GetAll(x => x.Name.Contains(txtSearch.Text) && x.CarBrandId == (int) cbBrandSearch.SelectedValue).ToListAsync()
-                );
+            var query = carModelService.GetAll().ProjectTo<CarModelViewModel>(mapper.ConfigurationProvider);
+
+            if(cbCarBrand.SelectedIndex != 0)
+                query = query.Where(x => x.CarBrandId == (int)cbBrandSearch.SelectedValue
+                && x.Name.Contains(txtSearch.Text));
+
+            dgvCarModels.DataSource = query.ToList();
+            dgvCarModels.Refresh();
+
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarModels.Rows.Count;
         }
 

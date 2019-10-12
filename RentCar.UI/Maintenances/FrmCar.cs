@@ -153,6 +153,9 @@ namespace RentCar.UI.Maintenances
         {
             txtName.Text = string.Empty;
             txtIdEmployee.Text = string.Empty;
+            txtChassisNumber.Text = string.Empty;
+            txtEngineNumber.Text = string.Empty;
+            txtPlacaNumber.Text = string.Empty;
         }
 
         private async void Search()
@@ -276,10 +279,10 @@ namespace RentCar.UI.Maintenances
         private void dgvCars_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             txtIdEmployee.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
-            txtName.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
-            txtChassisNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.CHASISS_NUMBER].Value.ToString();
-            txtPlacaNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.PLACA_NUMBER].Value.ToString();
-            txtEngineNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.ENGINE_NUMBER].Value.ToString();
+            txtName.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString().Trim();
+            txtChassisNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.CHASISS_NUMBER].Value.ToString().Trim();
+            txtPlacaNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.PLACA_NUMBER].Value.ToString().Trim();
+            txtEngineNumber.Text = dgvCars.CurrentRow.Cells[DataGridColumnNames.ENGINE_NUMBER].Value.ToString().Trim();
             cbBrand.SelectedValue = dgvCars.CurrentRow.Cells[DataGridColumnNames.CAR_BRAND_ID].Value;
             cbCarCategory.SelectedValue = dgvCars.CurrentRow.Cells[DataGridColumnNames.CAR_CATEGORY_ID].Value;
             cbCarModel.SelectedValue = dgvCars.CurrentRow.Cells[DataGridColumnNames.CAR_MODEL_ID].Value;
@@ -315,7 +318,7 @@ namespace RentCar.UI.Maintenances
             isNew = false;
             isEdit = false;
             EnableBottons();
-            EnableTextBox(true);
+            EnableTextBox(false);
             ClearTextBox();
             ClearErrorProvider();
         }
