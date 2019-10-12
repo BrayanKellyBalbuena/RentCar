@@ -18,7 +18,8 @@ namespace RentCar.UI.Constans
         public const string ENTER_A_VALID_IDENTIFICATION_CARD = "Enter a valid indetification card with lenth 11 numbers";
         public const string ENTER_A_VALID_CREDIT_CARD = "Enter a valid credit card with lenth 16 numbers";
         public const string ENTER_ONLY_NUMBERS = "Please enter only numbers.";
-
+        public const string ENTER_A_VALID_PLACA_NUMBER = "Enter a valid placa number";
+        public const string NO_SPECIAL_CHARACTERS = "special characters not allowed";
         public const string MISSING_DATA = "You need to enter some data, they will be highlighted";
     }
 }

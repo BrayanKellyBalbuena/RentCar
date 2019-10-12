@@ -68,5 +68,51 @@ namespace RentCar.UI.Utils
 
             return true;
         }
+
+        public static bool isValidPlacaNumber(this TextBox textBox)
+        {
+            bool result = true;
+
+            if (textBox.Text.ToString().HasSpecialCharacters())
+            {
+                result = false;
+            }
+
+            if (textBox.Text.HasSpecialCharacters())
+            {
+                MessageBox.Show(AlertMessages.NO_SPECIAL_CHARACTERS);
+                textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
+
+                result = false;
+            }
+
+            return result;
+        }
+
+
+        public static bool isValidChassisNumber(this TextBox textBox)
+        {
+            bool result = true;
+
+            if (textBox.Text.ToString().HasSpecialCharacters())
+            {
+                result = false;
+            }
+
+            if (textBox.Text.HasSpecialCharacters())
+            {
+                MessageBox.Show(AlertMessages.NO_SPECIAL_CHARACTERS);
+                textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
+
+                result = false;
+            }
+
+            return result;
+        }
+
+        public static bool HasSpecialCharacters(this string text) 
+        {
+            return Regex.IsMatch(text.ToLowerInvariant(), $"^[0-9a-z]+$") ? false: true;
+        }
     }
 }

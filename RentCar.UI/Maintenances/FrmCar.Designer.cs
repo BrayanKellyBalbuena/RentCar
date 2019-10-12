@@ -232,6 +232,7 @@
             this.cbBrandFilter.Name = "cbBrandFilter";
             this.cbBrandFilter.Size = new System.Drawing.Size(117, 21);
             this.cbBrandFilter.TabIndex = 8;
+            this.cbBrandFilter.SelectedIndexChanged += new System.EventHandler(this.cbBrandFilter_SelectedIndexChanged);
             // 
             // btnPrint
             // 
@@ -414,6 +415,7 @@
             this.txtChassisNumber.Name = "txtChassisNumber";
             this.txtChassisNumber.Size = new System.Drawing.Size(149, 20);
             this.txtChassisNumber.TabIndex = 22;
+            this.txtChassisNumber.TextChanged += new System.EventHandler(this.txtChassisNumber_TextChanged);
             // 
             // cbCarCategory
             // 
@@ -430,6 +432,7 @@
             this.cbBrand.Name = "cbBrand";
             this.cbBrand.Size = new System.Drawing.Size(149, 21);
             this.cbBrand.TabIndex = 20;
+            this.cbBrand.SelectedIndexChanged += new System.EventHandler(this.cbBrand_SelectedIndexChanged);
             // 
             // label13
             // 
@@ -468,6 +471,7 @@
             this.txtPlacaNumber.Name = "txtPlacaNumber";
             this.txtPlacaNumber.Size = new System.Drawing.Size(149, 20);
             this.txtPlacaNumber.TabIndex = 14;
+            this.txtPlacaNumber.TextChanged += new System.EventHandler(this.txtPlacaNumber_TextChanged);
             // 
             // label9
             // 

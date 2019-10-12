@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using AutoMapper.QueryableExtensions;
 using RentCar.UI.ViewModels;
 using RentCar.UI.Extensions;
+using System.Text.RegularExpressions;
 
 namespace RentCar.UI.Maintenances
 {
@@ -157,6 +158,11 @@ namespace RentCar.UI.Maintenances
         private async void Search()
         {
 
+            var query = carService.GetAll(c => c.CarBrandId == (int) cbBrandFilter.SelectedValue
+                && c.CarModelId == (int) cbCarModelFilter.SelectedValue
+            );
+
+
             if (cbBrandFilter.SelectedIndex == 0)
             {
                 dgvCars.DataSource = mapper.Map<IEnumerable<CarViewModel>>(
@@ -255,8 +261,7 @@ namespace RentCar.UI.Maintenances
 
         private void ClearErrorProvider()
         {
-            errorIcon.SetError(txtName, string.Empty);
-            //errorIcon.SetError(txtIdentificationCard, string.Empty);
+            errorIcon.Clear();
         }
 
         private void dgvCars_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -311,7 +316,8 @@ namespace RentCar.UI.Maintenances
             isEdit = false;
             EnableBottons();
             EnableTextBox(true);
-            this.ClearTextBox();
+            ClearTextBox();
+            ClearErrorProvider();
         }
 
         private void chkDelete_CheckedChanged(object sender, EventArgs e)
@@ -382,18 +388,65 @@ namespace RentCar.UI.Maintenances
 
             if (txtName.IsNotNullOrEmpty())
             {
-                MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
-                errorIcon.SetError(txtName, AlertMessages.ENTER_A_NAME);
+                setMissingDataError(txtName);
+
                 error = false;
             }
-            //if (!txtIdentificationCard.IsValidIdentificationCard())
-            //{
-            //    MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
-            //    errorIcon.SetError(txtIdentificationCard, AlertMessages.ENTER_A_VALID_IDENTIFICATION_CARD);
-            //    error = false;
-            //}
+
+            if (txtPlacaNumber.IsNotNullOrEmpty())
+            {
+                setMissingDataError(txtPlacaNumber);
+                error = false;
+            }
+
+            if (txtEngineNumber.IsNotNullOrEmpty() )
+            {
+                setMissingDataError(txtEngineNumber);
+
+                error = false;
+            }
+
+            if (txtChassisNumber.IsNotNullOrEmpty())
+            {
+                setMissingDataError(txtChassisNumber);
+            }
+
+            if (!error) MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
 
             return error;
+        }
+
+        private void setMissingDataError(TextBox textBox)
+        {
+            errorIcon.SetError(textBox, AlertMessages.MISSING_DATA);
+        }
+
+        private void txtPlacaNumber_TextChanged(object sender, EventArgs e)
+        {
+           (sender as TextBox).isValidPlacaNumber();
+        }
+
+        private void txtChassisNumber_TextChanged(object sender, EventArgs e)
+        {
+            (sender as TextBox).isValidChassisNumber();
+        }
+
+        private void cbBrandFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbCarModelFilter.DataSource = carModelService
+                .GetAll(m => m.CarBrandId == (int) cbBrand.SelectedValue)
+                .ToList();
+
+            cbCarModelFilter.Refresh();
+        }
+
+        private void cbBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbCarModel.DataSource = carModelService
+               .GetAll(m => m.CarBrandId == (int)cbBrand.SelectedValue)
+               .ToList();
+
+            cbCarModel.Refresh();
         }
     }
 }
