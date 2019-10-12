@@ -164,8 +164,9 @@ CREATE TABLE CarsInspections
 (
     Id INT NOT NULL IDENTITY,
     CarId INT NOT NULL,
-    ClienteId INt NOT NULL,
-    HasScratch INT NOT NULL,
+    ClientId INt NOT NULL,
+	EmployeeId INT NOT NULL,
+    HasScratch BIT NOT NULL,
     HasTires BIT NOT NULL,
     FluelQuantity FLOAT,
     HasHydraulicJack BIT NOT NULL,
@@ -176,7 +177,6 @@ CREATE TABLE CarsInspections
     BackRightTireState BIT NOT NULL,
     BackLeftTireState BIT NOT NULL,
     InspectionsDate DATETIME2 NOT NULL,
-    EmployeeId INT NOT NULL,
     [State] BIT NOT NULL,
     CreatedBy NVARCHAR(60),
     CreatedDate DATETIME2 NOT NULL,
@@ -184,8 +184,10 @@ CREATE TABLE CarsInspections
     ModifiedDate DATETIME2,
     CONSTRAINT PK_CarsInspections PRIMARY KEY (Id),
     CONSTRAINT FK_CarsInspections_EmployeeId FOREIGN KEY(EmployeeId) REFERENCES Employees(Id),
-    CONSTRAINT FK_CarsInspections_ClienteIdId FOREIGN KEY(ClienteId) REFERENCES Clients(Id)
+    CONSTRAINT FK_CarsInspections_ClienteIdId FOREIGN KEY(ClientId) REFERENCES Clients(Id)
 )
+
+DROP TABLE CarsInspections
 
 CREATE TABLE DevolutionAndRent(
     Id INT NOT NULL IDENTITY,
