@@ -2,15 +2,15 @@
 using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
 using RentCar.UI.Utils;
-using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using AutoMapper;
+using RentCar.UI.ViewModels;
+using AutoMapper.QueryableExtensions;
 
 namespace RentCar.UI.Maintenances
 {
@@ -22,14 +22,15 @@ namespace RentCar.UI.Maintenances
         private bool isNew;
         private bool isEdit;
 
-        public FrmClient(IEntityService<Client> clientService, IEntityService<PersonType> personTypeService)
+        public FrmClient(IEntityService<Client> clientService, IEntityService<PersonType> personTypeService,
+            IMapper mapper)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
 
-
             this.clientService = clientService;
             this.personTypeService = personTypeService;
+            this.mapper = mapper;
         }
 
         private void FrmClients_Load(object sender, EventArgs e)
@@ -78,8 +79,8 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                var data =  clientService.GetAll().ToList();
-                dgvClients.DataSource = mapper.Map<IEnumerable<ClientViewModel>>(data);
+                     
+                dgvClients.DataSource = clientService.GetAll().ProjectTo<ClientViewModel>(mapper.ConfigurationProvider).ToList();
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvClients.Rows.Count;
 
                 HideColumns();

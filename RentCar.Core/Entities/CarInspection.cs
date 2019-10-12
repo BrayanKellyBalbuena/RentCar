@@ -10,8 +10,8 @@ namespace RentCar.Core.Entities
         public int EmployeeId { get; set; }
         public bool HasScratch { get; set; }
         public bool HasTires { get; set; }
-        public float FluelCuantity { get; set; }
-        public bool HastHydraulicJack { get; set; }
+        public double FluelQuantity { get; set; }
+        public bool HasHydraulicJack { get; set; }
         public bool HasReplacementTires { get; set; }
         public bool HasBrokenCrystal { get; set; }
         public bool FrontRightTireState { get; set; }

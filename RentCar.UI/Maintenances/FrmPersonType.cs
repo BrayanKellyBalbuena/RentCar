@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Windows.Forms;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using System.Linq;
 
 namespace RentCar.UI.Maintenances
 {
@@ -18,11 +20,13 @@ namespace RentCar.UI.Maintenances
         private bool isNew;
         private bool isEdit;
 
-        public FrmPersonType(IEntityService<PersonType> personTypeService)
+        public FrmPersonType(IEntityService<PersonType> personTypeService, IMapper mapper)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
+
             this.personTypeService = personTypeService;
+            this.mapper = mapper;
         }
 
 
@@ -62,11 +66,13 @@ namespace RentCar.UI.Maintenances
             }
         }
 
-        private async void LoadPersonTypes()
+        private void LoadPersonTypes()
         {
             try
             {
-                dgvPersonTypes.DataSource = mapper.Map<IEnumerable<PersonTypeViewModel>>(await personTypeService.GetAll().ToListAsync());
+                dgvPersonTypes.DataSource =  personTypeService.GetAll()
+                    .ProjectTo<PersonTypeViewModel>(mapper.ConfigurationProvider)
+                    .ToList();
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvPersonTypes.Rows.Count;
             }
             catch (Exception ex)
@@ -79,6 +85,7 @@ namespace RentCar.UI.Maintenances
 
         private void HideColumns()
         {
+
             dgvPersonTypes.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             dgvPersonTypes.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }

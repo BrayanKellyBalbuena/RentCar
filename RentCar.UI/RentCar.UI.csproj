@@ -86,7 +86,14 @@
     <Compile Include="Constans\Constanst.cs" />
     <Compile Include="Constans\DataGridColumnNames.cs" />
     <Compile Include="EventsArgs\CarSelectedEventArgs.cs" />
+    <Compile Include="EventsArgs\EventArgs.cs" />
     <Compile Include="Extensions\ComboxExtension.cs" />
+    <Compile Include="FrmQueries\FrmClientQuery.Designer.cs">
+      <DependentUpon>FrmClientQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmQueries\FrmClientQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmQueries\FrmCarQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +211,9 @@
     <Compile Include="ViewModels\PersonTypeViewModel.cs" />
     <EmbeddedResource Include="FrmQueries\FrmCarQuery.resx">
       <DependentUpon>FrmCarQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmQueries\FrmClientQuery.resx">
+      <DependentUpon>FrmClientQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintenances\FrmCar.resx">
       <DependentUpon>FrmCar.cs</DependentUpon>

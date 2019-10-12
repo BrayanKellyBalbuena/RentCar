@@ -13,7 +13,7 @@ namespace RentCar.UI.Constans
         public const string NAME_COLUMN = "Name";
         public const string DESCRIPCION_COLUMN = "Description";
         public const string CAR_BRAND_ID = "CarBrandId";
-        public const string CAR_MODEL_ID  = "CarModelId";
+        public const string CAR_MODEL_ID = "CarModelId";
         public const string FLUEL_CATEGORY_ID = "FluelCategoryId";
         public const string CAR_CATEGORY_ID = "CarCategoryId";
         public const string IDENTIFICATION_CARD = "IdentificationCard";
@@ -23,5 +23,19 @@ namespace RentCar.UI.Constans
         public const string CHASISS_NUMBER = "ChassisNumber";
         public const string ENGINE_NUMBER = "EngineNumber";
         public const string PLACA_NUMBER = "PlacaNumber";
+        public const string HASS_CRATCH = "HasScratch";
+        public const string HAS_TIRES = "HasTires";
+        public const string FLUEL_QUANTITY = "FluelQuantity";
+        public const string HAS_HYDRAULIC_JACK = "HasHydraulicJack";
+        public const string HAS_REPLACEMENT_TIRES = "HasReplacementTires";
+        public const string HAS_BROKEN_CRYSTAL = "HasBrokenCrystal";
+        public const string FRONT_RIGHT_TIRE_STATE = "FrontRightTireState";
+        public const string FRONT_LEFT_TIRE_STATE = "FrontLeftTireState";
+        public const string BACK_RIGHT_TIRE_STATE = "BackRightTireState";
+        public const string BACK_LEFT_TIRESTATE = "BackLeftTireState";
+        public const string INSPECTIONS_DATE = "InspectionsDate";
+        public const string ClientId = "ClientId";
+        public const string EMPLOYEE_ID = "EmployeeId";
+        public const string CLIENT_ID = "ClientId";
     }
 }

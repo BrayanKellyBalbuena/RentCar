@@ -1,6 +1,7 @@
-﻿using System;
+﻿using RentCar.UI.Abstractions;
+using System;
 
-namespace RentCar.UI.Abstractions
+namespace RentCar.UI.ViewModels
 {
     public class CarInspectionViewModel : EntityViewModel
     {
@@ -9,7 +10,7 @@ namespace RentCar.UI.Abstractions
         public int EmployeeId { get; set; }
         public bool HasScratch { get; set; }
         public bool HasTires { get; set; }
-        public float FluelQuantity { get; set; }
+        public double FluelQuantity { get; set; }
         public bool HasHydraulicJack { get; set; }
         public bool HasReplacementTires { get; set; }
         public bool HasBrokenCrystal { get; set; }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Windows.Forms;
 using AutoMapper;
+using RentCar.UI.ViewModels;
 
 namespace RentCar.UI.Maintenances
 {

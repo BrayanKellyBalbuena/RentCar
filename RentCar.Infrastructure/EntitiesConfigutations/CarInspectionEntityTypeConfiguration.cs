@@ -10,5 +10,9 @@ namespace RentCar.Infrastructure.EntitiesConfigutations
 {
     internal class CarInspectionEntityTypeConfiguration : EntityConfiguration<CarInspection>
     {
+        public CarInspectionEntityTypeConfiguration()
+        {
+            ToTable("CarsInspections");
+        }
     }
 }

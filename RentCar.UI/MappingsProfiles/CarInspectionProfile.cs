@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using RentCar.Core.Entities;
-using RentCar.UI.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RentCar.UI.ViewModels;
 
 namespace RentCar.UI.MappingsProfiles
 {
