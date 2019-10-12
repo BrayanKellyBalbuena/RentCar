@@ -2,6 +2,8 @@
 using RentCar.Infrastructure.Constants;
 using RentCar.Infrastructure.EntitiesConfigutations;
 using System.Data.Entity;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RentCar.Infrastructure.DbContexts
 {
@@ -26,6 +28,28 @@ namespace RentCar.Infrastructure.DbContexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.AddFromAssembly(typeof(CarBrandEntityTypeConfiguration).Assembly);
+        }
+
+        public override int SaveChanges()
+        {
+            if (ChangeTracker.HasChanges())
+                return base.SaveChanges();
+            return 0;
+        }
+
+        public override Task<int> SaveChangesAsync()
+        {
+            if(ChangeTracker.HasChanges())
+                return base.SaveChangesAsync();
+
+            return new Task<int>(_ => 0, null);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            if(ChangeTracker.HasChanges())
+                 return base.SaveChangesAsync(cancellationToken);
+            return new Task<int>(_ => 0, cancellationToken);
         }
     }
 }
