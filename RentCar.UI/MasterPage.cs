@@ -1,11 +1,17 @@
-﻿using RentCar.UI.Maintenances;
+﻿
+using RentCar.UI.Maintenances;
+using RentCar.UI.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
+using RentCar.Core.Entities;
 
 namespace RentCar.UI
 {
     public partial class MasterPage : Form
     {
+
         public MasterPage()
         {
             InitializeComponent();
@@ -83,6 +89,33 @@ namespace RentCar.UI
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<FrmRole>();
+        }
+
+        private void employeesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenForm<FrmUser>();
+        }
+
+        private void MasterPage_Load(object sender, EventArgs e)
+        {
+            lblCurrentUser.Text = $"Welcome: {Program.CurrentUser.UserName}";
+            ShowMenuOptionByRoles(Program.CurrentUser.UserRoles);
+        }
+
+
+        private void ShowMenuOptionByRoles(HashSet<UserRole> roles)
+        {
+            foreach( var role in roles)
+            {
+               if (role.Role.Name == "Administrator")
+                     tpsSecurity.Enabled = true;
+            }
+
+        }
+
+        private void lblCurrentUser_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

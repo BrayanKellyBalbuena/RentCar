@@ -22,6 +22,7 @@ namespace RentCar.Infrastructure.DbContexts
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarInspection> CarsInspections { get; set; }
         public DbSet<Role>Roles { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

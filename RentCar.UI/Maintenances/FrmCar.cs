@@ -222,8 +222,9 @@ namespace RentCar.UI.Maintenances
                                 CarBrandId = (int)cbBrand.SelectedValue,
                                 CarCategoryId = (int)cbCarCategory.SelectedValue,
                                 CarModelId = (int)cbCarModel.SelectedValue,
-                                FluelCategoryId = (int) cbFluelCategory.SelectedValue
-                            }); ; 
+                                FluelCategoryId = (int) cbFluelCategory.SelectedValue,
+                                CreatedBy = Program.CurrentUser.UserName
+                            });
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.INSERTED_SUCCESSFULLY);
 
@@ -240,7 +241,7 @@ namespace RentCar.UI.Maintenances
                         entity.CarCategoryId = (int)cbCarCategory.SelectedValue;
                         entity.CarModelId = (int)cbCarModel.SelectedValue;
                         entity.FluelCategoryId = (int)cbFluelCategory.SelectedValue;
-
+                        entity.CreatedBy = Program.CurrentUser.UserName;
                         await carService.UpdateAsync(entity);
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.UPDATED_SUCCESSFULLY);
@@ -406,6 +407,12 @@ namespace RentCar.UI.Maintenances
             {
                 setMissingDataError(txtEngineNumber);
 
+                error = false;
+            }
+
+            if(txtPlacaNumber?.Text.Length != 7)
+            {
+                errorIcon.SetError(txtPlacaNumber, "Invalid Placa Number");
                 error = false;
             }
 

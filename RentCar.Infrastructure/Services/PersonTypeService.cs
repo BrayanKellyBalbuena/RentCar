@@ -11,7 +11,7 @@ namespace RentCar.Infrastructure.Services
 {
     public class PersonTypeService : EntityService<PersonType>
     {
-        public PersonTypeService(IRepository<PersonType> repository) : base(repository)
+        public PersonTypeService(IRepository<PersonType> repository, User currentUser) : base(repository)
         {
         }
     }

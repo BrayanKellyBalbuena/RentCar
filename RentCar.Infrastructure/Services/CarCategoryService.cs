@@ -8,7 +8,6 @@ namespace RentCar.Infrastructure.Services
     {
         public CarCategoryService(IRepository<CarCategory> repository) : base(repository)
         {
-
         }
     }
 }

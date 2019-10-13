@@ -1,4 +1,5 @@
 ﻿using RentCar.Core.Abstractions;
+using RentCar.Core.Entities;
 using RentCar.Core.Interfaces;
 using RentCar.Core.Interfaces.Domain;
 using System;
@@ -11,11 +12,13 @@ namespace RentCar.Infrastructure.Abstractions
 {
     public abstract class EntityService<TEntity> : IEntityService<TEntity> where TEntity : Entity
     {
+        public IRepository<TEntity> Repository { get; protected set; }
+
         public EntityService(IRepository<TEntity> repository)
         {
             Repository = repository;
         }
-        public IRepository<TEntity> Repository { get; protected set; }
+ 
 
         public virtual IQueryable<TEntity> GeTEntity()
         {
@@ -70,7 +73,6 @@ namespace RentCar.Infrastructure.Abstractions
             if (entity == null) throw new ArgumentNullException(nameof(TEntity));
 
             entity.ModifiedDate = DateTime.Now;
-
             await Repository.UpdateAsync(entity);
 
             return entity;

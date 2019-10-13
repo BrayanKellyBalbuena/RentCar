@@ -1,5 +1,6 @@
 ﻿
 using RentCar.Core.Abstractions;
+using RentCar.Core.Entities;
 using RentCar.Core.Interfaces;
 using System;
 using System.Collections.Generic;

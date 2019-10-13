@@ -11,7 +11,9 @@ namespace RentCar.Infrastructure.Services
 {
     public class FuelCategoryService : EntityService<FluelCategory>
     {
-        public FuelCategoryService(IRepository<FluelCategory> repository) : base(repository){ }
+        public FuelCategoryService(IRepository<FluelCategory> repository) : base(repository)
+        {
+        }
     }
- 
+
 }

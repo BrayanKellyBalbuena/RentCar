@@ -4,9 +4,9 @@ using RentCar.Infrastructure.Abstractions;
 
 namespace RentCar.Infrastructure.Services
 {
-    public class CarBrandService : EntityService<CarBrand>
+    public class UserService : EntityService<User>
     {
-        public CarBrandService(IRepository<CarBrand> repository) : base(repository)
+        public UserService(IRepository<User> repository) : base(repository)
         {
         }
     }

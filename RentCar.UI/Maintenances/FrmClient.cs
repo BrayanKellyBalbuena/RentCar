@@ -114,16 +114,6 @@ namespace RentCar.UI.Maintenances
             dgvClients.Columns[DataGridColumnNames.PERSON_TYPE_ID].Visible = false;
         }
 
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
-        }
-
         private void ClearTextBox()
         {
             txtName.Text = string.Empty;
@@ -179,7 +169,8 @@ namespace RentCar.UI.Maintenances
                                 CreditCardNumber = txtCreditCardNumber.Text.ToString(),
                                 CreditLimit = numericDownCreditLimit.Value,
                                 CreatedDate = DateTime.Now,
-                                PersonTypeId = (int) cbPersonType.SelectedValue
+                                PersonTypeId = (int) cbPersonType.SelectedValue,
+                                CreatedBy = Program.CurrentUser.UserName
 
                             });
 
