@@ -37,5 +37,9 @@ namespace RentCar.UI.Constans
         public const string ClientId = "ClientId";
         public const string EMPLOYEE_ID = "EmployeeId";
         public const string CLIENT_ID = "ClientId";
+        public const string RENT_DATE = "RentDate";
+        public const string DEVOLUTION_DATE = "DevolutionDate";
+        public const string AMOUNT = "AmountPerDay";
+        public const string CAR_ID = "CarId";
     }
 }

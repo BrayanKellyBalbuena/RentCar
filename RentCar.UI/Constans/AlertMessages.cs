@@ -21,5 +21,7 @@ namespace RentCar.UI.Constans
         public const string ENTER_A_VALID_PLACA_NUMBER = "Enter a valid placa number";
         public const string NO_SPECIAL_CHARACTERS = "special characters not allowed";
         public const string MISSING_DATA = "You need to enter some data, they will be highlighted";
+        public const string SELECT_CAR = "Please select a car";
+        public const string SELECT_CLIENT = "Please select a client";
     }
 }

@@ -193,11 +193,12 @@ CREATE TABLE DevolutionAndRent(
     Id INT NOT NULL IDENTITY,
     EmployeeId INT NOT NULL ,
     ClientId INT NOT NULL,
+	CarId INT NOT NULL,
     RentDate DATETIME NOT NULL,
     DevolutionDate DATETIME NOT NULL,
     AmountPerDay DECIMAL (12, 2) NOT NULL,
     DayQuantity INT NOT NULL,
-    Comentary NVARCHAR(1000) NOT NULL,
+    Comentary NVARCHAR(1000),
     [State] BIT NOT NULL,
     CreatedBy NVARCHAR(60),
     CreatedDate DATETIME2 NOT NULL,
@@ -205,7 +206,8 @@ CREATE TABLE DevolutionAndRent(
     ModifiedDate DATETIME2,
     CONSTRAINT PK_DevolutionAndRent_Id PRIMARY KEY (Id),
     CONSTRAINT FK_DevolutionAndRent_Employees_Id FOREIGN KEY (EmployeeId) REFERENCES Employees(Id),
-    CONSTRAINT FK_DevolutionAndRent_Clients_Id FOREIGN KEY (ClientId) REFERENCES Clients(Id)
+    CONSTRAINT FK_DevolutionAndRent_Clients_Id FOREIGN KEY (ClientId) REFERENCES Clients(Id),
+	CONSTRAINT FK_DevolutionAndRent_Car_Id FOREIGN KEY (CarId) REFERENCES Cars(Id)
 )
 ----Indexes Clients Table---
 CREATE NONCLUSTERED INDEX IX_Clients_Name ON Clients([name])
