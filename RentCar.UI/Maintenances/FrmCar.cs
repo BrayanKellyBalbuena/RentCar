@@ -410,6 +410,12 @@ namespace RentCar.UI.Maintenances
                 error = false;
             }
 
+            if(txtPlacaNumber?.Text.Length != 7)
+            {
+                errorIcon.SetError(txtPlacaNumber, "Invalid Placa Number");
+                error = false;
+            }
+
             if (txtChassisNumber.IsNotNullOrEmpty())
             {
                 setMissingDataError(txtChassisNumber);
