@@ -75,6 +75,9 @@
             this.errorIcon = new System.Windows.Forms.ErrorProvider(this.components);
             this.ttMessage = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDevolucion = new System.Windows.Forms.Button();
+            this.nupDayQuantiy = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.tbpMantenance.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -84,6 +87,7 @@
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorIcon)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupDayQuantiy)).BeginInit();
             this.SuspendLayout();
             // 
             // tbpMantenance
@@ -108,7 +112,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(743, 498);
+            this.groupBox1.Size = new System.Drawing.Size(743, 542);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Form";
@@ -119,6 +123,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.nupDayQuantiy);
+            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.txtComentary);
             this.panel2.Controls.Add(this.nudAmount);
             this.panel2.Controls.Add(this.label11);
@@ -142,12 +148,12 @@
             this.panel2.Location = new System.Drawing.Point(0, 21);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(736, 473);
+            this.panel2.Size = new System.Drawing.Size(736, 517);
             this.panel2.TabIndex = 10;
             // 
             // txtComentary
             // 
-            this.txtComentary.Location = new System.Drawing.Point(276, 276);
+            this.txtComentary.Location = new System.Drawing.Point(276, 331);
             this.txtComentary.MaxLength = 1000;
             this.txtComentary.Multiline = true;
             this.txtComentary.Name = "txtComentary";
@@ -190,7 +196,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(150, 276);
+            this.label7.Location = new System.Drawing.Point(150, 331);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 17);
             this.label7.TabIndex = 32;
@@ -283,7 +289,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(576, 412);
+            this.btnCancel.Location = new System.Drawing.Point(577, 469);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(107, 34);
@@ -293,7 +299,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(433, 412);
+            this.btnEdit.Location = new System.Drawing.Point(434, 469);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(107, 34);
@@ -312,7 +318,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(292, 412);
+            this.btnSave.Location = new System.Drawing.Point(293, 469);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(109, 34);
@@ -322,7 +328,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(153, 412);
+            this.btnNew.Location = new System.Drawing.Point(154, 469);
             this.btnNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(116, 34);
@@ -341,6 +347,7 @@
             // 
             // tbpList
             // 
+            this.tbpList.Controls.Add(this.btnDevolucion);
             this.tbpList.Controls.Add(this.label10);
             this.tbpList.Controls.Add(this.dtpTo);
             this.tbpList.Controls.Add(this.label9);
@@ -535,6 +542,32 @@
             this.panel1.Size = new System.Drawing.Size(964, 611);
             this.panel1.TabIndex = 2;
             // 
+            // btnDevolucion
+            // 
+            this.btnDevolucion.Location = new System.Drawing.Point(637, 59);
+            this.btnDevolucion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDevolucion.Name = "btnDevolucion";
+            this.btnDevolucion.Size = new System.Drawing.Size(108, 32);
+            this.btnDevolucion.TabIndex = 15;
+            this.btnDevolucion.Text = "Devolucion";
+            this.btnDevolucion.Click += new System.EventHandler(this.btnDevolucion_Click);
+            // 
+            // nupDayQuantiy
+            // 
+            this.nupDayQuantiy.Location = new System.Drawing.Point(277, 283);
+            this.nupDayQuantiy.Name = "nupDayQuantiy";
+            this.nupDayQuantiy.Size = new System.Drawing.Size(267, 22);
+            this.nupDayQuantiy.TabIndex = 40;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(151, 283);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(94, 17);
+            this.label12.TabIndex = 39;
+            this.label12.Text = "Day Quantity:";
+            // 
             // FrmRentDevolution
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -558,6 +591,7 @@
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorIcon)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nupDayQuantiy)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -607,5 +641,8 @@
         private System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtComentary;
+        private System.Windows.Forms.Button btnDevolucion;
+        private System.Windows.Forms.NumericUpDown nupDayQuantiy;
+        private System.Windows.Forms.Label label12;
     }
 }

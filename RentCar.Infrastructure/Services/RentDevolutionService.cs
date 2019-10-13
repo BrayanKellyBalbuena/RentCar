@@ -11,7 +11,7 @@ namespace RentCar.Infrastructure.Services
 {
     public class RentDevolutionService : EntityService<RentDevolution>
     {
-        public RentDevolutionService(IRepository<RentDevolution> repository, User currentUse) : base(repository)
+        public RentDevolutionService(IRepository<RentDevolution> repository) : base(repository)
         {
         }
     }

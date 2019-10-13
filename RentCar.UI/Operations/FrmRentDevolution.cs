@@ -23,6 +23,7 @@ namespace RentCar.UI.Maintenances
         private ClientViewModel selectedClient { get; set; }
         private bool isNew;
         private bool isEdit;
+        private bool isDevolucion;
         private const int FIRTS_OPTION = 0;
 
         public FrmRentDevolution(IEntityService<RentDevolution> rentDevolutionService,
@@ -97,7 +98,7 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                dgvRentDevolutions.DataSource = rentDevolutionService.GetAll()
+                dgvRentDevolutions.DataSource = rentDevolutionService.GetAll(r => r.DevolutionDate == null)
                     .ProjectTo<RentDevolutionViewModel>(mapper.ConfigurationProvider)
                     .ToList();
 
@@ -216,7 +217,6 @@ namespace RentCar.UI.Maintenances
                                 ClientId = selectedClient.Id,
                                 EmployeeId = 1,
                                 RentDate = dtpRentDate.Value,
-                                DevolutionDate = dtpDevolutionDate.Value,
                                 DayQuantity = dtpDevolutionDate.Value.Subtract(dtpRentDate.Value).Days,
                                 Comentary = txtComentary.Text,
                                 AmountPerDay = nudAmount.Value,
@@ -228,20 +228,40 @@ namespace RentCar.UI.Maintenances
                     }
                     else
                     {
-                        var rentDevolution = await rentDevolutionService.GetByIdAsync(int.Parse(txtId.Text));
-                        rentDevolution.CarId = selectedCart.Id;
-                        rentDevolution.ClientId = selectedClient.Id;
-                        rentDevolution.EmployeeId = 1;
-                        rentDevolution.RentDate = dtpRentDate.Value;
-                        rentDevolution.DevolutionDate = dtpDevolutionDate.Value;
-                        rentDevolution.DayQuantity = dtpDevolutionDate.Value.Subtract(dtpRentDate.Value).Days;
-                        rentDevolution.Comentary = txtComentary.Text;
-                        rentDevolution.AmountPerDay = nudAmount.Value;
-                        rentDevolution.CreatedBy = Program.CurrentUser.UserName;
+                        if (isEdit) {
+                            var rentDevolution = await rentDevolutionService.GetByIdAsync(int.Parse(txtId.Text));
+                            rentDevolution.CarId = selectedCart.Id;
+                            rentDevolution.ClientId = selectedClient.Id;
+                            rentDevolution.DayQuantity = (int)nupDayQuantiy.Value;
+                            rentDevolution.EmployeeId = 1;
+                            rentDevolution.RentDate = dtpRentDate.Value;
+                            rentDevolution.Comentary = txtComentary.Text;
+                            rentDevolution.AmountPerDay = nudAmount.Value;
+                            rentDevolution.CreatedBy = Program.CurrentUser.UserName;
 
-                        await rentDevolutionService.UpdateAsync(rentDevolution);
+                            await rentDevolutionService.UpdateAsync(rentDevolution);
 
-                        MessageBoxUtil.MessageOk(this, AlertMessages.UPDATED_SUCCESSFULLY);
+                            MessageBoxUtil.MessageOk(this, AlertMessages.UPDATED_SUCCESSFULLY);
+                        }
+                        else
+                        {
+                            var rentDevolution = await rentDevolutionService.GetByIdAsync(int.Parse(txtId.Text));
+                            rentDevolution.CarId = selectedCart.Id;
+                            rentDevolution.ClientId = selectedClient.Id;
+                            rentDevolution.EmployeeId = 1;
+                            rentDevolution.RentDate = dtpRentDate.Value;
+                            rentDevolution.DayQuantity = (int)nupDayQuantiy.Value;
+                            rentDevolution.DevolutionDate = dtpDevolutionDate.Value;
+                            rentDevolution.DayQuantity = dtpDevolutionDate.Value.Subtract(dtpRentDate.Value).Days;
+                            rentDevolution.Comentary = txtComentary.Text;
+                            rentDevolution.AmountPerDay = nudAmount.Value;
+                            rentDevolution.CreatedBy = Program.CurrentUser.UserName;
+
+                            await rentDevolutionService.UpdateAsync(rentDevolution);
+
+                            MessageBoxUtil.MessageOk(this, "Devolucion Exitosa");
+                        }
+                       
                     }
                     this.isNew = false;
                     this.isEdit = false;
@@ -269,8 +289,8 @@ namespace RentCar.UI.Maintenances
             var currentRow = dgvRentDevolutions.CurrentRow;
             txtId.Text = currentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
             nudAmount.Value = Convert.ToDecimal(currentRow.Cells[DataGridColumnNames.AMOUNT].Value);
+            nupDayQuantiy.Value = Convert.ToDecimal(currentRow.Cells[DataGridColumnNames.DAY_QUANTITY].Value);
             dtpRentDate.Value = (DateTime)currentRow.Cells[DataGridColumnNames.RENT_DATE].Value;
-            dtpDevolutionDate.Value = (DateTime)currentRow.Cells[DataGridColumnNames.DEVOLUTION_DATE].Value;
             var car = await carService.GetByIdAsync((int)currentRow.Cells[DataGridColumnNames.CAR_ID].Value);
             selectedCart = mapper.Map<CarViewModel>(car);
             var client = await clientService.GetByIdAsync((int)currentRow.Cells[DataGridColumnNames.CLIENT_ID].Value);
@@ -310,7 +330,7 @@ namespace RentCar.UI.Maintenances
         private void EnableFormControls(bool value)
         {
             dtpRentDate.Enabled = value;
-            dtpDevolutionDate.Enabled = value;
+            dtpDevolutionDate.Enabled = !value;
             nudAmount.Enabled = value;
             btnSelectCar.Enabled = value;
             btnSelectClient.Enabled = value;
@@ -401,6 +421,33 @@ namespace RentCar.UI.Maintenances
 
 
             return error;
+        }
+
+        private async void btnDevolucion_Click(object sender, EventArgs e)
+        {
+            if (dgvRentDevolutions.CurrentRow == null)
+            {
+                MessageBoxUtil.MessageOk(this, "Error you must select a row");
+            }
+
+
+            dtpDevolutionDate.Enabled = true;
+
+            var currentRow = dgvRentDevolutions.CurrentRow;
+            txtId.Text = currentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
+            nudAmount.Value = Convert.ToDecimal(currentRow.Cells[DataGridColumnNames.AMOUNT].Value);
+            nupDayQuantiy.Value = Convert.ToDecimal(currentRow.Cells[DataGridColumnNames.DAY_QUANTITY].Value);
+            dtpRentDate.Value = (DateTime)currentRow.Cells[DataGridColumnNames.RENT_DATE].Value;
+            var car = await carService.GetByIdAsync((int)currentRow.Cells[DataGridColumnNames.CAR_ID].Value);
+            selectedCart = mapper.Map<CarViewModel>(car);
+            var client = await clientService.GetByIdAsync((int)currentRow.Cells[DataGridColumnNames.CLIENT_ID].Value);
+            selectedClient = mapper.Map<ClientViewModel>(client);
+            txtCarName.Text = selectedCart.Name;
+            txtClient.Text = selectedClient.Name;
+            tabControl1.SelectedTab = tbpMantenance;
+            btnEdit.Enabled = false;
+            btnNew.Enabled = false;
+            btnSave.Enabled = true;
         }
     }
 }
