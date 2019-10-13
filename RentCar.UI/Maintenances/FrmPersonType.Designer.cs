@@ -152,6 +152,7 @@
             this.dgvPersonTypes.Location = new System.Drawing.Point(7, 93);
             this.dgvPersonTypes.Name = "dgvPersonTypes";
             this.dgvPersonTypes.ReadOnly = true;
+            this.dgvPersonTypes.RowHeadersWidth = 51;
             this.dgvPersonTypes.RowTemplate.Height = 24;
             this.dgvPersonTypes.Size = new System.Drawing.Size(726, 256);
             this.dgvPersonTypes.TabIndex = 4;
@@ -162,6 +163,7 @@
             // 
             this.Delete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -277,6 +279,7 @@
             this.label3.Size = new System.Drawing.Size(23, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Id:";
+            this.label3.Visible = false;
             // 
             // txtIdPersonType
             // 
@@ -284,6 +287,7 @@
             this.txtIdPersonType.Name = "txtIdPersonType";
             this.txtIdPersonType.Size = new System.Drawing.Size(296, 22);
             this.txtIdPersonType.TabIndex = 4;
+            this.txtIdPersonType.Visible = false;
             // 
             // btnCancel
             // 

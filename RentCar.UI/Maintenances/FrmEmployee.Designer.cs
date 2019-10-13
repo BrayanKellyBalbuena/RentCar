@@ -52,10 +52,10 @@
             this.chkDelete = new System.Windows.Forms.CheckBox();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
             this.tbpList = new System.Windows.Forms.TabPage();
+            this.cbSearchType = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbpMantenance = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbSearchType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorIcon)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
@@ -116,6 +116,7 @@
             this.label3.Size = new System.Drawing.Size(23, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Id:";
+            this.label3.Visible = false;
             // 
             // txtIdEmployee
             // 
@@ -123,6 +124,7 @@
             this.txtIdEmployee.Name = "txtIdEmployee";
             this.txtIdEmployee.Size = new System.Drawing.Size(296, 22);
             this.txtIdEmployee.TabIndex = 4;
+            this.txtIdEmployee.Visible = false;
             // 
             // btnCancel
             // 
@@ -215,6 +217,7 @@
             // 
             this.Delete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -263,6 +266,7 @@
             this.dgvEmployees.Location = new System.Drawing.Point(7, 93);
             this.dgvEmployees.Name = "dgvEmployees";
             this.dgvEmployees.ReadOnly = true;
+            this.dgvEmployees.RowHeadersWidth = 51;
             this.dgvEmployees.RowTemplate.Height = 24;
             this.dgvEmployees.Size = new System.Drawing.Size(726, 256);
             this.dgvEmployees.TabIndex = 4;
@@ -286,6 +290,17 @@
             this.tbpList.TabIndex = 0;
             this.tbpList.Text = "List";
             this.tbpList.UseVisualStyleBackColor = true;
+            // 
+            // cbSearchType
+            // 
+            this.cbSearchType.FormattingEnabled = true;
+            this.cbSearchType.Items.AddRange(new object[] {
+            "Name",
+            "IdentificationCard"});
+            this.cbSearchType.Location = new System.Drawing.Point(11, 23);
+            this.cbSearchType.Name = "cbSearchType";
+            this.cbSearchType.Size = new System.Drawing.Size(121, 24);
+            this.cbSearchType.TabIndex = 8;
             // 
             // tabControl1
             // 
@@ -322,17 +337,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(770, 447);
             this.panel1.TabIndex = 3;
-            // 
-            // cbSearchType
-            // 
-            this.cbSearchType.FormattingEnabled = true;
-            this.cbSearchType.Items.AddRange(new object[] {
-            "Name",
-            "IdentificationCard"});
-            this.cbSearchType.Location = new System.Drawing.Point(11, 23);
-            this.cbSearchType.Name = "cbSearchType";
-            this.cbSearchType.Size = new System.Drawing.Size(121, 24);
-            this.cbSearchType.TabIndex = 8;
             // 
             // FrmEmployee
             // 
