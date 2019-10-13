@@ -201,6 +201,7 @@
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
             this.usersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.usersToolStripMenuItem.Text = "Roles";
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // MasterPage
             // 

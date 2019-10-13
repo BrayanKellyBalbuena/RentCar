@@ -233,7 +233,7 @@ GO
 
 CREATE TABLE Roles(
     Id INT NOT NULL IDENTITY,
-    [Name] NVARCHAR(256),
+    [Name] NVARCHAR(256) UNIQUE,
     [State] BIT NOT NULL,
     CreatedBy NVARCHAR(60),
     CreatedDate DATETIME2 NOT NULL,

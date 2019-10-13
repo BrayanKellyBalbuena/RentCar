@@ -2,8 +2,6 @@
 using RentCar.Infrastructure.Constants;
 using RentCar.Infrastructure.EntitiesConfigutations;
 using System.Data.Entity;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RentCar.Infrastructure.DbContexts
 {
@@ -23,6 +21,7 @@ namespace RentCar.Infrastructure.DbContexts
         public DbSet<Client> Clients { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarInspection> CarsInspections { get; set; }
+        public DbSet<Role>Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

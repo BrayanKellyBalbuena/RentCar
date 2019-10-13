@@ -81,6 +81,7 @@
     <Compile Include="Repositories\PersonTypeRepository.cs" />
     <Compile Include="Abstractions\Repository.cs" />
     <Compile Include="Repositories\RentDevolutionRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Services\CarBrandService.cs" />
     <Compile Include="Services\CarCategoryService.cs" />
     <Compile Include="Services\CarInspectionService.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Services\FuelCategoryService.cs" />
     <Compile Include="Services\PersonTypeService.cs" />
     <Compile Include="Services\RentDevolutionService.cs" />
+    <Compile Include="Services\RoleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />

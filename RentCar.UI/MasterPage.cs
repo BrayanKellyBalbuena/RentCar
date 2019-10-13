@@ -15,7 +15,7 @@ namespace RentCar.UI
         {
             Close();
         }
-        private void SetActualForm<TForm>() where TForm : Form
+        private void OpenForm<TForm>() where TForm : Form
         {
      
              var  form = Program.Container.GetInstance<TForm>();
@@ -31,54 +31,58 @@ namespace RentCar.UI
 
         private void carBrandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmCarBrand>();
+            OpenForm<FrmCarBrand>();
         }
 
         private void carCategoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmCarCategory>();
+            OpenForm<FrmCarCategory>();
         }
 
 
         private void carToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmCar>();
+            OpenForm<FrmCar>();
         }
 
         private void fluelCategoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmFluelCategory>();
+            OpenForm<FrmFluelCategory>();
         }
 
         private void carModelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmCarModel>();
+            OpenForm<FrmCarModel>();
         }
 
         private void personTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmPersonType>();
+            OpenForm<FrmPersonType>();
         }
 
         private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmEmployee>();
+            OpenForm<FrmEmployee>();
         }
 
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmClient>();
+            OpenForm<FrmClient>();
         }
 
         private void carInspectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmCarInspection>();
+            OpenForm<FrmCarInspection>();
         }
 
         private void rentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetActualForm<FrmRentDevolution>();
+            OpenForm<FrmRentDevolution>();
         }
 
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<FrmRole>();
+        }
     }
 }
