@@ -1,4 +1,5 @@
-﻿using RentCar.UI.Maintenances;
+﻿using RentCar.Core.Entities;
+using RentCar.UI.Maintenances;
 using System;
 using System.Windows.Forms;
 
@@ -6,9 +7,12 @@ namespace RentCar.UI
 {
     public partial class MasterPage : Form
     {
-        public MasterPage()
+        private readonly User currentUser;
+
+        public MasterPage(User currentUser)
         {
             InitializeComponent();
+            this.currentUser = currentUser;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,6 +87,21 @@ namespace RentCar.UI
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<FrmRole>();
+        }
+
+        private void employeesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenForm<FrmUser>();
+        }
+
+        private void MasterPage_Load(object sender, EventArgs e)
+        {
+            lblCurrentUser.Text = $"Welcome: {currentUser.UserName}";
+        }
+
+        private void lblCurrentUser_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -41,5 +41,8 @@ namespace RentCar.UI.Constans
         public const string DEVOLUTION_DATE = "DevolutionDate";
         public const string AMOUNT = "AmountPerDay";
         public const string CAR_ID = "CarId";
+        public const string USER_NAME = "UserName";
+        public const string PASSWORD = "UserPassword";
+        public const string USER_ROLES = "UserRoles";
     }
 }

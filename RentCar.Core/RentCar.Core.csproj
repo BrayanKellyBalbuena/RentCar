@@ -52,6 +52,8 @@
     <Compile Include="Entities\PersonType.cs" />
     <Compile Include="Entities\RentDevolution.cs" />
     <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Interfaces\Domain\IEntityService.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
   </ItemGroup>

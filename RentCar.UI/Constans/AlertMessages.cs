@@ -23,5 +23,10 @@ namespace RentCar.UI.Constans
         public const string MISSING_DATA = "You need to enter some data, they will be highlighted";
         public const string SELECT_CAR = "Please select a car";
         public const string SELECT_CLIENT = "Please select a client";
+        public const string SELECT_EMPLOYEE = "Please select a employee";
+        public const string ENTER_PASSWORD = "Please enter a password";
+        public const string SELECT_ROLE = "Please select a role";
+        public const string INCORRECT_USER_PASSWORD= "User or password incorrect";
+
     }
 }
