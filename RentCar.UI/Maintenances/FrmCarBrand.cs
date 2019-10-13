@@ -28,20 +28,6 @@ namespace RentCar.UI.Maintenances
             this.mapper = mapper;
         }
 
-        //public static FrmCarBrand GetInstance()
-        //{
-        //    if (instance == null)
-        //    {
-        //        instance = new FrmCarBrand();
-        //    }
-        //    if (instance.IsDisposed) {
-        //        instance = new FrmCarBrand();
-               
-        //    }
-        //    return instance;
-
-        //}
-
         private void FrmCarBrands_Load(object sender, EventArgs e)
         {
       
@@ -101,17 +87,6 @@ namespace RentCar.UI.Maintenances
             dgvCarBrands.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }
 
-
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
-        }
-
         private void ClearTextBox()
         {
             txtName.Text = string.Empty;
@@ -162,7 +137,8 @@ namespace RentCar.UI.Maintenances
                             {
                                 Name = txtName.Text,
                                 Description = txtDescription.Text,
-                                CreatedDate = DateTime.Now
+                                CreatedDate = DateTime.Now,
+                                CreatedBy = Program.CurrentUser.UserName
 
                             });
 
@@ -179,7 +155,8 @@ namespace RentCar.UI.Maintenances
                             Name = txtName.Text,
                             Description = txtDescription.Text,
                             CreatedDate = entity.CreatedDate,
-                            ModifiedDate = DateTime.Now
+                            ModifiedDate = DateTime.Now,
+                             CreatedBy = Program.CurrentUser.UserName
                         };
                         entity = mapper.Map(brand, entity);
 

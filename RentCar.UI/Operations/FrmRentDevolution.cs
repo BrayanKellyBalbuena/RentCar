@@ -148,16 +148,6 @@ namespace RentCar.UI.Maintenances
             dgvRentDevolutions.Columns[DataGridColumnNames.CAR_ID].Visible = false;
         }
 
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
-        }
-
         private void ResetFormControls()
         {
             txtCarName.Text = string.Empty;
@@ -229,7 +219,8 @@ namespace RentCar.UI.Maintenances
                                 DevolutionDate = dtpDevolutionDate.Value,
                                 DayQuantity = dtpDevolutionDate.Value.Subtract(dtpRentDate.Value).Days,
                                 Comentary = txtComentary.Text,
-                                AmountPerDay = nudAmount.Value
+                                AmountPerDay = nudAmount.Value,
+                                CreatedBy = Program.CurrentUser.UserName
                             });
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.INSERTED_SUCCESSFULLY);
@@ -246,6 +237,7 @@ namespace RentCar.UI.Maintenances
                         rentDevolution.DayQuantity = dtpDevolutionDate.Value.Subtract(dtpRentDate.Value).Days;
                         rentDevolution.Comentary = txtComentary.Text;
                         rentDevolution.AmountPerDay = nudAmount.Value;
+                        rentDevolution.CreatedBy = Program.CurrentUser.UserName;
 
                         await rentDevolutionService.UpdateAsync(rentDevolution);
 

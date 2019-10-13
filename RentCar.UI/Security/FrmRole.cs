@@ -88,17 +88,6 @@ namespace RentCar.UI.Maintenances
             dgvRoles.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }
 
-
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
-        }
-
         private void ClearTextBox()
         {
             txtName.Text = string.Empty;
@@ -148,7 +137,8 @@ namespace RentCar.UI.Maintenances
                             new Role
                             {
                                 Name = txtName.Text,
-                                CreatedDate = DateTime.Now
+                                CreatedDate = DateTime.Now,
+                                CreatedBy = Program.CurrentUser.UserName
 
                             });
 
@@ -161,6 +151,7 @@ namespace RentCar.UI.Maintenances
                         entity.Id = int.Parse(txtId.Text);
                         entity.Name = txtName.Text;
                         entity.CreatedDate = entity.CreatedDate;
+                        entity.CreatedBy = Program.CurrentUser.UserName;
 
                         await roleService.UpdateAsync(entity);
 

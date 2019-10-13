@@ -157,8 +157,8 @@ namespace RentCar.UI.Maintenances
                             {
                                 Name = txtName.Text,
                                 IdentificationCard = txtIdentificationCard.Text,
-                                CreatedDate = DateTime.Now
-
+                                CreatedDate = DateTime.Now,
+                                 CreatedBy = Program.CurrentUser.UserName,
                             });
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.INSERTED_SUCCESSFULLY);
@@ -174,7 +174,8 @@ namespace RentCar.UI.Maintenances
                             Name = txtName.Text,
                             IdentificationCard = txtIdentificationCard.Text,
                             CreatedDate = entity.CreatedDate,
-                            ModifiedDate = DateTime.Now
+                            ModifiedDate = DateTime.Now,
+                            CreatedBy = Program.CurrentUser.UserName
                         };
                         entity = mapper.Map(employeeVm, entity);
 

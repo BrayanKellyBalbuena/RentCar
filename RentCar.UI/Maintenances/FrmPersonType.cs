@@ -90,17 +90,6 @@ namespace RentCar.UI.Maintenances
             dgvPersonTypes.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }
 
-
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
-        }
-
         private void ClearTextBox()
         {
             txtName.Text = string.Empty;
@@ -151,9 +140,8 @@ namespace RentCar.UI.Maintenances
                             {
                                 Name = txtName.Text,
                                 Description = txtDescription.Text,
-                                CreatedDate = DateTime.Now
-
-                            });
+                                CreatedDate = DateTime.Now,
+                                CreatedBy = Program.CurrentUser.UserName});
 
                         MessageBoxUtil.MessageOk(this, AlertMessages.INSERTED_SUCCESSFULLY);
 
@@ -168,7 +156,8 @@ namespace RentCar.UI.Maintenances
                             Name = txtName.Text,
                             Description = txtDescription.Text,
                             CreatedDate = entity.CreatedDate,
-                            ModifiedDate = DateTime.Now
+                            ModifiedDate = DateTime.Now,
+                            CreatedBy = Program.CurrentUser.UserName
                         };
                         entity = mapper.Map(Model, entity);
 

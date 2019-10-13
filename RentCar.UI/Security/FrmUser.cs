@@ -161,7 +161,8 @@ namespace RentCar.UI.Maintenances
                             UserName = txtName.Text,
                             UserPassword = ComputeSha256Hash(txtPassword.Text),
                             CreatedDate = DateTime.Now,
-                            UserRoles = new HashSet<UserRole>()
+                            UserRoles = new HashSet<UserRole>(),
+                            CreatedBy = Program.CurrentUser.UserName
                         };
 
                         foreach (var item in userRoles)
@@ -181,6 +182,7 @@ namespace RentCar.UI.Maintenances
                         entity.UserPassword = ComputeSha256Hash(txtPassword.Text);
                         entity.UserName = txtName.Text;
                         entity.CreatedDate = entity.CreatedDate;
+                        entity.CreatedBy = Program.CurrentUser.UserName;
 
                         await userService.UpdateAsync(entity);
 

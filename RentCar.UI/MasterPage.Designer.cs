@@ -44,7 +44,7 @@
             this.carInspectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tpsSecurity = new System.Windows.Forms.ToolStripMenuItem();
             this.employeesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblCurrentUser = new System.Windows.Forms.Label();
@@ -60,10 +60,10 @@
             this.maintenancesToolStripMenuItem,
             this.carInspectionToolStripMenuItem,
             this.reportsToolStripMenuItem,
-            this.companyToolStripMenuItem});
+            this.tpsSecurity});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -72,7 +72,7 @@
             this.rentCarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.rentCarToolStripMenuItem.Name = "rentCarToolStripMenuItem";
-            this.rentCarToolStripMenuItem.Size = new System.Drawing.Size(79, 26);
+            this.rentCarToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
             this.rentCarToolStripMenuItem.Text = "Rent Car";
             // 
             // exitToolStripMenuItem
@@ -94,7 +94,7 @@
             this.clientsToolStripMenuItem,
             this.employeesToolStripMenuItem});
             this.maintenancesToolStripMenuItem.Name = "maintenancesToolStripMenuItem";
-            this.maintenancesToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
+            this.maintenancesToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
             this.maintenancesToolStripMenuItem.Text = "Maintenances";
             // 
             // carToolStripMenuItem
@@ -159,7 +159,7 @@
             this.carInspectionsToolStripMenuItem,
             this.rentToolStripMenuItem});
             this.carInspectionToolStripMenuItem.Name = "carInspectionToolStripMenuItem";
-            this.carInspectionToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
+            this.carInspectionToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
             this.carInspectionToolStripMenuItem.Text = "Car Operations";
             // 
             // carInspectionsToolStripMenuItem
@@ -179,29 +179,30 @@
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
-            // companyToolStripMenuItem
+            // tpsSecurity
             // 
-            this.companyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tpsSecurity.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.employeesToolStripMenuItem1,
             this.usersToolStripMenuItem});
-            this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
-            this.companyToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
-            this.companyToolStripMenuItem.Text = "Security";
+            this.tpsSecurity.Enabled = false;
+            this.tpsSecurity.Name = "tpsSecurity";
+            this.tpsSecurity.Size = new System.Drawing.Size(75, 24);
+            this.tpsSecurity.Text = "Security";
             // 
             // employeesToolStripMenuItem1
             // 
             this.employeesToolStripMenuItem1.Name = "employeesToolStripMenuItem1";
-            this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(128, 26);
+            this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.employeesToolStripMenuItem1.Text = "Users";
             this.employeesToolStripMenuItem1.Click += new System.EventHandler(this.employeesToolStripMenuItem1_Click);
             // 
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.usersToolStripMenuItem.Text = "Roles";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
@@ -255,7 +256,7 @@
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem carInspectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem companyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tpsSecurity;
         private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.Label lblCurrentUser;

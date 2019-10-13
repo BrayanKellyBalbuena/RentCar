@@ -121,6 +121,7 @@
     <Compile Include="MappingsProfiles\RentDevolutionProfile.cs" />
     <Compile Include="MappingsProfiles\RoleProfile.cs" />
     <Compile Include="MappingsProfiles\UserProfile.cs" />
+    <Compile Include="MappingsProfiles\UserRoleProfile.cs" />
     <Compile Include="Operations\FrmRentDevolution.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +245,7 @@
     <Compile Include="ViewModels\PersonTypeViewModel.cs" />
     <Compile Include="ViewModels\RentDevolutionViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\UserRoleViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <EmbeddedResource Include="FrmQueries\FrmCarQuery.resx">
       <DependentUpon>FrmCarQuery.cs</DependentUpon>

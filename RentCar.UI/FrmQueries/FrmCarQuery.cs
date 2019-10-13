@@ -2,16 +2,13 @@
 using AutoMapper.QueryableExtensions;
 using RentCar.Core.Entities;
 using RentCar.Core.Interfaces.Domain;
-using RentCar.UI.Abstractions;
 using RentCar.UI.Constans;
 using RentCar.UI.EventsArgs;
 using RentCar.UI.Extensions;
 using RentCar.UI.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using RentCar.UI.Extensions;
 namespace RentCar.UI.FrmQueries
 {
     public partial class FrmCarQuery : Form

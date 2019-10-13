@@ -8,7 +8,9 @@ namespace RentCar.UI.MappingsProfiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserViewModel>().ForMember(dest => dest.Employee, opt => opt.MapFrom(source => source.Employee.Name));
+            CreateMap<User, UserViewModel>()
+                .ForMember(dest => dest.Employee, opt => opt.MapFrom(source => source.Employee.Name));
+               
 
         }
     }

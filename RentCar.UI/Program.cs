@@ -9,6 +9,8 @@ using RentCar.UI.MappingsProfiles;
 using System.Linq;
 using RentCar.Infrastructure.Services;
 using RentCar.Core.Entities;
+using RentCar.Core.Interfaces;
+using RentCar.UI.ViewModels;
 
 namespace RentCar.UI
 {
@@ -16,7 +18,7 @@ namespace RentCar.UI
     static class Program
     {
         public static Container Container { get; private set; }
-        public static User CurrentUser { get; set; }
+        public static UserViewModel CurrentUser { get; set; }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -33,7 +35,6 @@ namespace RentCar.UI
         {
             Container = new Container();
             Container.Register<RentCarContext>(Lifestyle.Singleton);
-            Container.Register(() => CurrentUser, Lifestyle.Singleton);
             RegisterRepositories();
             RegisterServices();
             RegisterForms();

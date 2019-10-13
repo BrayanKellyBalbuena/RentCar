@@ -159,7 +159,7 @@ namespace RentCar.UI.Maintenances
             nudFluelQuantity.Value = 0;
         }
 
-        private async void Search()
+        private  void Search()
         {
            dgvCartInspections.DataSource =carInspectionService
                 .GetAll((c =>((c.InspectionsDate >= dtpFrom.Value && c.InspectionsDate <= dtpTo.Value)
