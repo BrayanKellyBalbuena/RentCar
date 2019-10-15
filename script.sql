@@ -282,3 +282,27 @@ CREATE TABLE Access (
     CONSTRAINT FK_Access_Roles_RoleId FOREIGN KEY (RoleId) REFERENCES Roles(Id)
 )
 GO
+
+/*Reports**/
+
+CREATE PROC RentReports
+AS
+
+SET NOCOUNT ON;
+
+SELECT 
+	E.[Name] AS Empleado,
+	C.[Name] AS Cliente,
+	Ca.[Name] AS Carro,
+	Ca.PlacaNumber,
+	[RentDate],
+	[DevolutionDate], 
+	[AmountPerDay],
+	[AmountPerDay],
+	[DayQuantity],
+	[Comentary]
+FROM [dbo].[DevolutionAndRent] DR
+	INNER JOIN Employees E ON DR.EmployeeId = E.Id
+	INNER JOIN Clients C ON DR.ClientId = C.Id
+	INNER JOIN Cars Ca ON DR.CarId = Ca.Id
+WHERE DR.[State] = 1
