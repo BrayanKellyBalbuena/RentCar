@@ -217,7 +217,7 @@ namespace RentCar.UI.Maintenances
                                 ClientId = selectedClient.Id,
                                 EmployeeId = 1,
                                 RentDate = dtpRentDate.Value,
-                                DayQuantity = dtpDevolutionDate.Value.Subtract(dtpRentDate.Value).Days,
+                                DayQuantity = (int) nupDayQuantiy.Value,
                                 Comentary = txtComentary.Text,
                                 AmountPerDay = nudAmount.Value,
                                 CreatedBy = Program.CurrentUser.UserName
