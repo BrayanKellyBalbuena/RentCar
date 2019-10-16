@@ -68,96 +68,107 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 14);
+            this.label1.Location = new System.Drawing.Point(11, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 17);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Employees";
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(87, 155);
+            this.lblDescription.Location = new System.Drawing.Point(65, 126);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(121, 17);
+            this.lblDescription.Size = new System.Drawing.Size(92, 13);
             this.lblDescription.TabIndex = 9;
             this.lblDescription.Text = "IdentificationCard:";
             // 
             // txtIdentificationCard
             // 
-            this.txtIdentificationCard.Location = new System.Drawing.Point(214, 152);
+            this.txtIdentificationCard.Location = new System.Drawing.Point(160, 124);
+            this.txtIdentificationCard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIdentificationCard.MaxLength = 11;
             this.txtIdentificationCard.Name = "txtIdentificationCard";
-            this.txtIdentificationCard.Size = new System.Drawing.Size(296, 22);
+            this.txtIdentificationCard.Size = new System.Drawing.Size(223, 20);
             this.txtIdentificationCard.TabIndex = 8;
             this.txtIdentificationCard.TextChanged += new System.EventHandler(this.txtIdentificationCard_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(89, 98);
+            this.label4.Location = new System.Drawing.Point(67, 80);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 17);
+            this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Name:";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(214, 98);
+            this.txtName.Location = new System.Drawing.Point(160, 80);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(296, 22);
+            this.txtName.Size = new System.Drawing.Size(223, 20);
             this.txtName.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(89, 43);
+            this.label3.Location = new System.Drawing.Point(67, 35);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 17);
+            this.label3.Size = new System.Drawing.Size(19, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Id:";
             this.label3.Visible = false;
             // 
             // txtIdEmployee
             // 
-            this.txtIdEmployee.Location = new System.Drawing.Point(214, 43);
+            this.txtIdEmployee.Location = new System.Drawing.Point(160, 35);
+            this.txtIdEmployee.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIdEmployee.Name = "txtIdEmployee";
-            this.txtIdEmployee.Size = new System.Drawing.Size(296, 22);
+            this.txtIdEmployee.Size = new System.Drawing.Size(223, 20);
             this.txtIdEmployee.TabIndex = 4;
             this.txtIdEmployee.Visible = false;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(515, 295);
+            this.btnCancel.Location = new System.Drawing.Point(386, 240);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(106, 35);
+            this.btnCancel.Size = new System.Drawing.Size(80, 28);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(372, 295);
+            this.btnEdit.Location = new System.Drawing.Point(279, 240);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(106, 35);
+            this.btnEdit.Size = new System.Drawing.Size(80, 28);
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Edit";
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(231, 295);
+            this.btnSave.Location = new System.Drawing.Point(173, 240);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(110, 35);
+            this.btnSave.Size = new System.Drawing.Size(82, 28);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(92, 295);
+            this.btnNew.Location = new System.Drawing.Point(69, 240);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(116, 35);
+            this.btnNew.Size = new System.Drawing.Size(87, 28);
             this.btnNew.TabIndex = 0;
             this.btnNew.Text = "New";
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
@@ -181,36 +192,41 @@
             this.groupBox1.Controls.Add(this.btnEdit);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.btnNew);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Location = new System.Drawing.Point(4, 5);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(727, 380);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(545, 309);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Form";
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(506, 13);
+            this.btnDelete.Location = new System.Drawing.Point(380, 11);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(83, 32);
+            this.btnDelete.Size = new System.Drawing.Size(62, 26);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Eliminar";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(394, 13);
+            this.btnSearch.Location = new System.Drawing.Point(296, 11);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(86, 32);
+            this.btnSearch.Size = new System.Drawing.Size(64, 26);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(177, 23);
+            this.txtSearch.Location = new System.Drawing.Point(133, 19);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(180, 22);
+            this.txtSearch.Size = new System.Drawing.Size(136, 20);
             this.txtSearch.TabIndex = 1;
             // 
             // Delete
@@ -222,13 +238,14 @@
             this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Delete.Width = 78;
+            this.Delete.Width = 63;
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(620, 13);
+            this.btnPrint.Location = new System.Drawing.Point(465, 11);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(83, 32);
+            this.btnPrint.Size = new System.Drawing.Size(62, 26);
             this.btnPrint.TabIndex = 7;
             this.btnPrint.Text = "Print";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
@@ -236,18 +253,20 @@
             // lblTotalRows
             // 
             this.lblTotalRows.AutoSize = true;
-            this.lblTotalRows.Location = new System.Drawing.Point(553, 58);
+            this.lblTotalRows.Location = new System.Drawing.Point(415, 47);
+            this.lblTotalRows.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalRows.Name = "lblTotalRows";
-            this.lblTotalRows.Size = new System.Drawing.Size(16, 17);
+            this.lblTotalRows.Size = new System.Drawing.Size(13, 13);
             this.lblTotalRows.TabIndex = 6;
             this.lblTotalRows.Text = "0";
             // 
             // chkDelete
             // 
             this.chkDelete.AutoSize = true;
-            this.chkDelete.Location = new System.Drawing.Point(11, 58);
+            this.chkDelete.Location = new System.Drawing.Point(8, 47);
+            this.chkDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkDelete.Name = "chkDelete";
-            this.chkDelete.Size = new System.Drawing.Size(71, 21);
+            this.chkDelete.Size = new System.Drawing.Size(57, 17);
             this.chkDelete.TabIndex = 5;
             this.chkDelete.Text = "Delete";
             this.chkDelete.CheckedChanged += new System.EventHandler(this.chkDelete_CheckedChanged);
@@ -263,12 +282,13 @@
             this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Delete});
-            this.dgvEmployees.Location = new System.Drawing.Point(7, 93);
+            this.dgvEmployees.Location = new System.Drawing.Point(5, 76);
+            this.dgvEmployees.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvEmployees.Name = "dgvEmployees";
             this.dgvEmployees.ReadOnly = true;
             this.dgvEmployees.RowHeadersWidth = 51;
             this.dgvEmployees.RowTemplate.Height = 24;
-            this.dgvEmployees.Size = new System.Drawing.Size(726, 256);
+            this.dgvEmployees.Size = new System.Drawing.Size(544, 208);
             this.dgvEmployees.TabIndex = 4;
             this.dgvEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
             this.dgvEmployees.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_DoubleClick);
@@ -283,23 +303,26 @@
             this.tbpList.Controls.Add(this.btnDelete);
             this.tbpList.Controls.Add(this.btnSearch);
             this.tbpList.Controls.Add(this.txtSearch);
-            this.tbpList.Location = new System.Drawing.Point(4, 25);
+            this.tbpList.Location = new System.Drawing.Point(4, 22);
+            this.tbpList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbpList.Name = "tbpList";
-            this.tbpList.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpList.Size = new System.Drawing.Size(739, 355);
+            this.tbpList.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbpList.Size = new System.Drawing.Size(552, 286);
             this.tbpList.TabIndex = 0;
             this.tbpList.Text = "List";
             this.tbpList.UseVisualStyleBackColor = true;
             // 
             // cbSearchType
             // 
+            this.cbSearchType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSearchType.FormattingEnabled = true;
             this.cbSearchType.Items.AddRange(new object[] {
             "Name",
             "IdentificationCard"});
-            this.cbSearchType.Location = new System.Drawing.Point(11, 23);
+            this.cbSearchType.Location = new System.Drawing.Point(8, 19);
+            this.cbSearchType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbSearchType.Name = "cbSearchType";
-            this.cbSearchType.Size = new System.Drawing.Size(121, 24);
+            this.cbSearchType.Size = new System.Drawing.Size(92, 21);
             this.cbSearchType.TabIndex = 8;
             // 
             // tabControl1
@@ -309,19 +332,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tbpList);
             this.tabControl1.Controls.Add(this.tbpMantenance);
-            this.tabControl1.Location = new System.Drawing.Point(20, 60);
+            this.tabControl1.Location = new System.Drawing.Point(15, 49);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(747, 384);
+            this.tabControl1.Size = new System.Drawing.Size(560, 312);
             this.tabControl1.TabIndex = 1;
             // 
             // tbpMantenance
             // 
             this.tbpMantenance.Controls.Add(this.groupBox1);
-            this.tbpMantenance.Location = new System.Drawing.Point(4, 25);
+            this.tbpMantenance.Location = new System.Drawing.Point(4, 22);
+            this.tbpMantenance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbpMantenance.Name = "tbpMantenance";
-            this.tbpMantenance.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpMantenance.Size = new System.Drawing.Size(739, 355);
+            this.tbpMantenance.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbpMantenance.Size = new System.Drawing.Size(552, 286);
             this.tbpMantenance.TabIndex = 1;
             this.tbpMantenance.Text = "Mantenance";
             this.tbpMantenance.UseVisualStyleBackColor = true;
@@ -333,17 +358,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(-7, -1);
+            this.panel1.Location = new System.Drawing.Point(-5, -1);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(770, 447);
+            this.panel1.Size = new System.Drawing.Size(578, 363);
             this.panel1.TabIndex = 3;
             // 
             // FrmEmployee
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(756, 445);
+            this.ClientSize = new System.Drawing.Size(567, 362);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmEmployee";
             this.Text = "Employees";
             this.Load += new System.EventHandler(this.FrmEmployee_Load);
