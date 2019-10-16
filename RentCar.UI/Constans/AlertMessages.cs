@@ -27,6 +27,7 @@ namespace RentCar.UI.Constans
         public const string ENTER_PASSWORD = "Please enter a password";
         public const string SELECT_ROLE = "Please select a role";
         public const string INCORRECT_USER_PASSWORD= "User or password incorrect";
+        public const string INVALID_IDENTIFICATION = "Invalid Identification Car";
 
     }
 }

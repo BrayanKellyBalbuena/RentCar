@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Windows.Forms;
 using AutoMapper;
 using RentCar.UI.ViewModels;
+using RentCar.Infrastructure.Extensions;
 
 namespace RentCar.UI.Maintenances
 {
@@ -324,6 +325,11 @@ namespace RentCar.UI.Maintenances
             {
                 MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
                 errorIcon.SetError(txtIdentificationCard, AlertMessages.ENTER_A_VALID_IDENTIFICATION_CARD );
+                error = false;
+            }else if (!txtIdentificationCard.Text.ValidateIdentification())
+            {
+                MessageBoxUtil.MessageError(this, AlertMessages.INVALID_IDENTIFICATION);
+                errorIcon.SetError(txtIdentificationCard, AlertMessages.INVALID_IDENTIFICATION);
                 error = false;
             }
 

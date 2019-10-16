@@ -105,6 +105,7 @@
     <Compile Include="EntitiesConfigutations\PersonTypeEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\RentDevolutionEntityConfiguration.cs" />
     <Compile Include="Exceptions\EntityException.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CarBrandRepository.cs" />
     <Compile Include="Repositories\CarCategoryRepository.cs" />
@@ -135,7 +136,6 @@
     <Compile Include="utils\EncriptorUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using AutoMapper;
 using RentCar.UI.ViewModels;
 using AutoMapper.QueryableExtensions;
+using RentCar.Infrastructure.Extensions;
 
 namespace RentCar.UI.Maintenances
 {
@@ -353,8 +354,14 @@ namespace RentCar.UI.Maintenances
                 errorIcon.SetError(txtIdentificationCard, AlertMessages.ENTER_A_VALID_IDENTIFICATION_CARD);
                 error = false;
             }
+            else if (!txtIdentificationCard.Text.ValidateIdentification())
+            {
+                MessageBoxUtil.MessageError(this, AlertMessages.INVALID_IDENTIFICATION);
+                errorIcon.SetError(txtIdentificationCard, AlertMessages.INVALID_IDENTIFICATION);
+                error = false;
+            }
 
-            if(!txtCreditCardNumber.IsValidCreditCard())
+            if (!txtCreditCardNumber.IsValidCreditCard())
             {
                 MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
                 errorIcon.SetError(txtCreditCardNumber, AlertMessages.ENTER_A_VALID_CREDIT_CARD);
