@@ -13,7 +13,7 @@ namespace RentCar.Core.Entities
         public int ClientId { get; set; }
         public int CarId { get; set; }
         public DateTime RentDate { get; set; }
-        public DateTime DevolutionDate { get; set; }
+        public DateTime? DevolutionDate { get; set; }
         public decimal AmountPerDay { get; set; }
         public int DayQuantity { get; set; }
         public string Comentary { get; set; }

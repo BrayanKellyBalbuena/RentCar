@@ -61,6 +61,10 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.cbEmployee = new System.Windows.Forms.ComboBox();
             this.tbpList = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.cbCars = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -76,10 +80,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ttMessage = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.tbpMantenance.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -98,7 +98,7 @@
             this.tbpMantenance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbpMantenance.Name = "tbpMantenance";
             this.tbpMantenance.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbpMantenance.Size = new System.Drawing.Size(849, 430);
+            this.tbpMantenance.Size = new System.Drawing.Size(1080, 519);
             this.tbpMantenance.TabIndex = 1;
             this.tbpMantenance.Text = "Mantenance";
             this.tbpMantenance.UseVisualStyleBackColor = true;
@@ -425,6 +425,38 @@
             this.tbpList.Text = "List";
             this.tbpList.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(314, 59);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(63, 17);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Date To:";
+            // 
+            // dtpTo
+            // 
+            this.dtpTo.Location = new System.Drawing.Point(396, 54);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(200, 22);
+            this.dtpTo.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 59);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(78, 17);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Date From:";
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.Location = new System.Drawing.Point(89, 54);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(200, 22);
+            this.dtpFrom.TabIndex = 11;
+            // 
             // cbCars
             // 
             this.cbCars.FormattingEnabled = true;
@@ -547,7 +579,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1088, 548);
             this.tabControl1.TabIndex = 1;
-            this.tabControl1.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // errorIcon
             // 
@@ -574,38 +605,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1088, 611);
             this.panel1.TabIndex = 2;
-            // 
-            // dtpFrom
-            // 
-            this.dtpFrom.Location = new System.Drawing.Point(89, 54);
-            this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(200, 22);
-            this.dtpFrom.TabIndex = 11;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 59);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(78, 17);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Date From:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(314, 59);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(63, 17);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Date To:";
-            // 
-            // dtpTo
-            // 
-            this.dtpTo.Location = new System.Drawing.Point(396, 54);
-            this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(200, 22);
-            this.dtpTo.TabIndex = 13;
             // 
             // FrmCarInspection
             // 

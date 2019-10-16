@@ -119,6 +119,7 @@
             this.label3.Size = new System.Drawing.Size(23, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Id:";
+            this.label3.Visible = false;
             // 
             // txtIdCarModel
             // 
@@ -126,6 +127,7 @@
             this.txtIdCarModel.Name = "txtIdCarModel";
             this.txtIdCarModel.Size = new System.Drawing.Size(296, 22);
             this.txtIdCarModel.TabIndex = 4;
+            this.txtIdCarModel.Visible = false;
             // 
             // btnCancel
             // 
@@ -257,6 +259,7 @@
             // Delete
             // 
             this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -305,6 +308,7 @@
             this.dgvCarModels.Location = new System.Drawing.Point(7, 93);
             this.dgvCarModels.Name = "dgvCarModels";
             this.dgvCarModels.ReadOnly = true;
+            this.dgvCarModels.RowHeadersWidth = 51;
             this.dgvCarModels.RowTemplate.Height = 24;
             this.dgvCarModels.Size = new System.Drawing.Size(859, 310);
             this.dgvCarModels.TabIndex = 4;

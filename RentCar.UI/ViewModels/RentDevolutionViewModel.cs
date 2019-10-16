@@ -12,7 +12,7 @@ namespace RentCar.UI.ViewModels
         public int CarId { get; set; }
         public string Car { get; set; }
         public DateTime RentDate { get; set; }
-        public DateTime DevolutionDate { get; set; }
+        public DateTime? DevolutionDate { get; set; }
         public decimal AmountPerDay { get; set; }
         public int DayQuantity { get; set; }
         public string Comentary { get; set; }

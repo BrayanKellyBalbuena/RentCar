@@ -153,6 +153,7 @@ namespace RentCar.UI.Maintenances
             this.dgvCarBrands.Location = new System.Drawing.Point(7, 93);
             this.dgvCarBrands.Name = "dgvCarBrands";
             this.dgvCarBrands.ReadOnly = true;
+            this.dgvCarBrands.RowHeadersWidth = 51;
             this.dgvCarBrands.RowTemplate.Height = 24;
             this.dgvCarBrands.Size = new System.Drawing.Size(726, 293);
             this.dgvCarBrands.TabIndex = 4;
@@ -162,6 +163,7 @@ namespace RentCar.UI.Maintenances
             // Delete
             // 
             this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -275,6 +277,7 @@ namespace RentCar.UI.Maintenances
             this.label3.Size = new System.Drawing.Size(23, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Id:";
+            this.label3.Visible = false;
             // 
             // txtIdCarBrand
             // 
@@ -282,6 +285,7 @@ namespace RentCar.UI.Maintenances
             this.txtIdCarBrand.Name = "txtIdCarBrand";
             this.txtIdCarBrand.Size = new System.Drawing.Size(296, 22);
             this.txtIdCarBrand.TabIndex = 4;
+            this.txtIdCarBrand.Visible = false;
             // 
             // btnCancel
             // 

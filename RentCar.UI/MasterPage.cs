@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using RentCar.Core.Entities;
+using RentCar.UI.Reports;
 
 namespace RentCar.UI
 {
@@ -116,6 +117,16 @@ namespace RentCar.UI
         private void lblCurrentUser_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void inspectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<FrmInspectionReport>();
+        }
+
+        private void rentAndDevolutionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<FrmRentReport>();
         }
     }
 }

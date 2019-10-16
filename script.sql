@@ -7,6 +7,17 @@ GO
 USE RentCar
 GO
 
+CREATE LOGIN rentcar_user
+WITH PASSWORD 'rentcardb'
+
+CREATE USER rentcar_user
+FOR LOGIN rentcar_user
+GO
+ALTER ROLE db_datareader ADD MEMBER rentcar_user; 
+ALTER ROLE db_datawriter ADD MEMBER rentcar_user; 
+ALTER ROLE db_ddladmin ADD MEMBER rentcar_user; 
+GO
+
 DROP TABLE IF EXISTS dbo.DevolutionAndRent;
 DROP TABLE IF EXISTS dbo.CarsInspections;
 DROP TABLE IF EXISTS dbo.Car;
@@ -195,9 +206,9 @@ CREATE TABLE DevolutionAndRent(
     ClientId INT NOT NULL,
 	CarId INT NOT NULL,
     RentDate DATETIME NOT NULL,
-    DevolutionDate DATETIME NOT NULL,
+    DevolutionDate DATETIME NULL,
     AmountPerDay DECIMAL (12, 2) NOT NULL,
-    DayQuantity INT NOT NULL,
+    DayQuantity INT NULL,
     Comentary NVARCHAR(1000),
     [State] BIT NOT NULL,
     CreatedBy NVARCHAR(60),
@@ -209,6 +220,8 @@ CREATE TABLE DevolutionAndRent(
     CONSTRAINT FK_DevolutionAndRent_Clients_Id FOREIGN KEY (ClientId) REFERENCES Clients(Id),
 	CONSTRAINT FK_DevolutionAndRent_Car_Id FOREIGN KEY (CarId) REFERENCES Cars(Id)
 )
+
+
 ----Indexes Clients Table---
 CREATE NONCLUSTERED INDEX IX_Clients_Name ON Clients([name])
 CREATE UNIQUE INDEX IXU_Clients_IdentificationCard ON Clients(IdentificationCard)
@@ -280,3 +293,49 @@ CREATE TABLE Access (
     CONSTRAINT FK_Access_Roles_RoleId FOREIGN KEY (RoleId) REFERENCES Roles(Id)
 )
 GO
+
+/*Reports**/
+
+CREATE PROC RentReports
+AS
+
+SET NOCOUNT ON;
+
+SELECT 
+	E.[Name] AS Empleado,
+	C.[Name] AS Cliente,
+	Ca.[Name] AS Carro,
+	Ca.PlacaNumber,
+	[RentDate],
+	[DevolutionDate], 
+	[AmountPerDay],
+	[AmountPerDay],
+	[DayQuantity],
+	[Comentary]
+FROM [dbo].[DevolutionAndRent] DR
+	INNER JOIN Employees E ON DR.EmployeeId = E.Id
+	INNER JOIN Clients C ON DR.ClientId = C.Id
+	INNER JOIN Cars Ca ON DR.CarId = Ca.Id
+WHERE DR.[State] = 1
+
+GO
+
+CREATE PROC InspectionReport
+AS
+SET NOCOUNT ON;
+
+SELECT C.[Name] AS Cliente, E.[Name] AS Employee,
+	CASE [HasScratch] WHEN 1 THEN 'Yes' ELSE 'No' END HasScratch,
+	CASE [HasTires] WHEN 1 THEN 'Yes' ELSE 'No' END HasTires,
+	CASE [FluelQuantity] WHEN 1 THEN 'Yes' ELSE 'No' END FluelQuantity,
+	CASE [HasHydraulicJack] WHEN 1 THEN 'Yes' ELSE 'No' END HasHydraulicJack,
+	CASE [HasBrokenCrystal] WHEN 1 THEN 'Yes' ELSE 'No' END HasBrokenCrystal, 
+	CASE [FrontRightTireState] WHEN 1 THEN 'Yes' ELSE 'No' END FrontRightTireState,
+	CASE [FrontLeftTireState] WHEN 1 THEN 'Yes' ELSE 'No' END FrontLeftTireState,
+	CASE [BackRightTireState] WHEN 1 THEN 'Yes' ELSE 'No' END BackRightTireState,
+	CASE [BackLeftTireState] WHEN 1 THEN 'Yes' ELSE 'No' END BackLeftTireState,
+	[InspectionsDate]
+FROM [dbo].[CarsInspections] CI 
+	INNER JOIN Cars C ON CI.CarId = C.Id
+	INNER JOIN Employees E ON CI.EmployeeId = E.Id
+WHERE CI.[State] = 1
