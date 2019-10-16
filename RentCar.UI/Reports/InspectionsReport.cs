@@ -16,14 +16,14 @@ namespace RentCar.UI.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CarBrandReport : ReportClass {
+    public class InspectionsReport : ReportClass {
         
-        public CarBrandReport() {
+        public InspectionsReport() {
         }
         
         public override string ResourceName {
             get {
-                return "CarBrandReport.rpt";
+                return "InspectionsReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace RentCar.UI.Reports {
         
         public override string FullResourceName {
             get {
-                return "RentCar.UI.Reports.CarBrandReport.rpt";
+                return "RentCar.UI.Reports.InspectionsReport.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace RentCar.UI.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCarBrandReport : Component, ICachedReport {
+    public class CachedInspectionsReport : Component, ICachedReport {
         
-        public CachedCarBrandReport() {
+        public CachedInspectionsReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace RentCar.UI.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CarBrandReport rpt = new CarBrandReport();
+            InspectionsReport rpt = new InspectionsReport();
             rpt.Site = this.Site;
             return rpt;
         }

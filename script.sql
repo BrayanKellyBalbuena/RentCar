@@ -7,6 +7,17 @@ GO
 USE RentCar
 GO
 
+CREATE LOGIN rentcar_user
+WITH PASSWORD 'rentcardb'
+
+CREATE USER rentcar_user
+FOR LOGIN rentcar_user
+GO
+ALTER ROLE db_datareader ADD MEMBER rentcar_user; 
+ALTER ROLE db_datawriter ADD MEMBER rentcar_user; 
+ALTER ROLE db_ddladmin ADD MEMBER rentcar_user; 
+GO
+
 DROP TABLE IF EXISTS dbo.DevolutionAndRent;
 DROP TABLE IF EXISTS dbo.CarsInspections;
 DROP TABLE IF EXISTS dbo.Car;
@@ -306,3 +317,25 @@ FROM [dbo].[DevolutionAndRent] DR
 	INNER JOIN Clients C ON DR.ClientId = C.Id
 	INNER JOIN Cars Ca ON DR.CarId = Ca.Id
 WHERE DR.[State] = 1
+
+GO
+
+CREATE PROC InspectionReport
+AS
+SET NOCOUNT ON;
+
+SELECT C.[Name] AS Cliente, E.[Name] AS Employee,
+	CASE [HasScratch] WHEN 1 THEN 'Yes' ELSE 'No' END HasScratch,
+	CASE [HasTires] WHEN 1 THEN 'Yes' ELSE 'No' END HasTires,
+	CASE [FluelQuantity] WHEN 1 THEN 'Yes' ELSE 'No' END FluelQuantity,
+	CASE [HasHydraulicJack] WHEN 1 THEN 'Yes' ELSE 'No' END HasHydraulicJack,
+	CASE [HasBrokenCrystal] WHEN 1 THEN 'Yes' ELSE 'No' END HasBrokenCrystal, 
+	CASE [FrontRightTireState] WHEN 1 THEN 'Yes' ELSE 'No' END FrontRightTireState,
+	CASE [FrontLeftTireState] WHEN 1 THEN 'Yes' ELSE 'No' END FrontLeftTireState,
+	CASE [BackRightTireState] WHEN 1 THEN 'Yes' ELSE 'No' END BackRightTireState,
+	CASE [BackLeftTireState] WHEN 1 THEN 'Yes' ELSE 'No' END BackLeftTireState,
+	[InspectionsDate]
+FROM [dbo].[CarsInspections] CI 
+	INNER JOIN Cars C ON CI.CarId = C.Id
+	INNER JOIN Employees E ON CI.EmployeeId = E.Id
+WHERE CI.[State] = 1
