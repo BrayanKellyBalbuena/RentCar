@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Infrastructure", "R
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database_script", "database_script", "{0A8EA038-772F-4489-8803-DDEBF65C6D69}"
 	ProjectSection(SolutionItems) = preProject
+		full_backup.sql = full_backup.sql
 		script.sql = script.sql
 	EndProjectSection
 EndProject

@@ -91,7 +91,7 @@ namespace RentCar.UI.Maintenances
             HideColumns();
         }
 
-        private async void SetupComboBoxes()
+        private void SetupComboBoxes()
         {
             cbCarBrand.ValueMember = DataGridColumnNames.ID_COLUMN;
             cbCarBrand.DisplayMember = DataGridColumnNames.NAME_COLUMN;
@@ -100,9 +100,9 @@ namespace RentCar.UI.Maintenances
             cbBrandSearch.DisplayMember = DataGridColumnNames.NAME_COLUMN;
 
 
-            var brands = await (from brand in carBrandService.GetAll()
+            var brands = (from brand in carBrandService.GetAll()
                                            select new { brand.Id, brand.Name }
-                                    ).ToListAsync();
+                                    ).ToList();
             cbCarBrand.DataSource = brands;
 
             brands.Insert(0, new { Id = 0, Name = "All" });
