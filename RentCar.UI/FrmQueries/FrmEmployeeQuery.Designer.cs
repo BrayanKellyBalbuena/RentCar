@@ -51,48 +51,45 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dgvClients);
             this.panel1.Location = new System.Drawing.Point(1, 1);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(997, 551);
+            this.panel1.Size = new System.Drawing.Size(748, 448);
             this.panel1.TabIndex = 0;
             // 
             // cbFilter
             // 
+            this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilter.FormattingEnabled = true;
             this.cbFilter.Items.AddRange(new object[] {
             "All",
             "Name",
             "IdentificationCard"});
-            this.cbFilter.Location = new System.Drawing.Point(71, 18);
-            this.cbFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbFilter.Location = new System.Drawing.Point(53, 15);
+            this.cbFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(172, 24);
+            this.cbFilter.Size = new System.Drawing.Size(130, 21);
             this.cbFilter.TabIndex = 21;
             // 
             // lblTotalRegister
             // 
             this.lblTotalRegister.AutoSize = true;
-            this.lblTotalRegister.Location = new System.Drawing.Point(847, 68);
-            this.lblTotalRegister.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalRegister.Location = new System.Drawing.Point(635, 55);
             this.lblTotalRegister.Name = "lblTotalRegister";
-            this.lblTotalRegister.Size = new System.Drawing.Size(112, 17);
+            this.lblTotalRegister.Size = new System.Drawing.Size(84, 13);
             this.lblTotalRegister.TabIndex = 20;
             this.lblTotalRegister.Text = "Total Registers: ";
             // 
             // txtFilter
             // 
-            this.txtFilter.Location = new System.Drawing.Point(250, 20);
-            this.txtFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFilter.Location = new System.Drawing.Point(188, 16);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(227, 22);
+            this.txtFilter.Size = new System.Drawing.Size(171, 20);
             this.txtFilter.TabIndex = 19;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(537, 14);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearch.Location = new System.Drawing.Point(403, 11);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 28);
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 18;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -101,10 +98,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(10, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 17);
+            this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Filter by:";
             // 
@@ -114,21 +110,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClients.Location = new System.Drawing.Point(16, 107);
-            this.dgvClients.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvClients.Location = new System.Drawing.Point(12, 87);
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.RowHeadersWidth = 51;
-            this.dgvClients.Size = new System.Drawing.Size(965, 431);
+            this.dgvClients.Size = new System.Drawing.Size(724, 350);
             this.dgvClients.TabIndex = 0;
             this.dgvClients.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCars_CellContentDoubleClick);
             // 
             // FrmEmployeeQuery
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(999, 554);
+            this.ClientSize = new System.Drawing.Size(749, 450);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmEmployeeQuery";
             this.Text = "Employee Query";
             this.Load += new System.EventHandler(this.FrmEmployeeQuery_Load);
