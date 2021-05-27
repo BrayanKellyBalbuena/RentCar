@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RentCar.Infrastructure.EntitiesConfigutations
 {
-    internal class CarBrandEntityTypeConfiguration : EntityTypeConfiguration<CarBrand>
+    internal class CarBrandEntityTypeConfiguration : EntityConfiguration<CarBrand>
     {
         public CarBrandEntityTypeConfiguration()
         {

@@ -1,5 +1,6 @@
 ﻿
 using RentCar.Core.Abstractions;
+using RentCar.Core.Entities;
 using RentCar.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace RentCar.Infrastructure.Repositories
+namespace RentCar.Infrastructure.Abstractions
 {
-    public class Repository<TContext, TEntity> : IDisposable, IRepository<TEntity> where TEntity : Entity where TContext : DbContext
+    public abstract class Repository<TContext, TEntity> : IDisposable, IRepository<TEntity> where TEntity : Entity where TContext : DbContext
     {
         private bool _save = true;
         private readonly TContext _context;
@@ -40,7 +41,6 @@ namespace RentCar.Infrastructure.Repositories
 
         public virtual async Task UpdateAsync(TEntity entity)
         {
-            _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 

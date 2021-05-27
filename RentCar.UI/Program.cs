@@ -1,24 +1,24 @@
-﻿using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
-using RentCar.Core.Interfaces.Domain;
-using RentCar.Infrastructure.DbContexts;
+﻿using RentCar.Infrastructure.DbContexts;
 using RentCar.Infrastructure.Repositories;
-using RentCar.Infrastructure.Services;
 using RentCar.UI.Maintenances;
 using SimpleInjector;
 using System;
 using System.Windows.Forms;
 using AutoMapper;
-using RentCar.UI.ViewModels;
 using RentCar.UI.MappingsProfiles;
+using System.Linq;
+using RentCar.Infrastructure.Services;
+using RentCar.Core.Entities;
+using RentCar.Core.Interfaces;
+using RentCar.UI.ViewModels;
 
 namespace RentCar.UI
 {
-    
+
     static class Program
     {
         public static Container Container { get; private set; }
-        public static IMapper mapper;
+        public static UserViewModel CurrentUser { get; set; }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -28,14 +28,13 @@ namespace RentCar.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Bootstrap();
-            Application.Run(Container.GetInstance<MasterPage>());
+            Application.Run(Container.GetInstance<Login>());
         }
 
         private static void Bootstrap()
         {
             Container = new Container();
             Container.Register<RentCarContext>(Lifestyle.Singleton);
-
             RegisterRepositories();
             RegisterServices();
             RegisterForms();
@@ -45,22 +44,52 @@ namespace RentCar.UI
         private static void RegisterRepositories()
         {
 
-            Container.Register<IRepository<CarBrand>, CarBrandRepository<RentCarContext>>(Lifestyle.Singleton);
-            Container.Register<IRepository<CarCategory>, CarCategoryRepository<RentCarContext>>(Lifestyle.Singleton);
-            
+            var repositoryRegistrations =
+                from type in typeof(CarRepository<>).Assembly.GetExportedTypes()
+                where type.Namespace.StartsWith("RentCar.Infrastructure.Repositories")
+                select new { Interfaces = type.GetInterfaces().Where(x => x.Name.Contains("Repository")), Implementacion = type}
+                ;
+
+            foreach (var registration in repositoryRegistrations)
+            {
+                foreach (var @interface in registration.Interfaces)
+                {
+                    Type concreteRepository = registration.Implementacion.MakeGenericType(typeof(RentCarContext));
+
+                    Container.Register(@interface, concreteRepository, Lifestyle.Singleton);
+                }
+            }
         }
 
         private static void RegisterServices()
         {
-            Container.Register<IEntityService<CarBrand>, CarBrandService>(Lifestyle.Singleton);
-            Container.Register<IEntityService<CarCategory>, CarCategoryService>(Lifestyle.Singleton);
+            var serviceRegistrations =
+                from type in typeof(CarService).Assembly.GetExportedTypes()
+                where type.Namespace.StartsWith("RentCar.Infrastructure.Services")
+                select new { Interfaces = type.GetInterfaces().Where(i => i.Name.Contains("Service")), Implementation = type };
+
+            foreach (var registration in serviceRegistrations)
+            {
+                foreach (var @interface in registration.Interfaces)
+                {
+                    Container.Register(@interface, registration.Implementation, Lifestyle.Singleton);
+                }
+            }
         }
 
         private static void RegisterForms()
         {
-            Container.Register<MasterPage>(Lifestyle.Singleton);
-            Container.Register<FrmCarBrand>(Lifestyle.Singleton);
-            Container.Register<FrmCarCategory>(Lifestyle.Singleton);
+
+            var formRegistration =
+               from formType in typeof(Program).Assembly.GetExportedTypes()
+               where typeof(Form).IsAssignableFrom(formType)
+               select formType;
+
+            foreach (var formType in formRegistration)
+            {
+                Container.Register(formType);
+
+            }
         }
 
         private static void ConfigureMaps()
@@ -69,7 +98,9 @@ namespace RentCar.UI
                 cfg.AddMaps(typeof(CarBrandProfile).Assembly);
             });
 
-            mapper = config.CreateMapper();
+           var mapper = config.CreateMapper();
+            Container.Register(() => mapper, Lifestyle.Singleton); 
+            
         }
     }
 }

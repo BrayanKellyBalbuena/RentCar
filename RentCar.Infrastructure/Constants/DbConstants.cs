@@ -9,5 +9,6 @@ namespace RentCar.Infrastructure.Constants
     public static class DbConstants
     {
         public const string DATABASE = "RentCarDb";
+        public const string RENT_DEVOLUTION_TABLE = "DevolutionAndRent";
     }
 }

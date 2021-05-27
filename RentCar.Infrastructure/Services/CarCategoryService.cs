@@ -1,5 +1,6 @@
 ﻿using RentCar.Core.Entities;
 using RentCar.Core.Interfaces;
+using RentCar.Infrastructure.Abstractions;
 
 namespace RentCar.Infrastructure.Services
 {
@@ -7,7 +8,6 @@ namespace RentCar.Infrastructure.Services
     {
         public CarCategoryService(IRepository<CarCategory> repository) : base(repository)
         {
-
         }
     }
 }

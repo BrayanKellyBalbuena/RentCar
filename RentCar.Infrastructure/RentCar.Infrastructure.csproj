@@ -30,6 +30,42 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
@@ -56,21 +92,50 @@
   <ItemGroup>
     <Compile Include="Abstractions\EntityConfiguration.cs" />
     <Compile Include="Constants\DbConstants.cs" />
+    <Compile Include="Constants\IdentificationDocumentsLengthNumber.cs" />
     <Compile Include="DbContexts\RentCarContext.cs" />
     <Compile Include="EntitiesConfigutations\CarBrandEntityTypeConfiguration.cs" />
     <Compile Include="EntitiesConfigutations\CarCategoryEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\CarEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\CarInspectionEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\CarModelEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\ClientEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\EmployeeEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\FluelCategoryEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\PersonTypeEntityTypeConfiguration.cs" />
+    <Compile Include="EntitiesConfigutations\RentDevolutionEntityConfiguration.cs" />
     <Compile Include="Exceptions\EntityException.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CarBrandRepository.cs" />
     <Compile Include="Repositories\CarCategoryRepository.cs" />
-    <Compile Include="Repositories\ProductRepository.cs" />
-    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\CarInspectionRepository.cs" />
+    <Compile Include="Repositories\CarModelRepository.cs" />
+    <Compile Include="Repositories\CarRepository.cs" />
+    <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\EmployeeRepository.cs" />
+    <Compile Include="Repositories\FluelCategoryRepository.cs" />
+    <Compile Include="Repositories\PersonTypeRepository.cs" />
+    <Compile Include="Abstractions\Repository.cs" />
+    <Compile Include="Repositories\RentDevolutionRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\CarBrandService.cs" />
     <Compile Include="Services\CarCategoryService.cs" />
+    <Compile Include="Services\CarInspectionService.cs" />
+    <Compile Include="Services\CarModelService.cs" />
+    <Compile Include="Services\CarService.cs" />
+    <Compile Include="Services\ClientService.cs" />
+    <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\EntityService.cs" />
+    <Compile Include="Services\FuelCategoryService.cs" />
+    <Compile Include="Services\PersonTypeService.cs" />
+    <Compile Include="Services\RentDevolutionService.cs" />
+    <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="utils\EncriptorUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>

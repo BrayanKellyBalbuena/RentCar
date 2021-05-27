@@ -1,51 +1,32 @@
 ﻿
 using AutoMapper;
-using MetroFramework;
-using MetroFramework.Forms;
 using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
 using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
 using RentCar.UI.Reports;
 using RentCar.UI.Utils;
-using RentCar.UI.ViewModels;
+using RentCar.UI.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace RentCar.UI.Maintenances
 {
     public partial class FrmCarBrand : Form
     {
-        private IEntityService<CarBrand> carBrandService;
+        private readonly IEntityService<CarBrand> carBrandService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
-        private string ENTER_NAME_MESSAGE = "Enter a name of Card Brands";
-        private const string DELETE_COLUMN = "Delete";
-        private const string ID_COLUMN = "Id";
 
-        public FrmCarBrand(IEntityService<CarBrand> carBrandService) 
+        public FrmCarBrand(IEntityService<CarBrand> carBrandService, IMapper mapper) 
         {
             InitializeComponent();
-            ttMessage.SetToolTip(txtName, ENTER_NAME_MESSAGE);
+            ttMessage.SetToolTip(txtName, AlertMessages.ENTER_A_NAME);
             this.carBrandService = carBrandService;
+            this.mapper = mapper;
         }
-
-        //public static FrmCarBrand GetInstance()
-        //{
-        //    if (instance == null)
-        //    {
-        //        instance = new FrmCarBrand();
-        //    }
-        //    if (instance.IsDisposed) {
-        //        instance = new FrmCarBrand();
-               
-        //    }
-        //    return instance;
-
-        //}
 
         private void FrmCarBrands_Load(object sender, EventArgs e)
         {
@@ -88,12 +69,12 @@ namespace RentCar.UI.Maintenances
         private async void LoadCarBrands()
         {
             try {
-                dgvCarBrands.DataSource =   Program.mapper.Map<IEnumerable<CarBrandViewModel>>( await carBrandService.GetAll().ToListAsync());
+                dgvCarBrands.DataSource =   mapper.Map<IEnumerable<CarBrandViewModel>>( await carBrandService.GetAll().ToListAsync());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarBrands.Rows.Count;
             }
             catch (Exception ex)
             {
-
+                MessageBoxUtil.MessageError(this, ex.Message);
             }
 
 
@@ -102,19 +83,8 @@ namespace RentCar.UI.Maintenances
 
         private void HideColumns()
         {
-            dgvCarBrands.Columns[DELETE_COLUMN].Visible = false;
-            dgvCarBrands.Columns[ID_COLUMN].Visible = false;
-        }
-
-
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
+            dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
+            dgvCarBrands.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }
 
         private void ClearTextBox()
@@ -126,7 +96,7 @@ namespace RentCar.UI.Maintenances
 
         private async void Search()
         {
-            dgvCarBrands.DataSource = Program.mapper.Map<IEnumerable<CarBrandViewModel>>(
+            dgvCarBrands.DataSource = mapper.Map<IEnumerable<CarBrandViewModel>>(
                await carBrandService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarBrands.Rows.Count;
@@ -154,8 +124,8 @@ namespace RentCar.UI.Maintenances
             {
                 if (txtName.IsNotNullOrEmpty())
                 {
-                    MessageBoxUtil.MessageError(this, "Falta ingresar algunos datos, serán remarcados");
-                    errorIcon.SetError(txtName, "Ingrese un Nombre");
+                    MessageBoxUtil.MessageError(this, AlertMessages.MISSING_DATA);
+                    errorIcon.SetError(txtName, AlertMessages.ENTER_A_NAME);
                 }
                 else
                 {
@@ -167,11 +137,12 @@ namespace RentCar.UI.Maintenances
                             {
                                 Name = txtName.Text,
                                 Description = txtDescription.Text,
-                                CreatedDate = DateTime.Now
+                                CreatedDate = DateTime.Now,
+                                CreatedBy = Program.CurrentUser.UserName
 
                             });
 
-                        MessageBoxUtil.MessageOk(this, "Se Insertó de forma correcta el registro");
+                        MessageBoxUtil.MessageOk(this, AlertMessages.INSERTED_SUCCESSFULLY);
 
                     }
                     else
@@ -184,14 +155,15 @@ namespace RentCar.UI.Maintenances
                             Name = txtName.Text,
                             Description = txtDescription.Text,
                             CreatedDate = entity.CreatedDate,
-                            ModifiedDate = DateTime.Now
+                            ModifiedDate = DateTime.Now,
+                             CreatedBy = Program.CurrentUser.UserName
                         };
-                        entity = Program.mapper.Map(brand, entity);
+                        entity = mapper.Map(brand, entity);
 
                    
                         await carBrandService.UpdateAsync(entity);
 
-                        MessageBoxUtil.MessageOk(this, "Se Actualizó de forma correcta el registro");
+                        MessageBoxUtil.MessageOk(this, AlertMessages.UPDATED_SUCCESSFULLY);
                     }
                     this.isNew = false;
                     this.isEdit = false;
@@ -210,9 +182,9 @@ namespace RentCar.UI.Maintenances
 
         private void dgvCarBrands_DoubleClick(object sender, EventArgs e)
         {
-            txtIdCarBrand.Text = dgvCarBrands.CurrentRow.Cells["Id"].Value.ToString();
-            txtName.Text = dgvCarBrands.CurrentRow.Cells["Name"].Value.ToString();
-            txtDescription.Text = dgvCarBrands.CurrentRow.Cells["Description"].Value.ToString();
+            txtIdCarBrand.Text = dgvCarBrands.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
+            txtName.Text = dgvCarBrands.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
+            txtDescription.Text = dgvCarBrands.CurrentRow.Cells[DataGridColumnNames.DESCRIPCION_COLUMN].Value.ToString();
             this.tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
@@ -228,7 +200,7 @@ namespace RentCar.UI.Maintenances
                 EnableTextBox(true);
             } else
             {
-                MessageBoxUtil.MessageError(this, "Debe Seleccionar primero el registro a modificar");
+                MessageBoxUtil.MessageError(this, AlertMessages.NOT_RECORD_SELECTED_FOR_MODIFIY);
             }
         }
 
@@ -237,7 +209,7 @@ namespace RentCar.UI.Maintenances
             isNew = false;
             isEdit = false;
             EnableBottons();
-            EnableTextBox(true);
+            EnableTextBox(false);
             this.ClearTextBox();
         }
 
@@ -245,19 +217,19 @@ namespace RentCar.UI.Maintenances
         {
             if (chkDelete.Checked)
             {
-                dgvCarBrands.Columns[DELETE_COLUMN].Visible = true;
+                dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = true;
             }
             else
             {
-                dgvCarBrands.Columns[DELETE_COLUMN].Visible = false;
+                dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             }
         }
 
         private void dgvCarBrands_CellContentClick(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgvCarBrands.Columns[DELETE_COLUMN].Index)
+            if (e.ColumnIndex == dgvCarBrands.Columns[DataGridColumnNames.DELETE_COLUMN].Index)
             {
-                DataGridViewCheckBoxCell chkDelete =  dgvCarBrands.Rows[e.RowIndex].Cells[DELETE_COLUMN] as DataGridViewCheckBoxCell;
+                DataGridViewCheckBoxCell chkDelete =  dgvCarBrands.Rows[e.RowIndex].Cells[DataGridColumnNames.DELETE_COLUMN] as DataGridViewCheckBoxCell;
                 chkDelete.Value = !Convert.ToBoolean(chkDelete.Value);
             }
         }
@@ -266,19 +238,26 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
+                if (!chkDelete.Checked)
+                {
+                    MessageBoxUtil.MessageError(this, AlertMessages.NOT_RECORD_SELECTED_FOR_DELETE);
+                    return;
+                }
+
                 DialogResult Opcion;
-                Opcion = MessageBox.Show("Realmente Desea Eliminar los Registros", "Sistema de Ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                Opcion = MessageBox.Show(AlertMessages.CONFIRM_DELETION, Constanst.SYSTEM_NAME,
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                 if (Opcion == DialogResult.OK)
                 {
                     foreach (DataGridViewRow row in dgvCarBrands.Rows)
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        if (Convert.ToBoolean(row.Cells[DataGridColumnNames.DELETE_COLUMN].Value))
                         {
-                           int id = Convert.ToInt32(row.Cells[1].Value);
+                           int id = Convert.ToInt32(row.Cells[DataGridColumnNames.ID_COLUMN].Value);
 
                             await carBrandService.DeleteAsync(id);
-                                MessageBoxUtil.MessageOk(this,"Se Eliminó Correctamente el registro");
+                                MessageBoxUtil.MessageOk(this, AlertMessages.DELETED_SUCCESSFULLY);
                             }
 
                         }

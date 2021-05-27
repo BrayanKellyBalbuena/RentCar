@@ -143,6 +143,7 @@
             this.dgvCarCategory.Location = new System.Drawing.Point(7, 93);
             this.dgvCarCategory.Name = "dgvCarCategory";
             this.dgvCarCategory.ReadOnly = true;
+            this.dgvCarCategory.RowHeadersWidth = 51;
             this.dgvCarCategory.RowTemplate.Height = 24;
             this.dgvCarCategory.Size = new System.Drawing.Size(726, 293);
             this.dgvCarCategory.TabIndex = 4;
@@ -152,6 +153,7 @@
             // Delete
             // 
             this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
             this.Delete.Name = "Delete";
             this.Delete.ReadOnly = true;
             this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -232,6 +234,7 @@
             this.label3.Size = new System.Drawing.Size(23, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Id:";
+            this.label3.Visible = false;
             // 
             // txtIdCarBrand
             // 
@@ -239,6 +242,7 @@
             this.txtIdCarBrand.Name = "txtIdCarBrand";
             this.txtIdCarBrand.Size = new System.Drawing.Size(296, 22);
             this.txtIdCarBrand.TabIndex = 4;
+            this.txtIdCarBrand.Visible = false;
             // 
             // btnCancel
             // 

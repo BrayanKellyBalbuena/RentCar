@@ -1,4 +1,5 @@
 ﻿using RentCar.Core.Abstractions;
+using RentCar.Core.Entities;
 using RentCar.Core.Interfaces;
 using RentCar.Core.Interfaces.Domain;
 using System;
@@ -7,15 +8,17 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace RentCar.Infrastructure.Services
+namespace RentCar.Infrastructure.Abstractions
 {
-    public class EntityService<TEntity> : IEntityService<TEntity> where TEntity : Entity
+    public abstract class EntityService<TEntity> : IEntityService<TEntity> where TEntity : Entity
     {
+        public IRepository<TEntity> Repository { get; protected set; }
+
         public EntityService(IRepository<TEntity> repository)
         {
             Repository = repository;
         }
-        public IRepository<TEntity> Repository { get; protected set; }
+ 
 
         public virtual IQueryable<TEntity> GeTEntity()
         {
@@ -28,8 +31,9 @@ namespace RentCar.Infrastructure.Services
             {
                 throw new ArgumentNullException();
             }
-           
+
             entity.State = true;
+            entity.CreatedDate = DateTime.Now;
 
             await Repository.AddAsync(entity);
             await Repository.SaveChangesAsync();
@@ -66,8 +70,9 @@ namespace RentCar.Infrastructure.Services
 
         public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            if (entity == null)  throw new ArgumentNullException(nameof(TEntity));
-            
+            if (entity == null) throw new ArgumentNullException(nameof(TEntity));
+
+            entity.ModifiedDate = DateTime.Now;
             await Repository.UpdateAsync(entity);
 
             return entity;
@@ -88,13 +93,13 @@ namespace RentCar.Infrastructure.Services
         public async Task<TEntity> GetByIdAsync(int id)
         {
             var entity = await Repository.GetByIdAsync(id);
- 
+
             return entity;
         }
 
         public virtual IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-           
+
             if (filter != null)
             {
                 return Repository.GetAll(filter).Take(200);
@@ -110,7 +115,7 @@ namespace RentCar.Infrastructure.Services
         }
     }
 
-    internal static class ExpressionTransformer<TFrom, TTo> 
+    internal static class ExpressionTransformer<TFrom, TTo>
     {
         public class Visitor : ExpressionVisitor
         {

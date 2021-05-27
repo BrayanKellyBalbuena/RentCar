@@ -3,34 +3,29 @@ using RentCar.Core.Interfaces.Domain;
 using RentCar.UI.Constans;
 using RentCar.UI.Reports;
 using RentCar.UI.Utils;
-using RentCar.UI.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using RentCar.UI.ViewModels;
+using AutoMapper;
 
 namespace RentCar.UI.Maintenances
 {
     public partial class FrmCarCategory : Form
     {
-        private IEntityService<CarCategory> carCategoryService;
+        private readonly IEntityService<CarCategory> carCategoryService;
+        private readonly IMapper mapper;
         private bool isNew;
         private bool isEdit;
         private string ENTER_NAME_MESSAGE = "Enter a name of Card Category";
-        private const string DELETE_COLUMN = "Delete";
-        private const string ID_COLUMN = "Id";
 
-        public FrmCarCategory(IEntityService<CarCategory> carCategoryService)
+        public FrmCarCategory(IEntityService<CarCategory> carCategoryService, IMapper mapper)
         {
             InitializeComponent();
             ttMessage.SetToolTip(txtName, ENTER_NAME_MESSAGE);
             this.carCategoryService = carCategoryService;
+            this.mapper = mapper;
         }
 
 
@@ -74,7 +69,7 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
-                dgvCarCategory.DataSource = Program.mapper.Map<IEnumerable<CarCategoryViewModel>>(await carCategoryService.GetAll().ToListAsync());
+                dgvCarCategory.DataSource = mapper.Map<IEnumerable<CarCategoryViewModel>>(await carCategoryService.GetAll().ToListAsync());
                 lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarCategory.Rows.Count;
             }
             catch (Exception ex)
@@ -88,19 +83,8 @@ namespace RentCar.UI.Maintenances
 
         private void HideColumns()
         {
-            dgvCarCategory.Columns[DELETE_COLUMN].Visible = false;
-            dgvCarCategory.Columns[ID_COLUMN].Visible = false;
-        }
-
-
-        private void MessageOk(string message)
-        {
-            MessageBoxUtil.MessageOk(this, message);
-        }
-
-        private void MessageError(string message)
-        {
-            MessageBoxUtil.MessageError(this, message);
+            dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
+            dgvCarCategory.Columns[DataGridColumnNames.ID_COLUMN].Visible = false;
         }
 
         private void ClearTextBox()
@@ -112,7 +96,7 @@ namespace RentCar.UI.Maintenances
 
         private async void Search()
         {
-            dgvCarCategory.DataSource = Program.mapper.Map<IEnumerable<CarBrandViewModel>>(
+            dgvCarCategory.DataSource = mapper.Map<IEnumerable<CarCategoryViewModel>>(
                await carCategoryService.GetAll(x => x.Name.Contains(txtSearch.Text)).ToListAsync()
                 );
             lblTotalRows.Text = Constanst.TOTAL_REGISTERS + dgvCarCategory.Rows.Count;
@@ -153,8 +137,8 @@ namespace RentCar.UI.Maintenances
                             {
                                 Name = txtName.Text,
                                 Description = txtDescription.Text,
-                                CreatedDate = DateTime.Now
-
+                                CreatedDate = DateTime.Now,
+                                 CreatedBy = Program.CurrentUser.UserName
                             });
 
                         MessageBoxUtil.MessageOk(this, "Se Insertó de forma correcta el registro");
@@ -170,9 +154,10 @@ namespace RentCar.UI.Maintenances
                             Name = txtName.Text,
                             Description = txtDescription.Text,
                             CreatedDate = entity.CreatedDate,
-                            ModifiedDate = DateTime.Now
+                            ModifiedDate = DateTime.Now,
+                            CreatedBy = Program.CurrentUser.UserName
                         };
-                        entity = Program.mapper.Map(brand, entity);
+                        entity = mapper.Map(brand, entity);
 
 
                         await carCategoryService.UpdateAsync(entity);
@@ -196,9 +181,9 @@ namespace RentCar.UI.Maintenances
 
         private void dgvCarCategory_DoubleClick(object sender, EventArgs e)
         {
-            txtIdCarBrand.Text = dgvCarCategory.CurrentRow.Cells["Id"].Value.ToString();
-            txtName.Text = dgvCarCategory.CurrentRow.Cells["Name"].Value.ToString();
-            txtDescription.Text = dgvCarCategory.CurrentRow.Cells["Description"].Value.ToString();
+            txtIdCarBrand.Text = dgvCarCategory.CurrentRow.Cells[DataGridColumnNames.ID_COLUMN].Value.ToString();
+            txtName.Text = dgvCarCategory.CurrentRow.Cells[DataGridColumnNames.NAME_COLUMN].Value.ToString();
+            txtDescription.Text = dgvCarCategory.CurrentRow.Cells[DataGridColumnNames.DESCRIPCION_COLUMN].Value.ToString();
             this.tabControl1.SelectedTab = tbpMantenance;
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
@@ -232,19 +217,19 @@ namespace RentCar.UI.Maintenances
         {
             if (chkDelete.Checked)
             {
-                dgvCarCategory.Columns[DELETE_COLUMN].Visible = true;
+                dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = true;
             }
             else
             {
-                dgvCarCategory.Columns[DELETE_COLUMN].Visible = false;
+                dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Visible = false;
             }
         }
 
         private void dgvCarCategory_CellContentClick(object sender, System.Windows.Forms.DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgvCarCategory.Columns[DELETE_COLUMN].Index)
+            if (e.ColumnIndex == dgvCarCategory.Columns[DataGridColumnNames.DELETE_COLUMN].Index)
             {
-                DataGridViewCheckBoxCell chkDelete = dgvCarCategory.Rows[e.RowIndex].Cells[DELETE_COLUMN] as DataGridViewCheckBoxCell;
+                DataGridViewCheckBoxCell chkDelete = dgvCarCategory.Rows[e.RowIndex].Cells[DataGridColumnNames.DELETE_COLUMN] as DataGridViewCheckBoxCell;
                 chkDelete.Value = !Convert.ToBoolean(chkDelete.Value);
             }
         }
@@ -253,16 +238,23 @@ namespace RentCar.UI.Maintenances
         {
             try
             {
+                if (!chkDelete.Checked)
+                {
+                    MessageBoxUtil.MessageError(this, AlertMessages.NOT_RECORD_SELECTED_FOR_DELETE);
+                    return;
+                }
+
                 DialogResult Opcion;
-                Opcion = MessageBox.Show("Realmente Desea Eliminar los Registros", "Sistema de Ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                Opcion = MessageBox.Show(AlertMessages.CONFIRM_DELETION, Constanst.SYSTEM_NAME,
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                 if (Opcion == DialogResult.OK)
                 {
                     foreach (DataGridViewRow row in dgvCarCategory.Rows)
                     {
-                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        if (Convert.ToBoolean(row.Cells[DataGridColumnNames.DELETE_COLUMN].Value))
                         {
-                            int id = Convert.ToInt32(row.Cells[1].Value);
+                            int id = Convert.ToInt32(row.Cells[DataGridColumnNames.ID_COLUMN].Value);
 
                             await carCategoryService.DeleteAsync(id);
                             MessageBoxUtil.MessageOk(this, "Se Eliminó Correctamente el registro");
